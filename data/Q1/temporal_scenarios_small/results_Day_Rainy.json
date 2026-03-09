@@ -1,0 +1,5911 @@
+{
+  "scenario": "Day_Rainy",
+  "daynight": 0,
+  "raindry": 1,
+  "results": [
+    {
+      "grid_id": "0_0",
+      "x": 0,
+      "y": 0,
+      "raw_risk": 0.045951000000000006,
+      "normalized_risk": 0.051410545290671524,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_1",
+      "x": 1,
+      "y": 0,
+      "raw_risk": 0.047390999999999996,
+      "normalized_risk": 0.060063091482649836,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_2",
+      "x": 2,
+      "y": 0,
+      "raw_risk": 0.047390999999999996,
+      "normalized_risk": 0.060063091482649836,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_3",
+      "x": 3,
+      "y": 0,
+      "raw_risk": 0.047991,
+      "normalized_risk": 0.06366831906264084,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_4",
+      "x": 4,
+      "y": 0,
+      "raw_risk": 0.047991,
+      "normalized_risk": 0.06366831906264084,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_5",
+      "x": 5,
+      "y": 0,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_6",
+      "x": 6,
+      "y": 0,
+      "raw_risk": 0.048351,
+      "normalized_risk": 0.06583145561063543,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7933333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_7",
+      "x": 7,
+      "y": 0,
+      "raw_risk": 0.049791,
+      "normalized_risk": 0.07448400180261382,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8333333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_8",
+      "x": 8,
+      "y": 0,
+      "raw_risk": 0.048951,
+      "normalized_risk": 0.06943668319062643,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_9",
+      "x": 9,
+      "y": 0,
+      "raw_risk": 0.049551,
+      "normalized_risk": 0.0730419107706174,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_10",
+      "x": 10,
+      "y": 0,
+      "raw_risk": 0.048711,
+      "normalized_risk": 0.06799459215863002,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8033333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_11",
+      "x": 11,
+      "y": 0,
+      "raw_risk": 0.049551,
+      "normalized_risk": 0.0730419107706174,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_12",
+      "x": 12,
+      "y": 0,
+      "raw_risk": 0.048951,
+      "normalized_risk": 0.06943668319062643,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_13",
+      "x": 13,
+      "y": 0,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.85,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_14",
+      "x": 14,
+      "y": 0,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.85,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_15",
+      "x": 15,
+      "y": 0,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.85,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_16",
+      "x": 16,
+      "y": 0,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.85,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_17",
+      "x": 17,
+      "y": 0,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.85,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_18",
+      "x": 18,
+      "y": 0,
+      "raw_risk": 0.049791,
+      "normalized_risk": 0.07448400180261382,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8333333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "0_19",
+      "x": 19,
+      "y": 0,
+      "raw_risk": 0.049791,
+      "normalized_risk": 0.07448400180261382,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8333333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_-1",
+      "x": -1,
+      "y": 1,
+      "raw_risk": 0.047390999999999996,
+      "normalized_risk": 0.060063091482649836,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_0",
+      "x": 0,
+      "y": 1,
+      "raw_risk": 0.047390999999999996,
+      "normalized_risk": 0.060063091482649836,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_1",
+      "x": 1,
+      "y": 1,
+      "raw_risk": 0.047391,
+      "normalized_risk": 0.06006309148264988,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_2",
+      "x": 2,
+      "y": 1,
+      "raw_risk": 0.047391,
+      "normalized_risk": 0.06006309148264988,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_3",
+      "x": 3,
+      "y": 1,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_4",
+      "x": 4,
+      "y": 1,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_5",
+      "x": 5,
+      "y": 1,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_6",
+      "x": 6,
+      "y": 1,
+      "raw_risk": 0.047751,
+      "normalized_risk": 0.06222622803064446,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_7",
+      "x": 7,
+      "y": 1,
+      "raw_risk": 0.049191,
+      "normalized_risk": 0.07087877422262281,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_8",
+      "x": 8,
+      "y": 1,
+      "raw_risk": 0.048951,
+      "normalized_risk": 0.06943668319062643,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_9",
+      "x": 9,
+      "y": 1,
+      "raw_risk": 0.049551,
+      "normalized_risk": 0.0730419107706174,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_10",
+      "x": 10,
+      "y": 1,
+      "raw_risk": 0.04871100000000001,
+      "normalized_risk": 0.0679945921586301,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8033333333333335,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_11",
+      "x": 11,
+      "y": 1,
+      "raw_risk": 0.049551,
+      "normalized_risk": 0.0730419107706174,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_12",
+      "x": 12,
+      "y": 1,
+      "raw_risk": 0.048951,
+      "normalized_risk": 0.06943668319062643,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_13",
+      "x": 13,
+      "y": 1,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_14",
+      "x": 14,
+      "y": 1,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_15",
+      "x": 15,
+      "y": 1,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_16",
+      "x": 16,
+      "y": 1,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_17",
+      "x": 17,
+      "y": 1,
+      "raw_risk": 0.050391000000000005,
+      "normalized_risk": 0.07808922938260483,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_18",
+      "x": 18,
+      "y": 1,
+      "raw_risk": 0.049791,
+      "normalized_risk": 0.07448400180261382,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8333333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "1_19",
+      "x": 19,
+      "y": 1,
+      "raw_risk": 0.050630999999999995,
+      "normalized_risk": 0.07953132041460116,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8566666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_0",
+      "x": 0,
+      "y": 2,
+      "raw_risk": 0.048831000000000006,
+      "normalized_risk": 0.06871563767462827,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_1",
+      "x": 1,
+      "y": 2,
+      "raw_risk": 0.04883099999999999,
+      "normalized_risk": 0.06871563767462818,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_2",
+      "x": 2,
+      "y": 2,
+      "raw_risk": 0.052575000000000004,
+      "normalized_risk": 0.09121225777377201,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7666666666666668,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_3",
+      "x": 3,
+      "y": 2,
+      "raw_risk": 0.05317500000000001,
+      "normalized_risk": 0.09481748535376301,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_4",
+      "x": 4,
+      "y": 2,
+      "raw_risk": 0.05317500000000001,
+      "normalized_risk": 0.09481748535376301,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_5",
+      "x": 5,
+      "y": 2,
+      "raw_risk": 0.05377500000000001,
+      "normalized_risk": 0.09842271293375403,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_6",
+      "x": 6,
+      "y": 2,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_7",
+      "x": 7,
+      "y": 2,
+      "raw_risk": 0.05377500000000001,
+      "normalized_risk": 0.09842271293375403,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_8",
+      "x": 8,
+      "y": 2,
+      "raw_risk": 0.053535,
+      "normalized_risk": 0.09698062190175756,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7933333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_9",
+      "x": 9,
+      "y": 2,
+      "raw_risk": 0.059967,
+      "normalized_risk": 0.13562866155926095,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_10",
+      "x": 10,
+      "y": 2,
+      "raw_risk": 0.05141100000000001,
+      "normalized_risk": 0.08421811626858955,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8033333333333335,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_11",
+      "x": 11,
+      "y": 2,
+      "raw_risk": 0.059967,
+      "normalized_risk": 0.13562866155926095,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_12",
+      "x": 12,
+      "y": 2,
+      "raw_risk": 0.059967,
+      "normalized_risk": 0.13562866155926095,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.81,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_13",
+      "x": 13,
+      "y": 2,
+      "raw_risk": 0.053091000000000006,
+      "normalized_risk": 0.09431275349256428,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_14",
+      "x": 14,
+      "y": 2,
+      "raw_risk": 0.053091000000000006,
+      "normalized_risk": 0.09431275349256428,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_15",
+      "x": 15,
+      "y": 2,
+      "raw_risk": 0.053091000000000006,
+      "normalized_risk": 0.09431275349256428,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_16",
+      "x": 16,
+      "y": 2,
+      "raw_risk": 0.053091000000000006,
+      "normalized_risk": 0.09431275349256428,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8500000000000001,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_17",
+      "x": 17,
+      "y": 2,
+      "raw_risk": 0.06080700000000001,
+      "normalized_risk": 0.14067598017124838,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8333333333333335,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_18",
+      "x": 18,
+      "y": 2,
+      "raw_risk": 0.06164699999999999,
+      "normalized_risk": 0.14572329878323567,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8566666666666667,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "2_19",
+      "x": 19,
+      "y": 2,
+      "raw_risk": 0.051470999999999996,
+      "normalized_risk": 0.08457863902658855,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8799999999999999,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_-1",
+      "x": -1,
+      "y": 3,
+      "raw_risk": 0.050270999999999996,
+      "normalized_risk": 0.07736818386660657,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_0",
+      "x": 0,
+      "y": 3,
+      "raw_risk": 0.050270999999999996,
+      "normalized_risk": 0.07736818386660657,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_1",
+      "x": 1,
+      "y": 3,
+      "raw_risk": 0.055455000000000004,
+      "normalized_risk": 0.10851735015772876,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_2",
+      "x": 2,
+      "y": 3,
+      "raw_risk": 0.05401500000000001,
+      "normalized_risk": 0.0998648039657504,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8066666666666668,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_3",
+      "x": 3,
+      "y": 3,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333332,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_4",
+      "x": 4,
+      "y": 3,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333332,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_5",
+      "x": 5,
+      "y": 3,
+      "raw_risk": 0.053775,
+      "normalized_risk": 0.09842271293375399,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7999999999999999,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_6",
+      "x": 6,
+      "y": 3,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_7",
+      "x": 7,
+      "y": 3,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333332,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_8",
+      "x": 8,
+      "y": 3,
+      "raw_risk": 0.052935,
+      "normalized_risk": 0.0933753943217666,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_9",
+      "x": 9,
+      "y": 3,
+      "raw_risk": 0.059366999999999996,
+      "normalized_risk": 0.13202343397926994,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7933333333333332,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_10",
+      "x": 10,
+      "y": 3,
+      "raw_risk": 0.050810999999999995,
+      "normalized_risk": 0.08061288868859846,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7866666666666666,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_11",
+      "x": 11,
+      "y": 3,
+      "raw_risk": 0.051651,
+      "normalized_risk": 0.08566020730058588,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8099999999999999,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_12",
+      "x": 12,
+      "y": 3,
+      "raw_risk": 0.051651,
+      "normalized_risk": 0.08566020730058588,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8099999999999999,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_13",
+      "x": 13,
+      "y": 3,
+      "raw_risk": 0.052491,
+      "normalized_risk": 0.09070752591257326,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8333333333333333,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_14",
+      "x": 14,
+      "y": 3,
+      "raw_risk": 0.052491,
+      "normalized_risk": 0.09070752591257326,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8333333333333333,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_15",
+      "x": 15,
+      "y": 3,
+      "raw_risk": 0.052491,
+      "normalized_risk": 0.09070752591257326,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8333333333333333,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_16",
+      "x": 16,
+      "y": 3,
+      "raw_risk": 0.06020699999999999,
+      "normalized_risk": 0.13707075259125728,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_17",
+      "x": 17,
+      "y": 3,
+      "raw_risk": 0.06164699999999999,
+      "normalized_risk": 0.14572329878323567,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8566666666666667,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_18",
+      "x": 18,
+      "y": 3,
+      "raw_risk": 0.062487,
+      "normalized_risk": 0.1507706173952231,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.88,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "3_19",
+      "x": 19,
+      "y": 3,
+      "raw_risk": 0.052311,
+      "normalized_risk": 0.08962595763857598,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9033333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_0",
+      "x": 0,
+      "y": 4,
+      "raw_risk": 0.051711,
+      "normalized_risk": 0.08602073005858497,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8866666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_1",
+      "x": 1,
+      "y": 4,
+      "raw_risk": 0.051711,
+      "normalized_risk": 0.08602073005858497,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8866666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_2",
+      "x": 2,
+      "y": 4,
+      "raw_risk": 0.055455000000000004,
+      "normalized_risk": 0.10851735015772876,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_3",
+      "x": 3,
+      "y": 4,
+      "raw_risk": 0.054615,
+      "normalized_risk": 0.10347003154574133,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8233333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_4",
+      "x": 4,
+      "y": 4,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_5",
+      "x": 5,
+      "y": 4,
+      "raw_risk": 0.05377500000000001,
+      "normalized_risk": 0.09842271293375403,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_6",
+      "x": 6,
+      "y": 4,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_7",
+      "x": 7,
+      "y": 4,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_8",
+      "x": 8,
+      "y": 4,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_9",
+      "x": 9,
+      "y": 4,
+      "raw_risk": 0.052935,
+      "normalized_risk": 0.0933753943217666,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_10",
+      "x": 10,
+      "y": 4,
+      "raw_risk": 0.057927000000000006,
+      "normalized_risk": 0.12337088778729163,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7533333333333334,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_11",
+      "x": 11,
+      "y": 4,
+      "raw_risk": 0.050211000000000006,
+      "normalized_risk": 0.07700766110860753,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.77,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_12",
+      "x": 12,
+      "y": 4,
+      "raw_risk": 0.051051,
+      "normalized_risk": 0.08205497972059488,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7933333333333333,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_13",
+      "x": 13,
+      "y": 4,
+      "raw_risk": 0.051891,
+      "normalized_risk": 0.08710229833258226,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_14",
+      "x": 14,
+      "y": 4,
+      "raw_risk": 0.051891,
+      "normalized_risk": 0.08710229833258226,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_15",
+      "x": 15,
+      "y": 4,
+      "raw_risk": 0.051891,
+      "normalized_risk": 0.08710229833258226,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_16",
+      "x": 16,
+      "y": 4,
+      "raw_risk": 0.053330999999999996,
+      "normalized_risk": 0.09575484452456061,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.8566666666666667,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_17",
+      "x": 17,
+      "y": 4,
+      "raw_risk": 0.062487,
+      "normalized_risk": 0.1507706173952231,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8800000000000001,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_18",
+      "x": 18,
+      "y": 4,
+      "raw_risk": 0.063327,
+      "normalized_risk": 0.15581793600721044,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.9033333333333334,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "4_19",
+      "x": 19,
+      "y": 4,
+      "raw_risk": 0.053151,
+      "normalized_risk": 0.09467327625056332,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_-1",
+      "x": -1,
+      "y": 5,
+      "raw_risk": 0.052311,
+      "normalized_risk": 0.08962595763857598,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9033333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_0",
+      "x": 0,
+      "y": 5,
+      "raw_risk": 0.052311,
+      "normalized_risk": 0.08962595763857598,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9033333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_1",
+      "x": 1,
+      "y": 5,
+      "raw_risk": 0.063327,
+      "normalized_risk": 0.15581793600721044,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.9033333333333334,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_2",
+      "x": 2,
+      "y": 5,
+      "raw_risk": 0.05019900000000001,
+      "normalized_risk": 0.07693555655700772,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8866666666666667,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_3",
+      "x": 3,
+      "y": 5,
+      "raw_risk": 0.048759000000000004,
+      "normalized_risk": 0.06828301036502933,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8466666666666666,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_4",
+      "x": 4,
+      "y": 5,
+      "raw_risk": 0.047918999999999996,
+      "normalized_risk": 0.0632356917530419,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8233333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_5",
+      "x": 5,
+      "y": 5,
+      "raw_risk": 0.04515899999999999,
+      "normalized_risk": 0.04665164488508333,
+      "colorTag": 3,
+      "feature": "Water Pond",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.7
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.14,
+        "density_value": 0.497,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_6",
+      "x": 6,
+      "y": 5,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_7",
+      "x": 7,
+      "y": 5,
+      "raw_risk": 0.045879,
+      "normalized_risk": 0.05097791798107259,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7666666666666667,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_8",
+      "x": 8,
+      "y": 5,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_9",
+      "x": 9,
+      "y": 5,
+      "raw_risk": 0.04515899999999999,
+      "normalized_risk": 0.04665164488508333,
+      "colorTag": 3,
+      "feature": "Water Pond",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.7
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.14,
+        "density_value": 0.497,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_10",
+      "x": 10,
+      "y": 5,
+      "raw_risk": 0.04961100000000001,
+      "normalized_risk": 0.07340243352861657,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7533333333333334,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_11",
+      "x": 11,
+      "y": 5,
+      "raw_risk": 0.04961100000000001,
+      "normalized_risk": 0.07340243352861657,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7533333333333334,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_12",
+      "x": 12,
+      "y": 5,
+      "raw_risk": 0.04961100000000001,
+      "normalized_risk": 0.07340243352861657,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7533333333333334,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_13",
+      "x": 13,
+      "y": 5,
+      "raw_risk": 0.050450999999999996,
+      "normalized_risk": 0.07844975214060387,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_14",
+      "x": 14,
+      "y": 5,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_15",
+      "x": 15,
+      "y": 5,
+      "raw_risk": 0.047918999999999996,
+      "normalized_risk": 0.0632356917530419,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8233333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_16",
+      "x": 16,
+      "y": 5,
+      "raw_risk": 0.049359,
+      "normalized_risk": 0.07188823794502029,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8633333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_17",
+      "x": 17,
+      "y": 5,
+      "raw_risk": 0.05019900000000001,
+      "normalized_risk": 0.07693555655700772,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8866666666666667,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_18",
+      "x": 18,
+      "y": 5,
+      "raw_risk": 0.051639000000000004,
+      "normalized_risk": 0.08558810274898608,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.9266666666666666,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "5_19",
+      "x": 19,
+      "y": 5,
+      "raw_risk": 0.053151,
+      "normalized_risk": 0.09467327625056332,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9266666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_0",
+      "x": 0,
+      "y": 6,
+      "raw_risk": 0.053751,
+      "normalized_risk": 0.09827850383055432,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9433333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_1",
+      "x": 1,
+      "y": 6,
+      "raw_risk": 0.052239,
+      "normalized_risk": 0.08919333032897704,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.9433333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_2",
+      "x": 2,
+      "y": 6,
+      "raw_risk": 0.050799,
+      "normalized_risk": 0.08054078413699865,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.9033333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_3",
+      "x": 3,
+      "y": 6,
+      "raw_risk": 0.055215000000000014,
+      "normalized_risk": 0.10707525912573242,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_4",
+      "x": 4,
+      "y": 6,
+      "raw_risk": 0.05377500000000001,
+      "normalized_risk": 0.09842271293375403,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_5",
+      "x": 5,
+      "y": 6,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_6",
+      "x": 6,
+      "y": 6,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_7",
+      "x": 7,
+      "y": 6,
+      "raw_risk": 0.045879,
+      "normalized_risk": 0.05097791798107259,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7666666666666667,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_8",
+      "x": 8,
+      "y": 6,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_9",
+      "x": 9,
+      "y": 6,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_10",
+      "x": 10,
+      "y": 6,
+      "raw_risk": 0.052335000000000007,
+      "normalized_risk": 0.08977016674177564,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_11",
+      "x": 11,
+      "y": 6,
+      "raw_risk": 0.050450999999999996,
+      "normalized_risk": 0.07844975214060387,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_12",
+      "x": 12,
+      "y": 6,
+      "raw_risk": 0.050450999999999996,
+      "normalized_risk": 0.07844975214060387,
+      "colorTag": 7,
+      "feature": "Salt Marsh",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.8
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.32,
+        "density_value": 0.513,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_13",
+      "x": 13,
+      "y": 6,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_14",
+      "x": 14,
+      "y": 6,
+      "raw_risk": 0.046479000000000006,
+      "normalized_risk": 0.0545831455610636,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_15",
+      "x": 15,
+      "y": 6,
+      "raw_risk": 0.046598999999999995,
+      "normalized_risk": 0.05530419107706173,
+      "colorTag": 3,
+      "feature": "Water Pond",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.7
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.14,
+        "density_value": 0.497,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_16",
+      "x": 16,
+      "y": 6,
+      "raw_risk": 0.055215000000000014,
+      "normalized_risk": 0.10707525912573242,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_17",
+      "x": 17,
+      "y": 6,
+      "raw_risk": 0.056055,
+      "normalized_risk": 0.11212257773771972,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8633333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_18",
+      "x": 18,
+      "y": 6,
+      "raw_risk": 0.05689500000000001,
+      "normalized_risk": 0.11716989634970715,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8866666666666667,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "6_19",
+      "x": 19,
+      "y": 6,
+      "raw_risk": 0.051711,
+      "normalized_risk": 0.08602073005858497,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8866666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_-1",
+      "x": -1,
+      "y": 7,
+      "raw_risk": 0.052311,
+      "normalized_risk": 0.08962595763857598,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9033333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_0",
+      "x": 0,
+      "y": 7,
+      "raw_risk": 0.053751,
+      "normalized_risk": 0.09827850383055432,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.9433333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_1",
+      "x": 1,
+      "y": 7,
+      "raw_risk": 0.063927,
+      "normalized_risk": 0.15942316358720146,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.9200000000000002,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_2",
+      "x": 2,
+      "y": 7,
+      "raw_risk": 0.049478999999999995,
+      "normalized_risk": 0.07260928346101847,
+      "colorTag": 3,
+      "feature": "Water Pond",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.7
+      },
+      "components": {
+        "human_risk": 0.8966666666666667,
+        "environmental_risk": 0.14,
+        "density_value": 0.497,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_3",
+      "x": 3,
+      "y": 7,
+      "raw_risk": 0.05437500000000001,
+      "normalized_risk": 0.10202794051374499,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_4",
+      "x": 4,
+      "y": 7,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_5",
+      "x": 5,
+      "y": 7,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_6",
+      "x": 6,
+      "y": 7,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_7",
+      "x": 7,
+      "y": 7,
+      "raw_risk": 0.052575000000000004,
+      "normalized_risk": 0.09121225777377201,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_8",
+      "x": 8,
+      "y": 7,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_9",
+      "x": 9,
+      "y": 7,
+      "raw_risk": 0.047319,
+      "normalized_risk": 0.05963046417305094,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8066666666666666,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_10",
+      "x": 10,
+      "y": 7,
+      "raw_risk": 0.047918999999999996,
+      "normalized_risk": 0.0632356917530419,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8233333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_11",
+      "x": 11,
+      "y": 7,
+      "raw_risk": 0.047918999999999996,
+      "normalized_risk": 0.0632356917530419,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8233333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_12",
+      "x": 12,
+      "y": 7,
+      "raw_risk": 0.047918999999999996,
+      "normalized_risk": 0.0632356917530419,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8233333333333333,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_13",
+      "x": 13,
+      "y": 7,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_14",
+      "x": 14,
+      "y": 7,
+      "raw_risk": 0.059607,
+      "normalized_risk": 0.13346552501126635,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_15",
+      "x": 15,
+      "y": 7,
+      "raw_risk": 0.05876699999999999,
+      "normalized_risk": 0.12841820639927892,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_16",
+      "x": 16,
+      "y": 7,
+      "raw_risk": 0.06020699999999999,
+      "normalized_risk": 0.13707075259125728,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_17",
+      "x": 17,
+      "y": 7,
+      "raw_risk": 0.055215000000000014,
+      "normalized_risk": 0.10707525912573242,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_18",
+      "x": 18,
+      "y": 7,
+      "raw_risk": 0.056055,
+      "normalized_risk": 0.11212257773771972,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8633333333333333,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "7_19",
+      "x": 19,
+      "y": 7,
+      "raw_risk": 0.050871,
+      "normalized_risk": 0.08097341144659759,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8633333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_0",
+      "x": 0,
+      "y": 8,
+      "raw_risk": 0.05291100000000001,
+      "normalized_risk": 0.09323118521856698,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.92,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_1",
+      "x": 1,
+      "y": 8,
+      "raw_risk": 0.062487,
+      "normalized_risk": 0.1507706173952231,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.88,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_2",
+      "x": 2,
+      "y": 8,
+      "raw_risk": 0.050630999999999995,
+      "normalized_risk": 0.07953132041460116,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8566666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_3",
+      "x": 3,
+      "y": 8,
+      "raw_risk": 0.047750999999999995,
+      "normalized_risk": 0.06222622803064442,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_4",
+      "x": 4,
+      "y": 8,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7999999999999999,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_5",
+      "x": 5,
+      "y": 8,
+      "raw_risk": 0.047991,
+      "normalized_risk": 0.06366831906264084,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333332,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_6",
+      "x": 6,
+      "y": 8,
+      "raw_risk": 0.047991,
+      "normalized_risk": 0.06366831906264084,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333332,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_7",
+      "x": 7,
+      "y": 8,
+      "raw_risk": 0.047390999999999996,
+      "normalized_risk": 0.060063091482649836,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_8",
+      "x": 8,
+      "y": 8,
+      "raw_risk": 0.04883099999999999,
+      "normalized_risk": 0.06871563767462818,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_9",
+      "x": 9,
+      "y": 8,
+      "raw_risk": 0.04883099999999999,
+      "normalized_risk": 0.06871563767462818,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_10",
+      "x": 10,
+      "y": 8,
+      "raw_risk": 0.048759000000000004,
+      "normalized_risk": 0.06828301036502933,
+      "colorTag": 5,
+      "feature": "Main Road",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.2
+      },
+      "components": {
+        "human_risk": 0.8466666666666666,
+        "environmental_risk": 0.26,
+        "density_value": 0.41700000000000004,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_11",
+      "x": 11,
+      "y": 8,
+      "raw_risk": 0.054615,
+      "normalized_risk": 0.10347003154574133,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8233333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_12",
+      "x": 12,
+      "y": 8,
+      "raw_risk": 0.054615,
+      "normalized_risk": 0.10347003154574133,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8233333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_13",
+      "x": 13,
+      "y": 8,
+      "raw_risk": 0.053175,
+      "normalized_risk": 0.09481748535376297,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333332,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_14",
+      "x": 14,
+      "y": 8,
+      "raw_risk": 0.059607,
+      "normalized_risk": 0.13346552501126635,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7999999999999999,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_15",
+      "x": 15,
+      "y": 8,
+      "raw_risk": 0.05876699999999999,
+      "normalized_risk": 0.12841820639927892,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_16",
+      "x": 16,
+      "y": 8,
+      "raw_risk": 0.05876699999999999,
+      "normalized_risk": 0.12841820639927892,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_17",
+      "x": 17,
+      "y": 8,
+      "raw_risk": 0.05377500000000001,
+      "normalized_risk": 0.09842271293375403,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_18",
+      "x": 18,
+      "y": 8,
+      "raw_risk": 0.055215000000000014,
+      "normalized_risk": 0.10707525912573242,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "8_19",
+      "x": 19,
+      "y": 8,
+      "raw_risk": 0.050031000000000006,
+      "normalized_risk": 0.07592609283461024,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_-1",
+      "x": -1,
+      "y": 9,
+      "raw_risk": 0.050031000000000006,
+      "normalized_risk": 0.07592609283461024,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_0",
+      "x": 0,
+      "y": 9,
+      "raw_risk": 0.051470999999999996,
+      "normalized_risk": 0.08457863902658855,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8799999999999999,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_1",
+      "x": 1,
+      "y": 9,
+      "raw_risk": 0.050031000000000006,
+      "normalized_risk": 0.07592609283461024,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_2",
+      "x": 2,
+      "y": 9,
+      "raw_risk": 0.049191000000000006,
+      "normalized_risk": 0.07087877422262286,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8166666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_3",
+      "x": 3,
+      "y": 9,
+      "raw_risk": 0.047750999999999995,
+      "normalized_risk": 0.06222622803064442,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_4",
+      "x": 4,
+      "y": 9,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_5",
+      "x": 5,
+      "y": 9,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_6",
+      "x": 6,
+      "y": 9,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_7",
+      "x": 7,
+      "y": 9,
+      "raw_risk": 0.047391,
+      "normalized_risk": 0.06006309148264988,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_8",
+      "x": 8,
+      "y": 9,
+      "raw_risk": 0.048831000000000006,
+      "normalized_risk": 0.06871563767462827,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_9",
+      "x": 9,
+      "y": 9,
+      "raw_risk": 0.048831000000000006,
+      "normalized_risk": 0.06871563767462827,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_10",
+      "x": 10,
+      "y": 9,
+      "raw_risk": 0.050270999999999996,
+      "normalized_risk": 0.07736818386660657,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_11",
+      "x": 11,
+      "y": 9,
+      "raw_risk": 0.04943100000000001,
+      "normalized_risk": 0.07232086525461927,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8233333333333335,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_12",
+      "x": 12,
+      "y": 9,
+      "raw_risk": 0.04943100000000001,
+      "normalized_risk": 0.07232086525461927,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8233333333333335,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_13",
+      "x": 13,
+      "y": 9,
+      "raw_risk": 0.05317500000000001,
+      "normalized_risk": 0.09481748535376301,
+      "colorTag": 2,
+      "feature": "Sparse Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.5
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.46,
+        "density_value": 0.465,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_14",
+      "x": 14,
+      "y": 9,
+      "raw_risk": 0.059607,
+      "normalized_risk": 0.13346552501126635,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_15",
+      "x": 15,
+      "y": 9,
+      "raw_risk": 0.05876699999999999,
+      "normalized_risk": 0.12841820639927892,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_16",
+      "x": 16,
+      "y": 9,
+      "raw_risk": 0.05876699999999999,
+      "normalized_risk": 0.12841820639927892,
+      "colorTag": 1,
+      "feature": "Dense Forest",
+      "deployable": true,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.6
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.6599999999999999,
+        "density_value": 0.481,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_17",
+      "x": 17,
+      "y": 9,
+      "raw_risk": 0.047151,
+      "normalized_risk": 0.05862100045065346,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_18",
+      "x": 18,
+      "y": 9,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "9_19",
+      "x": 19,
+      "y": 9,
+      "raw_risk": 0.040275,
+      "normalized_risk": 0.017305092383956742,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_0",
+      "x": 0,
+      "y": 10,
+      "raw_risk": 0.050031000000000006,
+      "normalized_risk": 0.07592609283461024,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8400000000000001,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_1",
+      "x": 1,
+      "y": 10,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_2",
+      "x": 2,
+      "y": 10,
+      "raw_risk": 0.049191,
+      "normalized_risk": 0.07087877422262281,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_3",
+      "x": 3,
+      "y": 10,
+      "raw_risk": 0.047751,
+      "normalized_risk": 0.06222622803064446,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_4",
+      "x": 4,
+      "y": 10,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_5",
+      "x": 5,
+      "y": 10,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_6",
+      "x": 6,
+      "y": 10,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_7",
+      "x": 7,
+      "y": 10,
+      "raw_risk": 0.047391,
+      "normalized_risk": 0.06006309148264988,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_8",
+      "x": 8,
+      "y": 10,
+      "raw_risk": 0.04883099999999999,
+      "normalized_risk": 0.06871563767462818,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_9",
+      "x": 9,
+      "y": 10,
+      "raw_risk": 0.040514999999999995,
+      "normalized_risk": 0.01874718341595312,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_10",
+      "x": 10,
+      "y": 10,
+      "raw_risk": 0.04195499999999999,
+      "normalized_risk": 0.02739972960793147,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_11",
+      "x": 11,
+      "y": 10,
+      "raw_risk": 0.041115,
+      "normalized_risk": 0.022352410995944125,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8233333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_12",
+      "x": 12,
+      "y": 10,
+      "raw_risk": 0.049431,
+      "normalized_risk": 0.07232086525461923,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8233333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_13",
+      "x": 13,
+      "y": 10,
+      "raw_risk": 0.047991000000000006,
+      "normalized_risk": 0.06366831906264088,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333334,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_14",
+      "x": 14,
+      "y": 10,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_15",
+      "x": 15,
+      "y": 10,
+      "raw_risk": 0.047751,
+      "normalized_risk": 0.06222622803064446,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_16",
+      "x": 16,
+      "y": 10,
+      "raw_risk": 0.047751,
+      "normalized_risk": 0.06222622803064446,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_17",
+      "x": 17,
+      "y": 10,
+      "raw_risk": 0.038835,
+      "normalized_risk": 0.008652546191978392,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_18",
+      "x": 18,
+      "y": 10,
+      "raw_risk": 0.038835,
+      "normalized_risk": 0.008652546191978392,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "10_19",
+      "x": 19,
+      "y": 10,
+      "raw_risk": 0.038835,
+      "normalized_risk": 0.008652546191978392,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_-1",
+      "x": -1,
+      "y": 11,
+      "raw_risk": 0.038835,
+      "normalized_risk": 0.008652546191978392,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_0",
+      "x": 0,
+      "y": 11,
+      "raw_risk": 0.040275,
+      "normalized_risk": 0.017305092383956742,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_1",
+      "x": 1,
+      "y": 11,
+      "raw_risk": 0.040275,
+      "normalized_risk": 0.017305092383956742,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_2",
+      "x": 2,
+      "y": 11,
+      "raw_risk": 0.049191,
+      "normalized_risk": 0.07087877422262281,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8166666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_3",
+      "x": 3,
+      "y": 11,
+      "raw_risk": 0.047750999999999995,
+      "normalized_risk": 0.06222622803064442,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_4",
+      "x": 4,
+      "y": 11,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_5",
+      "x": 5,
+      "y": 11,
+      "raw_risk": 0.047991,
+      "normalized_risk": 0.06366831906264084,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_6",
+      "x": 6,
+      "y": 11,
+      "raw_risk": 0.047991,
+      "normalized_risk": 0.06366831906264084,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_7",
+      "x": 7,
+      "y": 11,
+      "raw_risk": 0.03907499999999999,
+      "normalized_risk": 0.010094637223974728,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7666666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_8",
+      "x": 8,
+      "y": 11,
+      "raw_risk": 0.040515,
+      "normalized_risk": 0.01874718341595316,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_9",
+      "x": 9,
+      "y": 11,
+      "raw_risk": 0.040515,
+      "normalized_risk": 0.01874718341595316,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8066666666666668,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_10",
+      "x": 10,
+      "y": 11,
+      "raw_risk": 0.04195499999999999,
+      "normalized_risk": 0.02739972960793147,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8466666666666667,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_11",
+      "x": 11,
+      "y": 11,
+      "raw_risk": 0.041115000000000006,
+      "normalized_risk": 0.022352410995944167,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8233333333333335,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_12",
+      "x": 12,
+      "y": 11,
+      "raw_risk": 0.041115000000000006,
+      "normalized_risk": 0.022352410995944167,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8233333333333335,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_13",
+      "x": 13,
+      "y": 11,
+      "raw_risk": 0.039674999999999995,
+      "normalized_risk": 0.013699864803965735,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7833333333333333,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_14",
+      "x": 14,
+      "y": 11,
+      "raw_risk": 0.048591,
+      "normalized_risk": 0.06727354664263185,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": true,
+      "species_densities": {
+        "rhino": 0.5,
+        "elephant": 0.5,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.8,
+        "environmental_risk": 0.3,
+        "density_value": 0.433,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_15",
+      "x": 15,
+      "y": 11,
+      "raw_risk": 0.03943499999999999,
+      "normalized_risk": 0.012257773771969316,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_16",
+      "x": 16,
+      "y": 11,
+      "raw_risk": 0.03943499999999999,
+      "normalized_risk": 0.012257773771969316,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.7766666666666666,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_17",
+      "x": 17,
+      "y": 11,
+      "raw_risk": 0.038835,
+      "normalized_risk": 0.008652546191978392,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_18",
+      "x": 18,
+      "y": 11,
+      "raw_risk": 0.038835,
+      "normalized_risk": 0.008652546191978392,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.76,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    },
+    {
+      "grid_id": "11_19",
+      "x": 19,
+      "y": 11,
+      "raw_risk": 0.037395,
+      "normalized_risk": 0.0,
+      "colorTag": 0,
+      "feature": "Unmarked",
+      "deployable": false,
+      "in_species_zone": false,
+      "species_densities": {
+        "rhino": 0.1,
+        "elephant": 0.1,
+        "bird": 0.3
+      },
+      "components": {
+        "human_risk": 0.72,
+        "environmental_risk": 0.3,
+        "density_value": 0.125,
+        "diurnal_factor": 0.3,
+        "seasonal_factor": 0.3,
+        "temporal_factor": 0.09
+      }
+    }
+  ]
+}

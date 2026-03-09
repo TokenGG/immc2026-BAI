@@ -1,0 +1,53 @@
+======================================================================
+  RISK SCENARIO COMPARISON SUMMARY
+======================================================================
+
+Species Distribution Rules:
+  - Rainy Season:
+    * 3 zones, radius 7-10, rhino/elephant density = 0.2
+  - Dry Season:
+    * 4 zones near water/salt marsh, radius 5-7, rhino/elephant density = 0.5
+
+Zone Locations:
+  Rainy season zones:
+    Zone 1: center=(37, 27), radius=7
+    Zone 2: center=(51, 0), radius=9
+    Zone 3: center=(22, 9), radius=8
+  Dry season zones:
+    Zone 1: center=(26, 5), radius=7
+    Zone 2: center=(52, 7), radius=5
+    Zone 3: center=(50, 7), radius=7
+    Zone 4: center=(55, 7), radius=7
+
+Deployment Summary:
+  Total grids: 1888
+  Deployable grids (colorTag 1-7): 1021
+  Not deployable grids (colorTag 0): 867
+
+Scenario: Day_Rainy
+  Min risk (raw): 0.044378
+  Max risk (raw): 0.096042
+  Avg risk (raw): 0.067607
+  High risk cells (raw > 0.141929): 0/1888
+  High risk deployable cells: 0
+
+Scenario: Day_Dry
+  Min risk (raw): 0.024899
+  Max risk (raw): 0.060783
+  Avg risk (raw): 0.039193
+  High risk cells (raw > 0.141929): 0/1888
+  High risk deployable cells: 0
+
+Scenario: Night_Rainy
+  Min risk (raw): 0.088756
+  Max risk (raw): 0.192084
+  Avg risk (raw): 0.135214
+  High risk cells (raw > 0.141929): 841/1888
+  High risk deployable cells: 791
+
+Scenario: Night_Dry
+  Min risk (raw): 0.049797
+  Max risk (raw): 0.121565
+  Avg risk (raw): 0.078386
+  High risk cells (raw > 0.141929): 0/1888
+  High risk deployable cells: 0
