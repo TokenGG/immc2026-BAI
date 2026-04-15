@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+
+# 测试 & 覆盖率
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 可视化输出图片
+hexdynamic/figures/
+
+# Pipeline 运行产物（中间/输出 JSON）
+hexdynamic/pipeline_input.json
+hexdynamic/pipeline_output.json
+hexdynamic/output_example.json
+hexdynamic/*_output.json
+hexdynamic/*_input.json
+
+# marker 导出的坐标文件（非示例）
+marker/grid-coordinates*.json
+!marker/grid-coordinates.json
+
+# 图片资源（大文件）
+marker/*.jpg
+marker/*.png
+marker/*.jpeg
+marker/*.webp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
