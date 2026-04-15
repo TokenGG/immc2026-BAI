@@ -109,7 +109,9 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
         map_height=map_cfg_raw['map_height'],
         boundary_type=map_cfg_raw.get('boundary_type', 'RECTANGLE'),
         road_locations=[tuple(p) for p in map_cfg_raw.get('road_locations', [])],
-        water_locations=[tuple(p) for p in map_cfg_raw.get('water_locations', [])]
+        water_locations=[tuple(p) for p in map_cfg_raw.get('water_locations', [])],
+        boundary_locations=[tuple(p) for p in map_cfg_raw['boundary_locations']]
+            if 'boundary_locations' in map_cfg_raw else None
     )
 
     time_raw = data.get('time', {})

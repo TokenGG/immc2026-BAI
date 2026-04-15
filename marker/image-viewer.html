@@ -1956,6 +1956,22 @@
                 if (color === '#3b82f6') waterLocations.push([x, y]);
             }
 
+            // 计算边界格子坐标（邻居数 < 6 的格子，即不规则边界）
+            // 建立 marker gridId → 已导出格子集合，用于判断邻居是否在保护区内
+            const exportedMarkerIds = new Set(coloredGrids.map(g => g.gridId));
+            const boundaryLocations = [];
+            for (const g of coloredGrids) {
+                const neighbors = g.neighbors || [];
+                // 邻居中有不在导出集合里的（保护区外或未标注），则为边界格
+                const isBoundary = neighbors.length < 6 ||
+                    neighbors.some(nb => !exportedMarkerIds.has(nb));
+                if (isBoundary) {
+                    const x = g.col - minCol;
+                    const y = maxRow - g.row; // riskIndex y 轴向上
+                    boundaryLocations.push([x, y]);
+                }
+            }
+
             // 构建网格列表（只导出已标注地形的格子）
             let gridId = 0;
             const gridsOutput = [];
@@ -2024,7 +2040,8 @@
                     map_height: mapHeight,
                     boundary_type: "RECTANGLE",
                     road_locations: roadLocations,
-                    water_locations: waterLocations
+                    water_locations: waterLocations,
+                    boundary_locations: boundaryLocations
                 },
                 time: {
                     hour_of_day: getInt('pi_hour'),

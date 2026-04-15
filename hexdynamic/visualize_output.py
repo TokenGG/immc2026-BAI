@@ -82,7 +82,14 @@ def load_data(output_path, input_path=None):
             if "species_densities" in g:
                 species_map[g["grid_id"]] = g["species_densities"]
 
-    return out, out_map, species_map, hex_size
+    # 提取 boundary_locations（来自 input JSON 的 map_config）
+    boundary_xy = None
+    if inp and "map_config" in inp:
+        bl = inp["map_config"].get("boundary_locations")
+        if bl:
+            boundary_xy = [tuple(p) for p in bl]
+
+    return out, out_map, species_map, hex_size, boundary_xy
 
 
 # ---------------------------------------------------------------------------
@@ -118,6 +125,54 @@ def setup_map_ax(ax, grids, hex_size, margin=1.5):
         xs.append(cx); ys.append(cy)
     ax.set_xlim(min(xs) - hex_size - margin, max(xs) + hex_size + margin)
     ax.set_ylim(min(ys) - hex_size - margin, max(ys) + hex_size + margin)
+
+
+def draw_boundary(ax, grids, boundary_xy, hex_size):
+    """
+    在边界格子的外侧边上画保护区轮廓线。
+    boundary_xy: [(x, y), ...] 边界格子的笛卡尔坐标（来自 input JSON）
+    通过 x/y 匹配 grids 里的格子，找到对应的 q/r，再找出朝向保护区外的六边形边绘制。
+    """
+    if not boundary_xy:
+        return
+
+    # 建立 (x, y) → grid 的映射
+    xy_to_grid = {(g["x"], g["y"]): g for g in grids}
+    # 保护区内所有格子的 (q, r) 集合
+    inner_qr = {(g["q"], g["r"]) for g in grids}
+
+    # pointy-top 六边形的 6 个邻居方向（axial 坐标偏移）
+    # 对应边的两个顶点角度索引（顶点从 -30° 开始，每 60° 一个）
+    # 方向顺序：E, NE, NW, W, SW, SE
+    neighbor_dirs = [(1, 0), (0, 1), (-1, 1), (-1, 0), (0, -1), (1, -1)]
+    # 每个方向对应的外侧边顶点索引（pointy-top，顶点 i 在角度 60*i - 30 度）
+    dir_to_edge_verts = {
+        (1,  0): (0, 5),   # E  → 顶点 0,5
+        (0,  1): (1, 0),   # NE → 顶点 1,0
+        (-1, 1): (2, 1),   # NW → 顶点 2,1
+        (-1, 0): (3, 2),   # W  → 顶点 3,2
+        (0, -1): (4, 3),   # SW → 顶点 4,3
+        (1, -1): (5, 4),   # SE → 顶点 5,4
+    }
+
+    def get_corner(cx, cy, size, i):
+        a = math.pi / 3 * i - math.pi / 6
+        return cx + size * math.cos(a), cy + size * math.sin(a)
+
+    for bx, by in boundary_xy:
+        g = xy_to_grid.get((bx, by))
+        if g is None:
+            continue
+        q, r = g["q"], g["r"]
+        cx, cy = grid_center(q, r, hex_size)
+        for (dq, dr), (vi, vj) in zip(neighbor_dirs, dir_to_edge_verts.values()):
+            nq, nr = q + dq, r + dr
+            if (nq, nr) not in inner_qr:
+                # 这条边朝向保护区外，画轮廓线
+                p1 = get_corner(cx, cy, hex_size, vi)
+                p2 = get_corner(cx, cy, hex_size, vj)
+                ax.plot([p1[0], p2[0]], [p1[1], p2[1]],
+                        color="#1a1a1a", lw=1.8, zorder=6, solid_capstyle="round")
 
 
 def legend_in_ax(ax_leg, handles, title, y_start=1.0, fontsize=9, title_fontsize=9):
@@ -226,7 +281,7 @@ def _draw_resources(ax, grids, out, hex_size, edge_ids):
 # 图 1：风险热力图
 # ---------------------------------------------------------------------------
 
-def plot_risk_heatmap(out, out_map, hex_size, save_path):
+def plot_risk_heatmap(out, out_map, hex_size, boundary_xy, save_path):
     grids = out["grids"]
     summary = out["summary"]
     cmap = matplotlib.colormaps.get_cmap("YlOrRd")
@@ -239,11 +294,11 @@ def plot_risk_heatmap(out, out_map, hex_size, save_path):
         draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=cmap(norm(g["risk_normalized"])))
 
     setup_map_ax(ax, grids, hex_size)
+    draw_boundary(ax, grids, boundary_xy, hex_size)
     ax.set_title("Risk Heatmap", fontsize=13, fontweight="bold", pad=8)
 
     add_colorbar(fig, ax_cbar, cmap, norm, "Normalized Risk")
 
-    # 右侧：指标文字（单行）
     items = [
         ("Summary", None, True),
         ("Total PB",    f"{summary['total_protection_benefit']:.4f}",  False),
@@ -265,11 +320,7 @@ def plot_risk_heatmap(out, out_map, hex_size, save_path):
     print(f"  saved: {save_path}")
 
 
-# ---------------------------------------------------------------------------
-# 图 2：保护收益热力图 + 资源部署
-# ---------------------------------------------------------------------------
-
-def plot_protection_heatmap(out, hex_size, save_path):
+def plot_protection_heatmap(out, hex_size, boundary_xy, save_path):
     grids = out["grids"]
     summary = out["summary"]
     cmap = matplotlib.colormaps.get_cmap("RdYlGn")
@@ -284,11 +335,11 @@ def plot_protection_heatmap(out, hex_size, save_path):
 
     _draw_resources(ax, grids, out, hex_size, edge_ids)
     setup_map_ax(ax, grids, hex_size)
+    draw_boundary(ax, grids, boundary_xy, hex_size)
     ax.set_title("Protection Benefit & Deployment", fontsize=13, fontweight="bold", pad=8)
 
     add_colorbar(fig, ax_cbar, cmap, norm, "Protection Benefit (norm.)")
 
-    # 右侧图例
     res_handles = [
         plt.Line2D([0], [0], marker=m, color="w", markerfacecolor=c,
                    markeredgecolor="black", markersize=8, label=l)
@@ -300,7 +351,6 @@ def plot_protection_heatmap(out, hex_size, save_path):
     )
     y = legend_in_ax(ax_leg, res_handles, "Resources", y_start=0.97)
 
-    # 指标（单行）
     summary_items = [
         ("Best Fitness", f"{summary['best_fitness']:.4f}"),
         ("Total PB",     f"{summary['total_protection_benefit']:.4f}"),
@@ -320,11 +370,7 @@ def plot_protection_heatmap(out, hex_size, save_path):
     print(f"  saved: {save_path}")
 
 
-# ---------------------------------------------------------------------------
-# 图 3：地形地图
-# ---------------------------------------------------------------------------
-
-def plot_terrain_map(out, hex_size, save_path):
+def plot_terrain_map(out, hex_size, boundary_xy, save_path):
     grids = out["grids"]
     fig, ax, _, ax_leg = make_figure(has_colorbar=False)
 
@@ -333,6 +379,7 @@ def plot_terrain_map(out, hex_size, save_path):
         draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=TERRAIN_COLORS.get(g["terrain_type"], "#ccc"))
 
     setup_map_ax(ax, grids, hex_size)
+    draw_boundary(ax, grids, boundary_xy, hex_size)
     ax.set_title("Terrain Map", fontsize=13, fontweight="bold", pad=8)
 
     handles = [mpatches.Patch(facecolor=c, edgecolor="black", linewidth=0.5, label=t)
@@ -344,11 +391,7 @@ def plot_terrain_map(out, hex_size, save_path):
     print(f"  saved: {save_path}")
 
 
-# ---------------------------------------------------------------------------
-# 图 4：地形 + 部署资源
-# ---------------------------------------------------------------------------
-
-def plot_terrain_deployment_map(out, hex_size, save_path):
+def plot_terrain_deployment_map(out, hex_size, boundary_xy, save_path):
     grids = out["grids"]
     edge_ids = _edge_grid_ids(grids)
     fig, ax, _, ax_leg = make_figure(has_colorbar=False)
@@ -359,6 +402,7 @@ def plot_terrain_deployment_map(out, hex_size, save_path):
 
     _draw_resources(ax, grids, out, hex_size, edge_ids)
     setup_map_ax(ax, grids, hex_size)
+    draw_boundary(ax, grids, boundary_xy, hex_size)
     ax.set_title("Terrain Map with Deployment", fontsize=13, fontweight="bold", pad=8)
 
     terrain_handles = [mpatches.Patch(facecolor=c, edgecolor="black", linewidth=0.5, label=t)
@@ -381,11 +425,7 @@ def plot_terrain_deployment_map(out, hex_size, save_path):
     print(f"  saved: {save_path}")
 
 
-# ---------------------------------------------------------------------------
-# 图 5：物种密度地图
-# ---------------------------------------------------------------------------
-
-def plot_species_map(out, species_map, hex_size, save_path):
+def plot_species_map(out, species_map, hex_size, boundary_xy, save_path):
     grids = out["grids"]
     if not species_map:
         print("  [skip] species_map.png — 无物种数据（请提供 --input 参数）")
@@ -415,6 +455,7 @@ def plot_species_map(out, species_map, hex_size, save_path):
                        linewidths=0.4, alpha=0.85, zorder=4)
 
     setup_map_ax(ax, grids, hex_size)
+    draw_boundary(ax, grids, boundary_xy, hex_size)
     ax.set_title("Species Density Map", fontsize=13, fontweight="bold", pad=8)
 
     terrain_handles = [mpatches.Patch(facecolor=c, edgecolor="black", linewidth=0.5, alpha=0.5, label=t)
@@ -457,21 +498,23 @@ def main():
     os.makedirs(args.out_dir, exist_ok=True)
 
     print(f"加载数据: {args.output}")
-    out, out_map, species_map, hex_size = load_data(args.output, args.input)
+    out, out_map, species_map, hex_size, boundary_xy = load_data(args.output, args.input)
     print(f"  网格数: {len(out['grids'])}, hex_size: {hex_size}")
+    if boundary_xy:
+        print(f"  边界格子数: {len(boundary_xy)}")
 
     pre = args.prefix + "_" if args.prefix else ""
     print("生成图片...")
 
-    plot_risk_heatmap(out, out_map, hex_size,
+    plot_risk_heatmap(out, out_map, hex_size, boundary_xy,
                       save_path=os.path.join(args.out_dir, f"{pre}risk_heatmap.png"))
-    plot_protection_heatmap(out, hex_size,
+    plot_protection_heatmap(out, hex_size, boundary_xy,
                             save_path=os.path.join(args.out_dir, f"{pre}protection_heatmap.png"))
-    plot_terrain_map(out, hex_size,
+    plot_terrain_map(out, hex_size, boundary_xy,
                      save_path=os.path.join(args.out_dir, f"{pre}terrain_map.png"))
-    plot_terrain_deployment_map(out, hex_size,
+    plot_terrain_deployment_map(out, hex_size, boundary_xy,
                                 save_path=os.path.join(args.out_dir, f"{pre}terrain_deployment_map.png"))
-    plot_species_map(out, species_map, hex_size,
+    plot_species_map(out, species_map, hex_size, boundary_xy,
                      save_path=os.path.join(args.out_dir, f"{pre}species_map.png"))
     print("完成。")
 

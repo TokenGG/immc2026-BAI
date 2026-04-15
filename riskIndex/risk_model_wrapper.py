@@ -78,6 +78,7 @@ class MapConfig:
     boundary_type: str  # "RECTANGLE"
     road_locations: List[Tuple[int, int]]  # List of (x, y) grid coordinates
     water_locations: List[Tuple[int, int]]  # List of (x, y) grid coordinates
+    boundary_locations: Optional[List[Tuple[int, int]]] = None  # 不规则边界格子坐标，None 时用矩形边界
 
 
 @dataclass
@@ -109,6 +110,7 @@ class DistanceCalculator:
         self.boundary_type = map_config.boundary_type
         self.road_locations = map_config.road_locations
         self.water_locations = map_config.water_locations
+        self.boundary_locations = map_config.boundary_locations  # 不规则边界格子坐标
 
     def euclidean_distance(self, x1: int, y1: int, x2: int, y2: int) -> float:
         """Calculate Euclidean distance between two grid cells."""
@@ -117,10 +119,13 @@ class DistanceCalculator:
     def calculate_distance_to_boundary(self, x: int, y: int) -> float:
         """
         Calculate distance to nearest boundary.
-        Coordinate system: origin at bottom-left, x increases right, y increases up.
+        若提供了 boundary_locations，使用最近边界格子的欧氏距离；
+        否则按 boundary_type 计算（RECTANGLE 用矩形边界，其他返回 0.5）。
         """
+        if self.boundary_locations:
+            return self.calculate_distance_to_feature(x, y, self.boundary_locations)
+
         if self.boundary_type == "RECTANGLE":
-            # Distance to each edge (in grid units)
             dist_left = x
             dist_right = (self.map_width - 1) - x
             dist_bottom = y
@@ -128,11 +133,9 @@ class DistanceCalculator:
 
             min_dist_grid = min(dist_left, dist_right, dist_bottom, dist_top)
 
-            # Normalize to [0, 1]
             max_possible_dist = max(self.map_width, self.map_height) / 2
             normalized_dist = min_dist_grid / max_possible_dist if max_possible_dist > 0 else 0.0
 
-            # Invert: closer to boundary = higher risk (0 = far, 1 = at boundary)
             return 1.0 - min(normalized_dist, 1.0)
         else:
             return 0.5

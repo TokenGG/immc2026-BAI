@@ -215,8 +215,9 @@ def generate(m: int, n: int, args) -> dict:
             y = m - 1 - row
 
             # 六边形轴坐标（even-r offset → axial）
-            r_hex = row
-            q_hex = col - (row // 2)
+            # r 从下到上递增，与 marker 导出和可视化脚本一致
+            r_hex = m - 1 - row
+            q_hex = col - (r_hex // 2)
 
             env_fire_range, env_terrain_range = TERRAIN_ENV[terrain]
             fire_risk = round(random.uniform(*env_fire_range), 2)
