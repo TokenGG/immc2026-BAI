@@ -1,0 +1,16 @@
+{
+  "risk_weights": {
+    "human_weight": 0.4,
+    "environmental_weight": 0.3,
+    "density_weight": 0.3
+  },
+  "human_risk_weights": {
+    "boundary_weight": 0.4,
+    "road_weight": 0.35,
+    "water_weight": 0.25
+  },
+  "environmental_risk_weights": {
+    "fire_weight": 0.6,
+    "terrain_weight": 0.4
+  }
+}
