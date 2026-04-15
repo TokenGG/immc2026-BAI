@@ -124,7 +124,15 @@ class HexGridModel:
         return boundary_edges
 
     def get_fencing_edges(self) -> List[Tuple[int, int, float]]:
-        return self.get_boundary_edges()
+        """只返回至少一端是边缘格子的边，确保围栏只能部署在地图外围。"""
+        edge_grid_set = set(self.get_edge_grids())
+        fencing_edges = []
+        for grid_id in self.get_all_grid_ids():
+            for neighbor_id in self.get_neighbors(grid_id):
+                if grid_id < neighbor_id:
+                    if grid_id in edge_grid_set or neighbor_id in edge_grid_set:
+                        fencing_edges.append((grid_id, neighbor_id, 1.0))
+        return fencing_edges
 
     def get_grid_risk(self, grid_id: int) -> float:
         grid = self.get_grid_by_id(grid_id)

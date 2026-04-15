@@ -1,0 +1,480 @@
+"""
+visualize_output.py
+输入：protection_pipeline.py 生成的 output JSON（+ 可选的 input JSON 用于物种数据）
+输出：5 张图片
+  1. risk_heatmap.png           — 风险热力图
+  2. protection_heatmap.png     — 保护收益热力图 + 资源部署叠加
+  3. terrain_map.png            — 地理属性地图
+  4. terrain_deployment_map.png — 地形 + 部署资源叠加
+  5. species_map.png            — 物种密度地图
+
+图例和文字说明全部放在地图右侧独立区域，不遮挡地图。
+
+用法：
+    python visualize_output.py output.json
+    python visualize_output.py output.json --input input.json --out_dir ./figures
+"""
+
+import argparse
+import json
+import math
+import os
+from typing import Dict, List, Optional, Tuple
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
+import numpy as np
+from matplotlib.patches import Polygon
+from matplotlib.colors import Normalize
+from matplotlib import cm
+
+
+# ---------------------------------------------------------------------------
+# 六边形几何
+# ---------------------------------------------------------------------------
+
+def hex_corners(cx, cy, size):
+    pts = []
+    for i in range(6):
+        a = math.pi / 3 * i - math.pi / 6
+        pts.append((cx + size * math.cos(a), cy + size * math.sin(a)))
+    return pts
+
+
+def grid_center(q, r, size):
+    col = q + (r // 2)
+    x = size * math.sqrt(3) * (col + 0.5 * (r & 1))
+    y = size * 1.5 * r
+    return x, y
+
+
+def draw_hex(ax, cx, cy, size, facecolor, edgecolor="black", lw=0.4, alpha=1.0, zorder=1):
+    poly = Polygon(hex_corners(cx, cy, size), closed=True,
+                   facecolor=facecolor, edgecolor=edgecolor,
+                   linewidth=lw, alpha=alpha, zorder=zorder)
+    ax.add_patch(poly)
+
+
+# ---------------------------------------------------------------------------
+# 数据加载
+# ---------------------------------------------------------------------------
+
+def load_data(output_path, input_path=None):
+    with open(output_path, "r", encoding="utf-8") as f:
+        out = json.load(f)
+    inp = None
+    if input_path and os.path.exists(input_path):
+        with open(input_path, "r", encoding="utf-8") as f:
+            inp = json.load(f)
+
+    hex_size = 1.0
+    for g in out["grids"]:
+        if g.get("hex_size"):
+            hex_size = float(g["hex_size"])
+            break
+
+    out_map = {g["grid_id"]: g for g in out["grids"]}
+    species_map = {}
+    if inp:
+        for g in inp.get("grids", []):
+            if "species_densities" in g:
+                species_map[g["grid_id"]] = g["species_densities"]
+
+    return out, out_map, species_map, hex_size
+
+
+# ---------------------------------------------------------------------------
+# 布局辅助：地图 ax 设置 + 右侧图例 ax
+# ---------------------------------------------------------------------------
+
+def make_figure(has_colorbar=False):
+    """
+    返回 (fig, ax_map, ax_cbar_or_None, ax_legend)
+    has_colorbar=True  → 三列：地图 | 颜色条 | 图例
+    has_colorbar=False → 两列：地图 | 图例
+    """
+    fig = plt.figure(figsize=(14, 9))
+    if has_colorbar:
+        # 地图 70%，颜色条 3%（紧贴地图），图例 20%，留白 2%+5%
+        ax_map  = fig.add_axes([0.02, 0.06, 0.68, 0.86])
+        ax_cbar = fig.add_axes([0.72, 0.12, 0.025, 0.62])
+        ax_leg  = fig.add_axes([0.77, 0.06, 0.21, 0.86])
+    else:
+        ax_map  = fig.add_axes([0.02, 0.06, 0.76, 0.86])
+        ax_cbar = None
+        ax_leg  = fig.add_axes([0.80, 0.06, 0.18, 0.86])
+    ax_map.set_aspect("equal")
+    ax_map.axis("off")
+    ax_leg.axis("off")
+    return fig, ax_map, ax_cbar, ax_leg
+
+
+def setup_map_ax(ax, grids, hex_size, margin=1.5):
+    xs, ys = [], []
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        xs.append(cx); ys.append(cy)
+    ax.set_xlim(min(xs) - hex_size - margin, max(xs) + hex_size + margin)
+    ax.set_ylim(min(ys) - hex_size - margin, max(ys) + hex_size + margin)
+
+
+def legend_in_ax(ax_leg, handles, title, y_start=1.0, fontsize=9, title_fontsize=9):
+    """在 ax_leg 里手动绘制图例，返回下一个可用 y 位置"""
+    ax_leg.text(0.05, y_start, title, transform=ax_leg.transAxes,
+                fontsize=title_fontsize, fontweight="bold", va="top")
+    y = y_start - 0.06
+    for h in handles:
+        # 画色块或线条
+        if isinstance(h, mpatches.Patch):
+            rect = mpatches.FancyBboxPatch((0.05, y - 0.025), 0.12, 0.04,
+                                           boxstyle="square,pad=0",
+                                           facecolor=h.get_facecolor(),
+                                           edgecolor="black", linewidth=0.5,
+                                           transform=ax_leg.transAxes, clip_on=False)
+            ax_leg.add_patch(rect)
+        else:
+            # Line2D with marker
+            marker = h.get_marker()
+            mfc = h.get_markerfacecolor()
+            mec = h.get_markeredgecolor()
+            ax_leg.plot(0.11, y - 0.005, marker=marker, color="w",
+                        markerfacecolor=mfc, markeredgecolor=mec,
+                        markersize=8, transform=ax_leg.transAxes,
+                        clip_on=False)
+        ax_leg.text(0.22, y - 0.005, h.get_label(), transform=ax_leg.transAxes,
+                    fontsize=fontsize, va="center")
+        y -= 0.055
+    return y - 0.02
+
+
+def add_colorbar(fig, ax_cbar, cmap, norm, label):
+    """在专用的 ax_cbar 上绘制颜色条"""
+    sm = cm.ScalarMappable(cmap=cmap, norm=norm)
+    sm.set_array([])
+    cb = fig.colorbar(sm, cax=ax_cbar)
+    cb.set_label(label, fontsize=9)
+    cb.ax.tick_params(labelsize=8)
+
+
+# ---------------------------------------------------------------------------
+# 常量
+# ---------------------------------------------------------------------------
+
+TERRAIN_COLORS = {
+    "SparseGrass": "#a8d5a2",
+    "DenseGrass":  "#2d6a2d",
+    "WaterHole":   "#5b9bd5",
+    "SaltMarsh":   "#c8b97a",
+    "Road":        "#888888",
+}
+
+RESOURCE_MARKERS = {
+    "camera":         ("s", "#1f77b4", "Camera"),
+    "drone":          ("^", "#ff7f0e", "Drone"),
+    "camp":           ("D", "#9467bd", "Camp"),
+    "patrol_rangers": ("o", "#2ca02c", "Patrol"),
+}
+
+FENCE_COLOR = "#c0392b"
+
+SPECIES_STYLE = {
+    "rhino":    {"marker": "^", "color": "#8B4513", "size_scale": 120},
+    "elephant": {"marker": "s", "color": "#708090", "size_scale": 120},
+    "bird":     {"marker": "o", "color": "#FF6347",  "size_scale": 80},
+}
+
+
+def _edge_grid_ids(grids):
+    rows = [g["r"] for g in grids]
+    cols = [g["q"] + g["r"] // 2 for g in grids]
+    min_r, max_r = min(rows), max(rows)
+    min_c, max_c = min(cols), max(cols)
+    return {g["grid_id"] for g in grids
+            if g["r"] in (min_r, max_r) or (g["q"] + g["r"] // 2) in (min_c, max_c)}
+
+
+def _draw_resources(ax, grids, out, hex_size, edge_ids):
+    """在 ax 上绘制所有资源图标（fence pentagon + 其他），返回已绘制的 label 集合"""
+    fence_edges = {(e["grid_id_1"], e["grid_id_2"]) for e in out.get("fence_edges", [])}
+    centers = {g["grid_id"]: grid_center(g["q"], g["r"], hex_size) for g in grids}
+
+    fenced = {gid for (a, b) in fence_edges for gid in (a, b) if gid in edge_ids}
+    for gid in fenced:
+        cx, cy = centers[gid]
+        ax.scatter(cx, cy + hex_size * 0.38, marker="p", s=80, color=FENCE_COLOR,
+                   edgecolors="black", linewidths=0.5, zorder=4)
+
+    for g in grids:
+        cx, cy = centers[g["grid_id"]]
+        dep = g["deployment"]
+        offset = 0
+        for key, (marker, color, _) in RESOURCE_MARKERS.items():
+            val = dep.get(key, 0)
+            if val > 0:
+                ox = (offset - 1) * hex_size * 0.28
+                ax.scatter(cx + ox, cy, marker=marker, s=60, color=color,
+                           edgecolors="black", linewidths=0.5, zorder=5)
+                if val > 1:
+                    ax.text(cx + ox, cy + hex_size * 0.35, str(val),
+                            ha="center", va="bottom", fontsize=6, color=color, zorder=6)
+                offset += 1
+
+
+# ---------------------------------------------------------------------------
+# 图 1：风险热力图
+# ---------------------------------------------------------------------------
+
+def plot_risk_heatmap(out, out_map, hex_size, save_path):
+    grids = out["grids"]
+    summary = out["summary"]
+    cmap = matplotlib.colormaps.get_cmap("YlOrRd")
+    norm = Normalize(vmin=0, vmax=1)
+
+    fig, ax, ax_cbar, ax_leg = make_figure(has_colorbar=True)
+
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=cmap(norm(g["risk_normalized"])))
+
+    setup_map_ax(ax, grids, hex_size)
+    ax.set_title("Risk Heatmap", fontsize=13, fontweight="bold", pad=8)
+
+    add_colorbar(fig, ax_cbar, cmap, norm, "Normalized Risk")
+
+    # 右侧：指标文字（单行）
+    items = [
+        ("Summary", None, True),
+        ("Total PB",    f"{summary['total_protection_benefit']:.4f}",  False),
+        ("Average PB",  f"{summary['average_protection_benefit']:.4f}", False),
+        ("Best Fitness",f"{summary['best_fitness']:.4f}",               False),
+        ("Total Grids", str(summary['total_grids']),                    False),
+    ]
+    y = 0.97
+    for label, value, bold in items:
+        text = label if value is None else f"{label}: {value}"
+        ax_leg.text(0.05, y, text, transform=ax_leg.transAxes,
+                    fontsize=9, va="top",
+                    fontweight="bold" if bold else "normal",
+                    fontfamily="monospace")
+        y -= 0.09
+
+    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved: {save_path}")
+
+
+# ---------------------------------------------------------------------------
+# 图 2：保护收益热力图 + 资源部署
+# ---------------------------------------------------------------------------
+
+def plot_protection_heatmap(out, hex_size, save_path):
+    grids = out["grids"]
+    summary = out["summary"]
+    cmap = matplotlib.colormaps.get_cmap("RdYlGn")
+    norm = Normalize(vmin=0, vmax=1)
+    edge_ids = _edge_grid_ids(grids)
+
+    fig, ax, ax_cbar, ax_leg = make_figure(has_colorbar=True)
+
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=cmap(norm(g["protection_benefit_normalized"])))
+
+    _draw_resources(ax, grids, out, hex_size, edge_ids)
+    setup_map_ax(ax, grids, hex_size)
+    ax.set_title("Protection Benefit & Deployment", fontsize=13, fontweight="bold", pad=8)
+
+    add_colorbar(fig, ax_cbar, cmap, norm, "Protection Benefit (norm.)")
+
+    # 右侧图例
+    res_handles = [
+        plt.Line2D([0], [0], marker=m, color="w", markerfacecolor=c,
+                   markeredgecolor="black", markersize=8, label=l)
+        for _, (m, c, l) in RESOURCE_MARKERS.items()
+    ]
+    res_handles.append(
+        plt.Line2D([0], [0], marker="p", color="w", markerfacecolor=FENCE_COLOR,
+                   markeredgecolor="black", markersize=8, label="Fence")
+    )
+    y = legend_in_ax(ax_leg, res_handles, "Resources", y_start=0.97)
+
+    # 指标（单行）
+    summary_items = [
+        ("Best Fitness", f"{summary['best_fitness']:.4f}"),
+        ("Total PB",     f"{summary['total_protection_benefit']:.4f}"),
+        ("Avg PB",       f"{summary['average_protection_benefit']:.4f}"),
+    ]
+    y -= 0.04
+    ax_leg.text(0.05, y, "Summary", transform=ax_leg.transAxes,
+                fontsize=9, fontweight="bold", va="top")
+    y -= 0.09
+    for k, v in summary_items:
+        ax_leg.text(0.05, y, f"{k}: {v}", transform=ax_leg.transAxes,
+                    fontsize=8, va="top", fontfamily="monospace")
+        y -= 0.09
+
+    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved: {save_path}")
+
+
+# ---------------------------------------------------------------------------
+# 图 3：地形地图
+# ---------------------------------------------------------------------------
+
+def plot_terrain_map(out, hex_size, save_path):
+    grids = out["grids"]
+    fig, ax, _, ax_leg = make_figure(has_colorbar=False)
+
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=TERRAIN_COLORS.get(g["terrain_type"], "#ccc"))
+
+    setup_map_ax(ax, grids, hex_size)
+    ax.set_title("Terrain Map", fontsize=13, fontweight="bold", pad=8)
+
+    handles = [mpatches.Patch(facecolor=c, edgecolor="black", linewidth=0.5, label=t)
+               for t, c in TERRAIN_COLORS.items()]
+    legend_in_ax(ax_leg, handles, "Terrain Type", y_start=0.97)
+
+    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved: {save_path}")
+
+
+# ---------------------------------------------------------------------------
+# 图 4：地形 + 部署资源
+# ---------------------------------------------------------------------------
+
+def plot_terrain_deployment_map(out, hex_size, save_path):
+    grids = out["grids"]
+    edge_ids = _edge_grid_ids(grids)
+    fig, ax, _, ax_leg = make_figure(has_colorbar=False)
+
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=TERRAIN_COLORS.get(g["terrain_type"], "#ccc"))
+
+    _draw_resources(ax, grids, out, hex_size, edge_ids)
+    setup_map_ax(ax, grids, hex_size)
+    ax.set_title("Terrain Map with Deployment", fontsize=13, fontweight="bold", pad=8)
+
+    terrain_handles = [mpatches.Patch(facecolor=c, edgecolor="black", linewidth=0.5, label=t)
+                       for t, c in TERRAIN_COLORS.items()]
+    res_handles = [
+        plt.Line2D([0], [0], marker=m, color="w", markerfacecolor=c,
+                   markeredgecolor="black", markersize=8, label=l)
+        for _, (m, c, l) in RESOURCE_MARKERS.items()
+    ]
+    res_handles.append(
+        plt.Line2D([0], [0], marker="p", color="w", markerfacecolor=FENCE_COLOR,
+                   markeredgecolor="black", markersize=8, label="Fence")
+    )
+
+    y = legend_in_ax(ax_leg, terrain_handles, "Terrain", y_start=0.97)
+    legend_in_ax(ax_leg, res_handles, "Resources", y_start=y)
+
+    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved: {save_path}")
+
+
+# ---------------------------------------------------------------------------
+# 图 5：物种密度地图
+# ---------------------------------------------------------------------------
+
+def plot_species_map(out, species_map, hex_size, save_path):
+    grids = out["grids"]
+    if not species_map:
+        print("  [skip] species_map.png — 无物种数据（请提供 --input 参数）")
+        return
+
+    all_species = sorted({sp for sd in species_map.values() for sp in sd})
+    fig, ax, _, ax_leg = make_figure(has_colorbar=False)
+
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        draw_hex(ax, cx, cy, hex_size * 0.97,
+                 facecolor=TERRAIN_COLORS.get(g["terrain_type"], "#ccc"), alpha=0.45)
+
+    for g in grids:
+        sd = species_map.get(g["grid_id"], {})
+        active = [sp for sp in all_species if sd.get(sp, 0) > 0]
+        if not active:
+            continue
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        n = len(active)
+        for i, sp in enumerate(active):
+            style = SPECIES_STYLE.get(sp, {"marker": "P", "color": "#333", "size_scale": 80})
+            ox = (i - (n - 1) / 2) * hex_size * 0.35
+            size = max(10, style["size_scale"] * sd[sp])
+            ax.scatter(cx + ox, cy, marker=style["marker"], s=size,
+                       color=style["color"], edgecolors="black",
+                       linewidths=0.4, alpha=0.85, zorder=4)
+
+    setup_map_ax(ax, grids, hex_size)
+    ax.set_title("Species Density Map", fontsize=13, fontweight="bold", pad=8)
+
+    terrain_handles = [mpatches.Patch(facecolor=c, edgecolor="black", linewidth=0.5, alpha=0.5, label=t)
+                       for t, c in TERRAIN_COLORS.items()]
+    species_handles = [
+        plt.Line2D([0], [0], marker=SPECIES_STYLE.get(sp, {}).get("marker", "P"),
+                   color="w",
+                   markerfacecolor=SPECIES_STYLE.get(sp, {}).get("color", "#333"),
+                   markeredgecolor="black", markersize=9,
+                   label=f"{sp} (size ∝ density)")
+        for sp in all_species
+    ]
+
+    y = legend_in_ax(ax_leg, terrain_handles, "Terrain", y_start=0.97)
+    legend_in_ax(ax_leg, species_handles, "Species Density", y_start=y)
+
+    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved: {save_path}")
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def parse_args():
+    p = argparse.ArgumentParser(
+        description="可视化 protection_pipeline.py 的输出 JSON",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    p.add_argument("output", help="pipeline 输出 JSON 路径")
+    p.add_argument("--input", "-i", default=None, help="pipeline 输入 JSON 路径（用于物种数据）")
+    p.add_argument("--out_dir", "-d", default="./figures", help="图片输出目录")
+    p.add_argument("--prefix", default="", help="输出文件名前缀")
+    return p.parse_args()
+
+
+def main():
+    args = parse_args()
+    os.makedirs(args.out_dir, exist_ok=True)
+
+    print(f"加载数据: {args.output}")
+    out, out_map, species_map, hex_size = load_data(args.output, args.input)
+    print(f"  网格数: {len(out['grids'])}, hex_size: {hex_size}")
+
+    pre = args.prefix + "_" if args.prefix else ""
+    print("生成图片...")
+
+    plot_risk_heatmap(out, out_map, hex_size,
+                      save_path=os.path.join(args.out_dir, f"{pre}risk_heatmap.png"))
+    plot_protection_heatmap(out, hex_size,
+                            save_path=os.path.join(args.out_dir, f"{pre}protection_heatmap.png"))
+    plot_terrain_map(out, hex_size,
+                     save_path=os.path.join(args.out_dir, f"{pre}terrain_map.png"))
+    plot_terrain_deployment_map(out, hex_size,
+                                save_path=os.path.join(args.out_dir, f"{pre}terrain_deployment_map.png"))
+    plot_species_map(out, species_map, hex_size,
+                     save_path=os.path.join(args.out_dir, f"{pre}species_map.png"))
+    print("完成。")
+
+
+if __name__ == "__main__":
+    main()

@@ -156,13 +156,18 @@ class DSSAOptimizer:
             idx += 1
 
         for grid_id in self.grid_ids:
-            rangers[grid_id] = int(round(vector[idx]))
+            val = int(round(vector[idx]))
+            if val > 0 and self.coverage_model.deployment_matrix['patrol'][grid_id] == 1:
+                rangers[grid_id] = val
             idx += 1
 
         for edge in self.fencing_edges:
             edge_key = tuple(sorted((edge[0], edge[1])))
             if vector[idx] > 0.5:
-                fences[edge_key] = 1
+                id1, id2 = edge_key
+                if (self.coverage_model.deployment_matrix['fence'][id1] == 1 and
+                        self.coverage_model.deployment_matrix['fence'][id2] == 1):
+                    fences[edge_key] = 1
             idx += 1
 
         return DeploymentSolution(

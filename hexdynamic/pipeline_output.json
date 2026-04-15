@@ -1,0 +1,2351 @@
+{
+  "summary": {
+    "total_grids": 120,
+    "total_risk": 66.819009,
+    "best_fitness": 0.353925,
+    "total_protection_benefit": 23.648894,
+    "average_protection_benefit": 0.197074,
+    "fitness_history": [
+      0.35161,
+      0.35161,
+      0.35161,
+      0.35161,
+      0.35161,
+      0.35161,
+      0.352848,
+      0.352848,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353202,
+      0.353498,
+      0.353498,
+      0.353859,
+      0.353859,
+      0.353859,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925,
+      0.353925
+    ],
+    "resources_deployed": {
+      "total_cameras": 10,
+      "total_drones": 3,
+      "total_camps": 1,
+      "total_rangers": 12,
+      "fence_segments": 17
+    }
+  },
+  "grids": [
+    {
+      "grid_id": 0,
+      "q": 0,
+      "r": 0,
+      "x": 0,
+      "y": 9,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.544286,
+      "protection_benefit_raw": 0.175097,
+      "protection_benefit_normalized": 0.434402,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 1,
+      "q": 1,
+      "r": 0,
+      "x": 1,
+      "y": 9,
+      "terrain_type": "Road",
+      "risk_normalized": 0.011305,
+      "protection_benefit_raw": 0.007051,
+      "protection_benefit_normalized": 0.017493,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 1,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 2,
+      "q": 2,
+      "r": 0,
+      "x": 2,
+      "y": 9,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.513496,
+      "protection_benefit_raw": 0.185698,
+      "protection_benefit_normalized": 0.460703,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 3,
+      "q": 3,
+      "r": 0,
+      "x": 3,
+      "y": 9,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.375452,
+      "protection_benefit_raw": 0.138578,
+      "protection_benefit_normalized": 0.343801,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 4,
+      "q": 4,
+      "r": 0,
+      "x": 4,
+      "y": 9,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.800684,
+      "protection_benefit_raw": 0.403076,
+      "protection_benefit_normalized": 1.0,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 5,
+      "q": 5,
+      "r": 0,
+      "x": 5,
+      "y": 9,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.572356,
+      "protection_benefit_raw": 0.222228,
+      "protection_benefit_normalized": 0.551331,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 6,
+      "q": 6,
+      "r": 0,
+      "x": 6,
+      "y": 9,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.847076,
+      "protection_benefit_raw": 0.382191,
+      "protection_benefit_normalized": 0.948186,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 7,
+      "q": 7,
+      "r": 0,
+      "x": 7,
+      "y": 9,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.344987,
+      "protection_benefit_raw": 0.089414,
+      "protection_benefit_normalized": 0.22183,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 8,
+      "q": 8,
+      "r": 0,
+      "x": 8,
+      "y": 9,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.194346,
+      "protection_benefit_raw": 0.050371,
+      "protection_benefit_normalized": 0.124966,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 9,
+      "q": 9,
+      "r": 0,
+      "x": 9,
+      "y": 9,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.553639,
+      "protection_benefit_raw": 0.249795,
+      "protection_benefit_normalized": 0.619723,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 10,
+      "q": 10,
+      "r": 0,
+      "x": 10,
+      "y": 9,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.720471,
+      "protection_benefit_raw": 0.362696,
+      "protection_benefit_normalized": 0.89982,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 11,
+      "q": 11,
+      "r": 0,
+      "x": 11,
+      "y": 9,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.700852,
+      "protection_benefit_raw": 0.316216,
+      "protection_benefit_normalized": 0.784508,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 12,
+      "q": 0,
+      "r": 1,
+      "x": 0,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.695874,
+      "protection_benefit_raw": 0.350313,
+      "protection_benefit_normalized": 0.8691,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 13,
+      "q": 1,
+      "r": 1,
+      "x": 1,
+      "y": 8,
+      "terrain_type": "Road",
+      "risk_normalized": 0.082677,
+      "protection_benefit_raw": 0.045514,
+      "protection_benefit_normalized": 0.112917,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 14,
+      "q": 2,
+      "r": 1,
+      "x": 2,
+      "y": 8,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.112596,
+      "protection_benefit_raw": 0.029183,
+      "protection_benefit_normalized": 0.0724,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 15,
+      "q": 3,
+      "r": 1,
+      "x": 3,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.717411,
+      "protection_benefit_raw": 0.282279,
+      "protection_benefit_normalized": 0.700313,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 16,
+      "q": 4,
+      "r": 1,
+      "x": 4,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.652016,
+      "protection_benefit_raw": 0.256548,
+      "protection_benefit_normalized": 0.636476,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 17,
+      "q": 5,
+      "r": 1,
+      "x": 5,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.681449,
+      "protection_benefit_raw": 0.268129,
+      "protection_benefit_normalized": 0.665208,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 18,
+      "q": 6,
+      "r": 1,
+      "x": 6,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.766081,
+      "protection_benefit_raw": 0.301429,
+      "protection_benefit_normalized": 0.747823,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 19,
+      "q": 7,
+      "r": 1,
+      "x": 7,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.664643,
+      "protection_benefit_raw": 0.261517,
+      "protection_benefit_normalized": 0.648803,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 20,
+      "q": 8,
+      "r": 1,
+      "x": 8,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.840312,
+      "protection_benefit_raw": 0.330637,
+      "protection_benefit_normalized": 0.820285,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 21,
+      "q": 9,
+      "r": 1,
+      "x": 9,
+      "y": 8,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.649164,
+      "protection_benefit_raw": 0.168252,
+      "protection_benefit_normalized": 0.417419,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 22,
+      "q": 10,
+      "r": 1,
+      "x": 10,
+      "y": 8,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.899297,
+      "protection_benefit_raw": 0.353846,
+      "protection_benefit_normalized": 0.877864,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 23,
+      "q": 11,
+      "r": 1,
+      "x": 11,
+      "y": 8,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.387005,
+      "protection_benefit_raw": 0.100305,
+      "protection_benefit_normalized": 0.248848,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 24,
+      "q": -1,
+      "r": 2,
+      "x": 0,
+      "y": 7,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.424732,
+      "protection_benefit_raw": 0.191634,
+      "protection_benefit_normalized": 0.47543,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 25,
+      "q": 0,
+      "r": 2,
+      "x": 1,
+      "y": 7,
+      "terrain_type": "Road",
+      "risk_normalized": 0.12725,
+      "protection_benefit_raw": 0.070059,
+      "protection_benefit_normalized": 0.17381,
+      "deployment": {
+        "patrol_rangers": 2,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 26,
+      "q": 1,
+      "r": 2,
+      "x": 2,
+      "y": 7,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.666102,
+      "protection_benefit_raw": 0.262091,
+      "protection_benefit_normalized": 0.650226,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 27,
+      "q": 2,
+      "r": 2,
+      "x": 3,
+      "y": 7,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.624169,
+      "protection_benefit_raw": 0.161773,
+      "protection_benefit_normalized": 0.401347,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 28,
+      "q": 3,
+      "r": 2,
+      "x": 4,
+      "y": 7,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.395518,
+      "protection_benefit_raw": 0.102511,
+      "protection_benefit_normalized": 0.254322,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 29,
+      "q": 4,
+      "r": 2,
+      "x": 5,
+      "y": 7,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.746173,
+      "protection_benefit_raw": 0.293596,
+      "protection_benefit_normalized": 0.72839,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 30,
+      "q": 5,
+      "r": 2,
+      "x": 6,
+      "y": 7,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.742725,
+      "protection_benefit_raw": 0.292239,
+      "protection_benefit_normalized": 0.725023,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 31,
+      "q": 6,
+      "r": 2,
+      "x": 7,
+      "y": 7,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.908509,
+      "protection_benefit_raw": 0.35747,
+      "protection_benefit_normalized": 0.886856,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 32,
+      "q": 7,
+      "r": 2,
+      "x": 8,
+      "y": 7,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.636486,
+      "protection_benefit_raw": 0.164966,
+      "protection_benefit_normalized": 0.409267,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 33,
+      "q": 8,
+      "r": 2,
+      "x": 9,
+      "y": 7,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.305007,
+      "protection_benefit_raw": 0.079052,
+      "protection_benefit_normalized": 0.196122,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 34,
+      "q": 9,
+      "r": 2,
+      "x": 10,
+      "y": 7,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.382001,
+      "protection_benefit_raw": 0.099008,
+      "protection_benefit_normalized": 0.24563,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 35,
+      "q": 10,
+      "r": 2,
+      "x": 11,
+      "y": 7,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.400237,
+      "protection_benefit_raw": 0.103734,
+      "protection_benefit_normalized": 0.257356,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 36,
+      "q": -1,
+      "r": 3,
+      "x": 0,
+      "y": 6,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.290893,
+      "protection_benefit_raw": 0.075394,
+      "protection_benefit_normalized": 0.187047,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 37,
+      "q": 0,
+      "r": 3,
+      "x": 1,
+      "y": 6,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.748222,
+      "protection_benefit_raw": 0.294403,
+      "protection_benefit_normalized": 0.73039,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 38,
+      "q": 1,
+      "r": 3,
+      "x": 2,
+      "y": 6,
+      "terrain_type": "Road",
+      "risk_normalized": 0.186348,
+      "protection_benefit_raw": 0.102601,
+      "protection_benefit_normalized": 0.254545,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 39,
+      "q": 2,
+      "r": 3,
+      "x": 3,
+      "y": 6,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.539486,
+      "protection_benefit_raw": 0.139825,
+      "protection_benefit_normalized": 0.346895,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 40,
+      "q": 3,
+      "r": 3,
+      "x": 4,
+      "y": 6,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.504086,
+      "protection_benefit_raw": 0.13065,
+      "protection_benefit_normalized": 0.324132,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 41,
+      "q": 4,
+      "r": 3,
+      "x": 5,
+      "y": 6,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.887173,
+      "protection_benefit_raw": 0.349075,
+      "protection_benefit_normalized": 0.866028,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 42,
+      "q": 5,
+      "r": 3,
+      "x": 6,
+      "y": 6,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.831931,
+      "protection_benefit_raw": 0.327339,
+      "protection_benefit_normalized": 0.812103,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 43,
+      "q": 6,
+      "r": 3,
+      "x": 7,
+      "y": 6,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.649773,
+      "protection_benefit_raw": 0.168409,
+      "protection_benefit_normalized": 0.417811,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 44,
+      "q": 7,
+      "r": 3,
+      "x": 8,
+      "y": 6,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.70749,
+      "protection_benefit_raw": 0.183369,
+      "protection_benefit_normalized": 0.454923,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 45,
+      "q": 8,
+      "r": 3,
+      "x": 9,
+      "y": 6,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.6706,
+      "protection_benefit_raw": 0.173807,
+      "protection_benefit_normalized": 0.431202,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 1,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 46,
+      "q": 9,
+      "r": 3,
+      "x": 10,
+      "y": 6,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.719072,
+      "protection_benefit_raw": 0.282933,
+      "protection_benefit_normalized": 0.701935,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 47,
+      "q": 10,
+      "r": 3,
+      "x": 11,
+      "y": 6,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.698757,
+      "protection_benefit_raw": 0.181105,
+      "protection_benefit_normalized": 0.449308,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 48,
+      "q": -2,
+      "r": 4,
+      "x": 0,
+      "y": 5,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.406228,
+      "protection_benefit_raw": 0.092723,
+      "protection_benefit_normalized": 0.230039,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 49,
+      "q": -1,
+      "r": 4,
+      "x": 1,
+      "y": 5,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.772554,
+      "protection_benefit_raw": 0.303976,
+      "protection_benefit_normalized": 0.754141,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 50,
+      "q": 0,
+      "r": 4,
+      "x": 2,
+      "y": 5,
+      "terrain_type": "Road",
+      "risk_normalized": 0.224054,
+      "protection_benefit_raw": 0.123364,
+      "protection_benefit_normalized": 0.306057,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 51,
+      "q": 1,
+      "r": 4,
+      "x": 3,
+      "y": 5,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.662724,
+      "protection_benefit_raw": 0.171766,
+      "protection_benefit_normalized": 0.426138,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 52,
+      "q": 2,
+      "r": 4,
+      "x": 4,
+      "y": 5,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.937771,
+      "protection_benefit_raw": 0.368984,
+      "protection_benefit_normalized": 0.915421,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 53,
+      "q": 3,
+      "r": 4,
+      "x": 5,
+      "y": 5,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.536319,
+      "protection_benefit_raw": 0.139004,
+      "protection_benefit_normalized": 0.344858,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 54,
+      "q": 4,
+      "r": 4,
+      "x": 6,
+      "y": 5,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.796451,
+      "protection_benefit_raw": 0.206426,
+      "protection_benefit_normalized": 0.512126,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 55,
+      "q": 5,
+      "r": 4,
+      "x": 7,
+      "y": 5,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 1.0,
+      "protection_benefit_raw": 0.393469,
+      "protection_benefit_normalized": 0.976167,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 56,
+      "q": 6,
+      "r": 4,
+      "x": 8,
+      "y": 5,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.937399,
+      "protection_benefit_raw": 0.368838,
+      "protection_benefit_normalized": 0.915058,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 57,
+      "q": 7,
+      "r": 4,
+      "x": 9,
+      "y": 5,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.294387,
+      "protection_benefit_raw": 0.0763,
+      "protection_benefit_normalized": 0.189294,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 58,
+      "q": 8,
+      "r": 4,
+      "x": 10,
+      "y": 5,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.8517,
+      "protection_benefit_raw": 0.335118,
+      "protection_benefit_normalized": 0.831401,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 59,
+      "q": 9,
+      "r": 4,
+      "x": 11,
+      "y": 5,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.228548,
+      "protection_benefit_raw": 0.059236,
+      "protection_benefit_normalized": 0.146959,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 60,
+      "q": -2,
+      "r": 5,
+      "x": 0,
+      "y": 4,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.079475,
+      "protection_benefit_raw": 0.020598,
+      "protection_benefit_normalized": 0.051103,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 61,
+      "q": -1,
+      "r": 5,
+      "x": 1,
+      "y": 4,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.689783,
+      "protection_benefit_raw": 0.271408,
+      "protection_benefit_normalized": 0.673343,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 62,
+      "q": 0,
+      "r": 5,
+      "x": 2,
+      "y": 4,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.649641,
+      "protection_benefit_raw": 0.255614,
+      "protection_benefit_normalized": 0.634158,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 63,
+      "q": 1,
+      "r": 5,
+      "x": 3,
+      "y": 4,
+      "terrain_type": "Road",
+      "risk_normalized": 0.29819,
+      "protection_benefit_raw": 0.164184,
+      "protection_benefit_normalized": 0.407327,
+      "deployment": {
+        "patrol_rangers": 2,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 64,
+      "q": 2,
+      "r": 5,
+      "x": 4,
+      "y": 4,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.494705,
+      "protection_benefit_raw": 0.128219,
+      "protection_benefit_normalized": 0.3181,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 65,
+      "q": 3,
+      "r": 5,
+      "x": 5,
+      "y": 4,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.857315,
+      "protection_benefit_raw": 0.2222,
+      "protection_benefit_normalized": 0.551262,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 66,
+      "q": 4,
+      "r": 5,
+      "x": 6,
+      "y": 4,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.7654,
+      "protection_benefit_raw": 0.198378,
+      "protection_benefit_normalized": 0.49216,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 67,
+      "q": 5,
+      "r": 5,
+      "x": 7,
+      "y": 4,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.962794,
+      "protection_benefit_raw": 0.37883,
+      "protection_benefit_normalized": 0.939848,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 68,
+      "q": 6,
+      "r": 5,
+      "x": 8,
+      "y": 4,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.677763,
+      "protection_benefit_raw": 0.175664,
+      "protection_benefit_normalized": 0.435808,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 69,
+      "q": 7,
+      "r": 5,
+      "x": 9,
+      "y": 4,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.475616,
+      "protection_benefit_raw": 0.123271,
+      "protection_benefit_normalized": 0.305826,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 70,
+      "q": 8,
+      "r": 5,
+      "x": 10,
+      "y": 4,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.63454,
+      "protection_benefit_raw": 0.164461,
+      "protection_benefit_normalized": 0.408016,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 71,
+      "q": 9,
+      "r": 5,
+      "x": 11,
+      "y": 4,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.725585,
+      "protection_benefit_raw": 0.285495,
+      "protection_benefit_normalized": 0.708292,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 72,
+      "q": -3,
+      "r": 6,
+      "x": 0,
+      "y": 3,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.741158,
+      "protection_benefit_raw": 0.291623,
+      "protection_benefit_normalized": 0.723494,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 73,
+      "q": -2,
+      "r": 6,
+      "x": 1,
+      "y": 3,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.126305,
+      "protection_benefit_raw": 0.032736,
+      "protection_benefit_normalized": 0.081215,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 74,
+      "q": -1,
+      "r": 6,
+      "x": 2,
+      "y": 3,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.532399,
+      "protection_benefit_raw": 0.137988,
+      "protection_benefit_normalized": 0.342338,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 75,
+      "q": 0,
+      "r": 6,
+      "x": 3,
+      "y": 3,
+      "terrain_type": "Road",
+      "risk_normalized": 0.21745,
+      "protection_benefit_raw": 0.119727,
+      "protection_benefit_normalized": 0.297033,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 76,
+      "q": 1,
+      "r": 6,
+      "x": 4,
+      "y": 3,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.217229,
+      "protection_benefit_raw": 0.056302,
+      "protection_benefit_normalized": 0.13968,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 1,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 77,
+      "q": 2,
+      "r": 6,
+      "x": 5,
+      "y": 3,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.892371,
+      "protection_benefit_raw": 0.35112,
+      "protection_benefit_normalized": 0.871103,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 78,
+      "q": 3,
+      "r": 6,
+      "x": 6,
+      "y": 3,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.716903,
+      "protection_benefit_raw": 0.185808,
+      "protection_benefit_normalized": 0.460976,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 79,
+      "q": 4,
+      "r": 6,
+      "x": 7,
+      "y": 3,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.993228,
+      "protection_benefit_raw": 0.390805,
+      "protection_benefit_normalized": 0.969556,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 80,
+      "q": 5,
+      "r": 6,
+      "x": 8,
+      "y": 3,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.567534,
+      "protection_benefit_raw": 0.147094,
+      "protection_benefit_normalized": 0.36493,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 81,
+      "q": 6,
+      "r": 6,
+      "x": 9,
+      "y": 3,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.93687,
+      "protection_benefit_raw": 0.36863,
+      "protection_benefit_normalized": 0.914541,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 82,
+      "q": 7,
+      "r": 6,
+      "x": 10,
+      "y": 3,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.537726,
+      "protection_benefit_raw": 0.139369,
+      "protection_benefit_normalized": 0.345763,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 83,
+      "q": 8,
+      "r": 6,
+      "x": 11,
+      "y": 3,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.209242,
+      "protection_benefit_raw": 0.054232,
+      "protection_benefit_normalized": 0.134545,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 84,
+      "q": -3,
+      "r": 7,
+      "x": 0,
+      "y": 2,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.274986,
+      "protection_benefit_raw": 0.071271,
+      "protection_benefit_normalized": 0.176819,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 85,
+      "q": -2,
+      "r": 7,
+      "x": 1,
+      "y": 2,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.626594,
+      "protection_benefit_raw": 0.246546,
+      "protection_benefit_normalized": 0.611661,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 86,
+      "q": -1,
+      "r": 7,
+      "x": 2,
+      "y": 2,
+      "terrain_type": "Road",
+      "risk_normalized": 0.190618,
+      "protection_benefit_raw": 0.104943,
+      "protection_benefit_normalized": 0.260354,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 87,
+      "q": 0,
+      "r": 7,
+      "x": 3,
+      "y": 2,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.679279,
+      "protection_benefit_raw": 0.267275,
+      "protection_benefit_normalized": 0.663089,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 88,
+      "q": 1,
+      "r": 7,
+      "x": 4,
+      "y": 2,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.566871,
+      "protection_benefit_raw": 0.146923,
+      "protection_benefit_normalized": 0.364503,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 89,
+      "q": 2,
+      "r": 7,
+      "x": 5,
+      "y": 2,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.604506,
+      "protection_benefit_raw": 0.156677,
+      "protection_benefit_normalized": 0.388703,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 1,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 90,
+      "q": 3,
+      "r": 7,
+      "x": 6,
+      "y": 2,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.651398,
+      "protection_benefit_raw": 0.256305,
+      "protection_benefit_normalized": 0.635873,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 91,
+      "q": 4,
+      "r": 7,
+      "x": 7,
+      "y": 2,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.596429,
+      "protection_benefit_raw": 0.154584,
+      "protection_benefit_normalized": 0.38351,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 92,
+      "q": 5,
+      "r": 7,
+      "x": 8,
+      "y": 2,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.693982,
+      "protection_benefit_raw": 0.179867,
+      "protection_benefit_normalized": 0.446237,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 93,
+      "q": 6,
+      "r": 7,
+      "x": 9,
+      "y": 2,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.853408,
+      "protection_benefit_raw": 0.33579,
+      "protection_benefit_normalized": 0.833069,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 94,
+      "q": 7,
+      "r": 7,
+      "x": 10,
+      "y": 2,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.580727,
+      "protection_benefit_raw": 0.150514,
+      "protection_benefit_normalized": 0.373413,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 95,
+      "q": 8,
+      "r": 7,
+      "x": 11,
+      "y": 2,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.423234,
+      "protection_benefit_raw": 0.109694,
+      "protection_benefit_normalized": 0.272143,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 96,
+      "q": -4,
+      "r": 8,
+      "x": 0,
+      "y": 1,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.524842,
+      "protection_benefit_raw": 0.105999,
+      "protection_benefit_normalized": 0.262975,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 97,
+      "q": -3,
+      "r": 8,
+      "x": 1,
+      "y": 1,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.611306,
+      "protection_benefit_raw": 0.24053,
+      "protection_benefit_normalized": 0.596737,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 98,
+      "q": -2,
+      "r": 8,
+      "x": 2,
+      "y": 1,
+      "terrain_type": "Road",
+      "risk_normalized": 0.141952,
+      "protection_benefit_raw": 0.078133,
+      "protection_benefit_normalized": 0.193842,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 99,
+      "q": -1,
+      "r": 8,
+      "x": 3,
+      "y": 1,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.340435,
+      "protection_benefit_raw": 0.088235,
+      "protection_benefit_normalized": 0.218903,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 100,
+      "q": 0,
+      "r": 8,
+      "x": 4,
+      "y": 1,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.144641,
+      "protection_benefit_raw": 0.037488,
+      "protection_benefit_normalized": 0.093005,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 101,
+      "q": 1,
+      "r": 8,
+      "x": 5,
+      "y": 1,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.166366,
+      "protection_benefit_raw": 0.043119,
+      "protection_benefit_normalized": 0.106975,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 102,
+      "q": 2,
+      "r": 8,
+      "x": 6,
+      "y": 1,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.634248,
+      "protection_benefit_raw": 0.249557,
+      "protection_benefit_normalized": 0.619132,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 103,
+      "q": 3,
+      "r": 8,
+      "x": 7,
+      "y": 1,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.777519,
+      "protection_benefit_raw": 0.30593,
+      "protection_benefit_normalized": 0.758989,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 1
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 104,
+      "q": 4,
+      "r": 8,
+      "x": 8,
+      "y": 1,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.83304,
+      "protection_benefit_raw": 0.327776,
+      "protection_benefit_normalized": 0.813187,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 105,
+      "q": 5,
+      "r": 8,
+      "x": 9,
+      "y": 1,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.711061,
+      "protection_benefit_raw": 0.279781,
+      "protection_benefit_normalized": 0.694114,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 106,
+      "q": 6,
+      "r": 8,
+      "x": 10,
+      "y": 1,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.643839,
+      "protection_benefit_raw": 0.166871,
+      "protection_benefit_normalized": 0.413995,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 107,
+      "q": 7,
+      "r": 8,
+      "x": 11,
+      "y": 1,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.559227,
+      "protection_benefit_raw": 0.183426,
+      "protection_benefit_normalized": 0.455066,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 108,
+      "q": -4,
+      "r": 9,
+      "x": 0,
+      "y": 0,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.199156,
+      "protection_benefit_raw": 0.051617,
+      "protection_benefit_normalized": 0.128059,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 109,
+      "q": -3,
+      "r": 9,
+      "x": 1,
+      "y": 0,
+      "terrain_type": "Road",
+      "risk_normalized": 0.084612,
+      "protection_benefit_raw": 0.045397,
+      "protection_benefit_normalized": 0.112626,
+      "deployment": {
+        "patrol_rangers": 1,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 110,
+      "q": -2,
+      "r": 9,
+      "x": 2,
+      "y": 0,
+      "terrain_type": "WaterHole",
+      "risk_normalized": 0.0,
+      "protection_benefit_raw": 0.0,
+      "protection_benefit_normalized": 0.0,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 111,
+      "q": -1,
+      "r": 9,
+      "x": 3,
+      "y": 0,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.499745,
+      "protection_benefit_raw": 0.164756,
+      "protection_benefit_normalized": 0.408746,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 112,
+      "q": 0,
+      "r": 9,
+      "x": 4,
+      "y": 0,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.574552,
+      "protection_benefit_raw": 0.289238,
+      "protection_benefit_normalized": 0.717577,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 113,
+      "q": 1,
+      "r": 9,
+      "x": 5,
+      "y": 0,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.413197,
+      "protection_benefit_raw": 0.136223,
+      "protection_benefit_normalized": 0.337958,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 114,
+      "q": 2,
+      "r": 9,
+      "x": 6,
+      "y": 0,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.337801,
+      "protection_benefit_raw": 0.087552,
+      "protection_benefit_normalized": 0.217209,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 115,
+      "q": 3,
+      "r": 9,
+      "x": 7,
+      "y": 0,
+      "terrain_type": "DenseGrass",
+      "risk_normalized": 0.48225,
+      "protection_benefit_raw": 0.158988,
+      "protection_benefit_normalized": 0.394437,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 116,
+      "q": 4,
+      "r": 9,
+      "x": 8,
+      "y": 0,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.67974,
+      "protection_benefit_raw": 0.342191,
+      "protection_benefit_normalized": 0.84895,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 117,
+      "q": 5,
+      "r": 9,
+      "x": 9,
+      "y": 0,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.763518,
+      "protection_benefit_raw": 0.384366,
+      "protection_benefit_normalized": 0.953582,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 118,
+      "q": 6,
+      "r": 9,
+      "x": 10,
+      "y": 0,
+      "terrain_type": "SparseGrass",
+      "risk_normalized": 0.710317,
+      "protection_benefit_raw": 0.357584,
+      "protection_benefit_normalized": 0.887138,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    },
+    {
+      "grid_id": 119,
+      "q": 7,
+      "r": 9,
+      "x": 11,
+      "y": 0,
+      "terrain_type": "SaltMarsh",
+      "risk_normalized": 0.476038,
+      "protection_benefit_raw": 0.12338,
+      "protection_benefit_normalized": 0.306097,
+      "deployment": {
+        "patrol_rangers": 0,
+        "camp": 0,
+        "drone": 0,
+        "camera": 0
+      },
+      "hex_size": 62
+    }
+  ],
+  "fence_edges": [
+    {
+      "grid_id_1": 0,
+      "grid_id_2": 1
+    },
+    {
+      "grid_id_1": 0,
+      "grid_id_2": 12
+    },
+    {
+      "grid_id_1": 1,
+      "grid_id_2": 2
+    },
+    {
+      "grid_id_1": 1,
+      "grid_id_2": 12
+    },
+    {
+      "grid_id_1": 2,
+      "grid_id_2": 3
+    },
+    {
+      "grid_id_1": 3,
+      "grid_id_2": 4
+    },
+    {
+      "grid_id_1": 4,
+      "grid_id_2": 5
+    },
+    {
+      "grid_id_1": 5,
+      "grid_id_2": 6
+    },
+    {
+      "grid_id_1": 9,
+      "grid_id_2": 10
+    },
+    {
+      "grid_id_1": 10,
+      "grid_id_2": 11
+    },
+    {
+      "grid_id_1": 12,
+      "grid_id_2": 24
+    },
+    {
+      "grid_id_1": 107,
+      "grid_id_2": 118
+    },
+    {
+      "grid_id_1": 111,
+      "grid_id_2": 112
+    },
+    {
+      "grid_id_1": 112,
+      "grid_id_2": 113
+    },
+    {
+      "grid_id_1": 115,
+      "grid_id_2": 116
+    },
+    {
+      "grid_id_1": 116,
+      "grid_id_2": 117
+    },
+    {
+      "grid_id_1": 117,
+      "grid_id_2": 118
+    }
+  ]
+}

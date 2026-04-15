@@ -195,12 +195,18 @@ class CoverageModel:
 
     def repair_solution(self, solution: DeploymentSolution, 
                        constraints: Dict[str, any]) -> DeploymentSolution:
-        # 清理输入解决方案，只保留值大于0的条目
+        # 清理输入解决方案，只保留值大于0的条目，同时过滤不合法位置的 rangers
         cleaned_cameras = {k: v for k, v in solution.cameras.items() if v > 0}
         cleaned_camps = {k: v for k, v in solution.camps.items() if v > 0}
         cleaned_drones = {k: v for k, v in solution.drones.items() if v > 0}
-        cleaned_rangers = {k: v for k, v in solution.rangers.items() if v > 0}
-        cleaned_fences = {k: v for k, v in solution.fences.items() if v > 0}
+        cleaned_rangers = {k: v for k, v in solution.rangers.items()
+                           if v > 0 and self.deployment_matrix['patrol'].get(k, 0) == 1}
+        cleaned_fences = {
+            k: v for k, v in solution.fences.items()
+            if v > 0
+            and self.deployment_matrix['fence'].get(k[0], 0) == 1
+            and self.deployment_matrix['fence'].get(k[1], 0) == 1
+        }
         
         repaired = DeploymentSolution(
             cameras=cleaned_cameras,

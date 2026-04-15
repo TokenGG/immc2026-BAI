@@ -114,11 +114,11 @@ class DataLoader:
             edge_grids: 边缘网格ID列表，Fence只能在这些网格部署
         """
         terrain_deployment = {
-            'SaltMarsh': {'patrol': 0, 'camp': 0, 'drone': 1, 'camera': 0, 'fence': 0},
-            'SparseGrass': {'patrol': 1, 'camp': 1, 'drone': 1, 'camera': 1, 'fence': 1},
-            'DenseGrass': {'patrol': 1, 'camp': 1, 'drone': 1, 'camera': 0, 'fence': 1},
-            'WaterHole': {'patrol': 0, 'camp': 0, 'drone': 1, 'camera': 0, 'fence': 0},
-            'Road': {'patrol': 1, 'camp': 1, 'drone': 1, 'camera': 1, 'fence': 1}
+            'SaltMarsh':  {'patrol': 0, 'camp': 0, 'drone': 1, 'camera': 0, 'fence': 0},
+            'SparseGrass':{'patrol': 0, 'camp': 0, 'drone': 1, 'camera': 1, 'fence': 1},
+            'DenseGrass': {'patrol': 0, 'camp': 0, 'drone': 1, 'camera': 0, 'fence': 1},
+            'WaterHole':  {'patrol': 0, 'camp': 0, 'drone': 1, 'camera': 0, 'fence': 0},
+            'Road':       {'patrol': 1, 'camp': 1, 'drone': 1, 'camera': 1, 'fence': 1}
         }
 
         self.deployment_matrix = {}

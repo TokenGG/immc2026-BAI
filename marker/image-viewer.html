@@ -497,6 +497,7 @@
                     <button class="export-btn" id="importBtn" title="导入坐标数据">📥 导入JSON</button>
                     <button class="export-btn" id="exportBtn" title="导出坐标数据">📤 导出JSON</button>
                     <button class="export-btn" id="exportSvgBtn" title="导出网格SVG矢量图">📥 导出SVG</button>
+                    <button class="export-btn" id="exportPipelineBtn" title="导出 Pipeline 输入JSON" style="background:#f59e0b;">🚀 导出Pipeline JSON</button>
                     <input type="file" id="importFileInput" accept=".json" style="display: none;">
                 </div>
             </div>
@@ -1688,6 +1689,349 @@
             if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
             return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
         }
+
+        // =====================================================================
+        // Pipeline JSON 导出
+        // =====================================================================
+
+        // 颜色 → hexdynamic 地形类型
+        const colorToTerrainType = new Map([
+            ['#4ade80', 'DenseGrass'],
+            ['#ef4444', 'SparseGrass'],
+            ['#3b82f6', 'WaterHole'],
+            ['#eab308', 'SaltMarsh'],
+            ['#a855f7', 'Road'],
+            ['#f97316', 'Road'],
+            ['#06b6d4', 'SaltMarsh']
+        ]);
+
+        // 颜色 → riskIndex vegetation_type
+        const colorToVegetationType = new Map([
+            ['#4ade80', 'FOREST'],
+            ['#ef4444', 'GRASSLAND'],
+            ['#3b82f6', 'SHRUB'],
+            ['#eab308', 'SHRUB'],
+            ['#a855f7', 'GRASSLAND'],
+            ['#f97316', 'GRASSLAND'],
+            ['#06b6d4', 'SHRUB']
+        ]);
+
+        // 颜色 → 默认 fire_risk / terrain_complexity
+        const colorToEnvDefaults = new Map([
+            ['#4ade80', { fire_risk: 0.6, terrain_complexity: 0.5 }],
+            ['#ef4444', { fire_risk: 0.3, terrain_complexity: 0.2 }],
+            ['#3b82f6', { fire_risk: 0.1, terrain_complexity: 0.2 }],
+            ['#eab308', { fire_risk: 0.2, terrain_complexity: 0.3 }],
+            ['#a855f7', { fire_risk: 0.2, terrain_complexity: 0.1 }],
+            ['#f97316', { fire_risk: 0.2, terrain_complexity: 0.1 }],
+            ['#06b6d4', { fire_risk: 0.1, terrain_complexity: 0.4 }]
+        ]);
+
+        // 颜色 → 默认 species_densities
+        const colorToSpeciesDensities = new Map([
+            ['#4ade80', { rhino: 0.7, elephant: 0.5, bird: 0.4 }],
+            ['#ef4444', { rhino: 0.4, elephant: 0.3, bird: 0.5 }],
+            ['#3b82f6', { rhino: 0.8, elephant: 0.7, bird: 0.9 }],
+            ['#eab308', { rhino: 0.2, elephant: 0.1, bird: 0.3 }],
+            ['#a855f7', { rhino: 0.2, elephant: 0.2, bird: 0.3 }],
+            ['#f97316', { rhino: 0.2, elephant: 0.2, bird: 0.3 }],
+            ['#06b6d4', { rhino: 0.2, elephant: 0.1, bird: 0.6 }]
+        ]);
+
+        document.getElementById('exportPipelineBtn').addEventListener('click', () => {
+            if (gridCoordinates.length === 0) {
+                alert('请先开启网格化以生成坐标数据');
+                return;
+            }
+            openPipelineModal();
+        });
+
+        // 默认物种列表
+        const defaultSpecies = [
+            { name: 'rhino',    weight: 0.5, rainy: 1.2, dry: 1.0 },
+            { name: 'elephant', weight: 0.3, rainy: 1.3, dry: 0.9 },
+            { name: 'bird',     weight: 0.2, rainy: 1.5, dry: 0.8 }
+        ];
+
+        function addSpeciesRow(name='', weight=0.3, rainy=1.0, dry=1.0) {
+            const container = document.getElementById('speciesRows');
+            const row = document.createElement('div');
+            row.style.cssText = 'display:grid;grid-template-columns:1fr 0.6fr 0.6fr 0.6fr 28px;gap:6px;margin-bottom:6px;';
+            const inputStyle = 'width:100%;background:#1a1a1a;border:1px solid #444;color:#fff;padding:5px;border-radius:4px;font-size:0.82rem;';
+            row.innerHTML = `
+                <input type="text"   class="sp-name"   value="${name}"   placeholder="物种名" style="${inputStyle}">
+                <input type="number" class="sp-weight" value="${weight}" step="0.05" min="0" max="1" style="${inputStyle}">
+                <input type="number" class="sp-rainy"  value="${rainy}"  step="0.05" min="0" style="${inputStyle}">
+                <input type="number" class="sp-dry"    value="${dry}"    step="0.05" min="0" style="${inputStyle}">
+                <button onclick="this.parentElement.remove()" style="background:#3a3a3a;color:#ef4444;border:1px solid #ef4444;border-radius:4px;cursor:pointer;font-size:0.85rem;padding:0;">✕</button>
+            `;
+            container.appendChild(row);
+        }
+
+        function openPipelineModal() {
+            // 初始化物种行（只在首次打开时填充）
+            const container = document.getElementById('speciesRows');
+            if (container.children.length === 0) {
+                defaultSpecies.forEach(s => addSpeciesRow(s.name, s.weight, s.rainy, s.dry));
+            }
+            document.getElementById('pipelineModal').style.display = 'flex';
+        }
+
+        function closePipelineModal() {
+            document.getElementById('pipelineModal').style.display = 'none';
+        }
+
+        function buildPipelineJson() {
+            const getValue = id => document.getElementById(id).value;
+            const getInt = id => parseInt(getValue(id));
+            const getFloat = id => parseFloat(getValue(id));
+
+            // ---- 收集物种配置 ----
+            const speciesConfig = {};
+            const speciesNames = [];
+            document.querySelectorAll('#speciesRows > div').forEach(row => {
+                const name   = row.querySelector('.sp-name').value.trim();
+                const weight = parseFloat(row.querySelector('.sp-weight').value);
+                const rainy  = parseFloat(row.querySelector('.sp-rainy').value);
+                const dry    = parseFloat(row.querySelector('.sp-dry').value);
+                if (name) {
+                    speciesConfig[name] = { weight, rainy_season_multiplier: rainy, dry_season_multiplier: dry };
+                    speciesNames.push(name);
+                }
+            });
+
+            // 收集所有有颜色的网格，确定道路/水源位置
+            const coloredGrids = gridCoordinates.filter(g => gridColorMap.has(g.gridId));
+            const uncoloredGrids = gridCoordinates.filter(g => !gridColorMap.has(g.gridId));
+
+            // 计算地图尺寸（行列范围）
+            const allGrids = gridCoordinates;
+            const rows = allGrids.map(g => g.row);
+            const cols = allGrids.map(g => g.col);
+            const minRow = Math.min(...rows), maxRow = Math.max(...rows);
+            const minCol = Math.min(...cols), maxCol = Math.max(...cols);
+            const mapHeight = maxRow - minRow + 1;
+            const mapWidth = maxCol - minCol + 1;
+
+            // 道路/水源位置（用于 riskIndex 距离计算，坐标归一化到 0-based）
+            const roadLocations = [];
+            const waterLocations = [];
+            for (const g of coloredGrids) {
+                const color = gridColorMap.get(g.gridId);
+                const x = g.col - minCol;
+                const y = maxRow - g.row; // riskIndex y 轴向上
+                if (color === '#a855f7' || color === '#f97316') roadLocations.push([x, y]);
+                if (color === '#3b82f6') waterLocations.push([x, y]);
+            }
+
+            // 构建网格列表（有颜色的 + 未标注的默认为 SparseGrass）
+            let gridId = 0;
+            const gridsOutput = [];
+
+            // 用 row/col 建立 offset 坐标系，转换为六边形轴坐标 q/r
+            for (const g of allGrids) {
+                const row = g.row - minRow;
+                const col = g.col - minCol;
+                const x = col;
+                const y = mapHeight - 1 - row; // riskIndex y 轴向上
+
+                // 六边形轴坐标（even-r offset → axial）
+                const r_hex = row;
+                const q_hex = col - Math.floor(row / 2);
+
+                const color = gridColorMap.get(g.gridId) || '#ef4444'; // 默认 SparseGrass
+                const terrainType = colorToTerrainType.get(color) || 'SparseGrass';
+                const vegType = colorToVegetationType.get(color) || 'GRASSLAND';
+                const envDef = colorToEnvDefaults.get(color) || { fire_risk: 0.3, terrain_complexity: 0.2 };
+
+                // 按颜色取默认密度基准，再映射到当前物种列表
+                const colorDensityBase = colorToSpeciesDensities.get(color) || {};
+                const speciesDef = {};
+                speciesNames.forEach(sp => {
+                    speciesDef[sp] = colorDensityBase[sp] !== undefined ? colorDensityBase[sp] : 0.3;
+                });
+
+                gridsOutput.push({
+                    grid_id: gridId,
+                    q: q_hex,
+                    r: r_hex,
+                    x: x,
+                    y: y,
+                    hex_size: g.hexSizeNatural || hexSize,
+                    terrain_type: terrainType,
+                    fire_risk: envDef.fire_risk,
+                    terrain_complexity: envDef.terrain_complexity,
+                    vegetation_type: vegType,
+                    species_densities: speciesDef
+                });
+                gridId++;
+            }
+
+            const output = {
+                map_config: {
+                    map_width: mapWidth,
+                    map_height: mapHeight,
+                    boundary_type: "RECTANGLE",
+                    road_locations: roadLocations,
+                    water_locations: waterLocations
+                },
+                time: {
+                    hour_of_day: getInt('pi_hour'),
+                    season: getValue('pi_season')
+                },
+                use_temporal_factors: document.getElementById('pi_temporal').checked,
+                species_config: speciesConfig,
+                constraints: {
+                    total_patrol: getInt('pi_patrol'),
+                    total_camps: getInt('pi_camps'),
+                    max_rangers_per_camp: getInt('pi_rangers_per_camp'),
+                    total_cameras: getInt('pi_cameras'),
+                    total_drones: getInt('pi_drones'),
+                    total_fence_length: getFloat('pi_fence')
+                },
+                coverage_params: {
+                    patrol_radius: getFloat('pi_patrol_radius'),
+                    drone_radius: getFloat('pi_drone_radius'),
+                    camera_radius: getFloat('pi_camera_radius'),
+                    fence_protection: getFloat('pi_fence_protection'),
+                    wp: getFloat('pi_wp'),
+                    wd: getFloat('pi_wd'),
+                    wc: getFloat('pi_wc'),
+                    wf: getFloat('pi_wf')
+                },
+                dssa_config: {
+                    population_size: getInt('pi_pop_size'),
+                    max_iterations: getInt('pi_max_iter'),
+                    producer_ratio: getFloat('pi_producer_ratio'),
+                    scout_ratio: getFloat('pi_scout_ratio'),
+                    ST: getFloat('pi_ST'),
+                    R2: getFloat('pi_R2')
+                },
+                grids: gridsOutput
+            };
+
+            const dataStr = JSON.stringify(output, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'pipeline_input.json';
+            link.click();
+            URL.revokeObjectURL(url);
+            closePipelineModal();
+        }
     </script>
+
+    <!-- Pipeline 配置 Modal -->
+    <div id="pipelineModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:2000;justify-content:center;align-items:center;">
+        <div style="background:#2a2a2a;border-radius:12px;padding:28px 32px;width:560px;max-height:90vh;overflow-y:auto;color:#fff;font-size:0.9rem;">
+            <h2 style="color:#f59e0b;margin-bottom:20px;font-size:1.1rem;">🚀 导出 Pipeline 输入 JSON</h2>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+                <!-- 时间配置 -->
+                <div style="grid-column:1/-1;color:#aaa;font-size:0.8rem;border-bottom:1px solid #444;padding-bottom:4px;margin-top:4px;">时间配置</div>
+                <label>时间（小时 0-23）
+                    <input id="pi_hour" type="number" min="0" max="23" value="12" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>季节
+                    <select id="pi_season" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                        <option value="DRY">旱季 (DRY)</option>
+                        <option value="RAINY">雨季 (RAINY)</option>
+                    </select>
+                </label>
+                <label style="grid-column:1/-1;display:flex;align-items:center;gap:8px;">
+                    <input id="pi_temporal" type="checkbox">
+                    启用昼夜/季节时间因子
+                </label>
+
+                <!-- 资源约束 -->
+                <div style="grid-column:1/-1;color:#aaa;font-size:0.8rem;border-bottom:1px solid #444;padding-bottom:4px;margin-top:8px;">资源约束</div>
+                <label>巡逻人员总数
+                    <input id="pi_patrol" type="number" min="0" value="20" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>营地总数
+                    <input id="pi_camps" type="number" min="0" value="5" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>每营地最大人员
+                    <input id="pi_rangers_per_camp" type="number" min="1" value="5" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>摄像头总数
+                    <input id="pi_cameras" type="number" min="0" value="10" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>无人机总数
+                    <input id="pi_drones" type="number" min="0" value="3" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>围栏总长度
+                    <input id="pi_fence" type="number" min="0" value="50" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+
+                <!-- 覆盖参数 -->
+                <div style="grid-column:1/-1;color:#aaa;font-size:0.8rem;border-bottom:1px solid #444;padding-bottom:4px;margin-top:8px;">覆盖参数</div>
+                <label>巡逻半径
+                    <input id="pi_patrol_radius" type="number" step="0.1" value="5.0" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>无人机半径
+                    <input id="pi_drone_radius" type="number" step="0.1" value="8.0" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>摄像头半径
+                    <input id="pi_camera_radius" type="number" step="0.1" value="3.0" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>围栏保护系数
+                    <input id="pi_fence_protection" type="number" step="0.1" min="0" max="1" value="0.5" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>巡逻权重 wp
+                    <input id="pi_wp" type="number" step="0.05" min="0" max="1" value="0.3" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>无人机权重 wd
+                    <input id="pi_wd" type="number" step="0.05" min="0" max="1" value="0.3" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>摄像头权重 wc
+                    <input id="pi_wc" type="number" step="0.05" min="0" max="1" value="0.2" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>围栏权重 wf
+                    <input id="pi_wf" type="number" step="0.05" min="0" max="1" value="0.2" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+
+                <!-- 物种配置 -->
+                <div style="grid-column:1/-1;color:#aaa;font-size:0.8rem;border-bottom:1px solid #444;padding-bottom:4px;margin-top:8px;">
+                    珍稀物种配置
+                    <button onclick="addSpeciesRow()" style="margin-left:10px;background:#3a3a3a;color:#4ade80;border:1px solid #4ade80;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:0.75rem;">+ 添加物种</button>
+                </div>
+                <div style="grid-column:1/-1;">
+                    <div style="display:grid;grid-template-columns:1fr 0.6fr 0.6fr 0.6fr 28px;gap:6px;margin-bottom:4px;color:#666;font-size:0.75rem;padding:0 2px;">
+                        <span>物种名称</span><span>保护权重</span><span>雨季系数</span><span>旱季系数</span><span></span>
+                    </div>
+                    <div id="speciesRows"></div>
+                </div>
+
+                <!-- DSSA 优化参数 -->
+                <div style="grid-column:1/-1;color:#aaa;font-size:0.8rem;border-bottom:1px solid #444;padding-bottom:4px;margin-top:8px;">DSSA 优化参数</div>
+                <label>种群大小
+                    <input id="pi_pop_size" type="number" min="10" value="50" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>最大迭代次数
+                    <input id="pi_max_iter" type="number" min="10" value="100" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>生产者比例
+                    <input id="pi_producer_ratio" type="number" step="0.05" min="0" max="1" value="0.2" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>侦察者比例
+                    <input id="pi_scout_ratio" type="number" step="0.05" min="0" max="1" value="0.2" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>ST 阈值
+                    <input id="pi_ST" type="number" step="0.05" min="0" max="1" value="0.8" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+                <label>R2 参数
+                    <input id="pi_R2" type="number" step="0.05" min="0" max="1" value="0.5" style="width:100%;margin-top:4px;background:#1a1a1a;border:1px solid #444;color:#fff;padding:6px;border-radius:4px;">
+                </label>
+            </div>
+
+            <div style="margin-top:24px;display:flex;gap:12px;justify-content:flex-end;">
+                <button onclick="closePipelineModal()" style="background:#3a3a3a;color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:0.9rem;">取消</button>
+                <button onclick="buildPipelineJson()" style="background:#f59e0b;color:#1a1a1a;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:0.9rem;font-weight:600;">📥 生成并下载</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

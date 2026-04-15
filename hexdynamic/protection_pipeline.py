@@ -24,6 +24,13 @@ from risk_model_wrapper import (
     MapConfig, GridInputData, TimeInputData, ModelInputData, ModelConfigData,
     DistanceCalculator, convert_grid_input, convert_time_input, create_model_from_config,
 )
+from risk_model.core.species import Species
+from risk_model.risk.density import DensityRiskCalculator
+from risk_model.risk.composite import CompositeRiskCalculator
+from risk_model.risk.human import HumanRiskCalculator
+from risk_model.risk.environmental import EnvironmentalRiskCalculator
+from risk_model.config import WeightManager
+from risk_model.risk import RiskModel, HumanRiskWeights, EnvironmentalRiskWeights
 
 from data_loader import DataLoader, GridData
 from grid_model import HexGridModel
@@ -79,6 +86,19 @@ def load_input(path: str) -> dict:
         return json.load(f)
 
 
+def build_species_config(species_cfg: dict) -> dict:
+    """将 JSON 中的 species_config 转换为 {name: Species} 字典"""
+    result = {}
+    for name, cfg in species_cfg.items():
+        result[name] = Species(
+            name=name,
+            weight=float(cfg.get('weight', 0.3)),
+            rainy_season_multiplier=float(cfg.get('rainy_season_multiplier', 1.0)),
+            dry_season_multiplier=float(cfg.get('dry_season_multiplier', 1.0))
+        )
+    return result
+
+
 def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
     """调用 riskIndex 模块计算每个网格的归一化风险值，返回 {grid_id: normalized_risk}"""
 
@@ -108,6 +128,26 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
         environmental_risk_weights=cfg_raw.get('environmental_risk_weights')
     )
     model = create_model_from_config(model_config)
+
+    # 如果有自定义物种配置，重建带物种的模型
+    if 'species_config' in data:
+        species_cfg = build_species_config(data['species_config'])
+        weight_manager = WeightManager()
+        if cfg_raw.get('risk_weights'):
+            weight_manager.set_risk_weights(**cfg_raw['risk_weights'])
+        human_weights = None
+        if cfg_raw.get('human_risk_weights'):
+            human_weights = HumanRiskWeights(**cfg_raw['human_risk_weights'])
+        env_weights = None
+        if cfg_raw.get('environmental_risk_weights'):
+            env_weights = EnvironmentalRiskWeights(**cfg_raw['environmental_risk_weights'])
+        composite_calc = CompositeRiskCalculator(
+            weight_manager=weight_manager,
+            human_calculator=HumanRiskCalculator(weights=human_weights),
+            environmental_calculator=EnvironmentalRiskCalculator(weights=env_weights),
+            density_calculator=DensityRiskCalculator(species_config=species_cfg)
+        )
+        model = RiskModel(composite_calculator=composite_calc)
 
     # 构建 riskIndex 输入列表，保持 grid_id 顺序
     grid_data_list = []
@@ -234,17 +274,21 @@ def run_pipeline(input_path: str, output_path: str):
         return float((v - pb_min) / (pb_max - pb_min)) if pb_max != pb_min else float(v)
 
     # ---- 每个网格结果 ----
+    # 建立 grid_id → 输入原始数据的快速查找表
+    input_grid_map = {g['grid_id']: g for g in data['grids']}
+
     grid_results = []
     for grid in loader.grids:
         gid = grid.grid_id
-        grid_results.append({
+        src = input_grid_map.get(gid, {})
+        entry = {
             'grid_id': gid,
             'q': grid.q,
             'r': grid.r,
-            'x': data['grids'][loader.grids.index(grid)].get('x', 0),
-            'y': data['grids'][loader.grids.index(grid)].get('y', 0),
+            'x': src.get('x', 0),
+            'y': src.get('y', 0),
             'terrain_type': grid.terrain_type,
-            'risk_normalized': round(float(grid.risk), 6),       # 已由 riskIndex 归一化
+            'risk_normalized': round(float(grid.risk), 6),
             'protection_benefit_raw': round(float(pb_per_grid[gid]), 6),
             'protection_benefit_normalized': round(norm_pb(pb_per_grid[gid]), 6),
             'deployment': {
@@ -253,7 +297,11 @@ def run_pipeline(input_path: str, output_path: str):
                 'drone': int(best_solution.drones.get(gid, 0)),
                 'camera': int(best_solution.cameras.get(gid, 0))
             }
-        })
+        }
+        # 透传输入中存在的 hex_size
+        if 'hex_size' in src:
+            entry['hex_size'] = src['hex_size']
+        grid_results.append(entry)
 
     fence_edges = [
         {'grid_id_1': int(e[0]), 'grid_id_2': int(e[1])}

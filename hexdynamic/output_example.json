@@ -2,66 +2,66 @@
   "summary": {
     "total_grids": 20,
     "total_risk": 9.789729,
-    "best_fitness": 0.513546,
-    "total_protection_benefit": 5.027477,
-    "average_protection_benefit": 0.251374,
+    "best_fitness": 0.514705,
+    "total_protection_benefit": 5.038826,
+    "average_protection_benefit": 0.251941,
     "fitness_history": [
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.512854,
-      0.513153,
-      0.513298,
-      0.513298,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.51345,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513531,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546,
-      0.513546
+      0.512111,
+      0.512112,
+      0.512112,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.513461,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705,
+      0.514705
     ],
     "resources_deployed": {
       "total_cameras": 4,
       "total_drones": 2,
-      "total_camps": 1,
+      "total_camps": 0,
       "total_rangers": 8,
       "fence_segments": 10
     }
@@ -75,14 +75,15 @@
       "y": 0,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.350246,
-      "protection_benefit_raw": 0.218808,
-      "protection_benefit_normalized": 0.430628,
+      "protection_benefit_raw": 0.218572,
+      "protection_benefit_normalized": 0.430288,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
-        "camera": 1
-      }
+        "camera": 0
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 1,
@@ -95,11 +96,12 @@
       "protection_benefit_raw": 0.0,
       "protection_benefit_normalized": 0.0,
       "deployment": {
-        "patrol_rangers": 0,
+        "patrol_rangers": 1,
         "camp": 0,
         "drone": 0,
-        "camera": 0
-      }
+        "camera": 1
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 2,
@@ -109,14 +111,15 @@
       "y": 0,
       "terrain_type": "DenseGrass",
       "risk_normalized": 0.810312,
-      "protection_benefit_raw": 0.444031,
-      "protection_benefit_normalized": 0.873883,
+      "protection_benefit_raw": 0.44523,
+      "protection_benefit_normalized": 0.876494,
       "deployment": {
-        "patrol_rangers": 0,
+        "patrol_rangers": 1,
         "camp": 0,
-        "drone": 0,
+        "drone": 1,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 3,
@@ -126,14 +129,15 @@
       "y": 0,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.475908,
-      "protection_benefit_raw": 0.281487,
-      "protection_benefit_normalized": 0.553985,
+      "protection_benefit_raw": 0.281894,
+      "protection_benefit_normalized": 0.554946,
       "deployment": {
-        "patrol_rangers": 0,
+        "patrol_rangers": 1,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 4,
@@ -144,13 +148,14 @@
       "terrain_type": "WaterHole",
       "risk_normalized": 0.546446,
       "protection_benefit_raw": 0.141629,
-      "protection_benefit_normalized": 0.278735,
+      "protection_benefit_normalized": 0.278815,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 5,
@@ -160,14 +165,15 @@
       "y": 1,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.257514,
-      "protection_benefit_raw": 0.162133,
-      "protection_benefit_normalized": 0.319089,
+      "protection_benefit_raw": 0.161982,
+      "protection_benefit_normalized": 0.318884,
       "deployment": {
-        "patrol_rangers": 1,
+        "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 6,
@@ -177,14 +183,15 @@
       "y": 1,
       "terrain_type": "DenseGrass",
       "risk_normalized": 0.991432,
-      "protection_benefit_raw": 0.44515,
-      "protection_benefit_normalized": 0.876085,
+      "protection_benefit_raw": 0.445366,
+      "protection_benefit_normalized": 0.876761,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
-        "drone": 1,
+        "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 7,
@@ -194,14 +201,15 @@
       "y": 1,
       "terrain_type": "Road",
       "risk_normalized": 0.235936,
-      "protection_benefit_raw": 0.129721,
-      "protection_benefit_normalized": 0.255299,
+      "protection_benefit_raw": 0.129691,
+      "protection_benefit_normalized": 0.255313,
       "deployment": {
-        "patrol_rangers": 1,
+        "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
-        "camera": 0
-      }
+        "camera": 1
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 8,
@@ -211,14 +219,15 @@
       "y": 1,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.675059,
-      "protection_benefit_raw": 0.371231,
-      "protection_benefit_normalized": 0.730607,
+      "protection_benefit_raw": 0.371065,
+      "protection_benefit_normalized": 0.730491,
       "deployment": {
-        "patrol_rangers": 2,
+        "patrol_rangers": 1,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 9,
@@ -229,13 +238,14 @@
       "terrain_type": "SaltMarsh",
       "risk_normalized": 0.084378,
       "protection_benefit_raw": 0.021869,
-      "protection_benefit_normalized": 0.04304,
+      "protection_benefit_normalized": 0.043052,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 10,
@@ -245,14 +255,15 @@
       "y": 2,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.469468,
-      "protection_benefit_raw": 0.277655,
-      "protection_benefit_normalized": 0.546444,
+      "protection_benefit_raw": 0.277557,
+      "protection_benefit_normalized": 0.546408,
       "deployment": {
         "patrol_rangers": 1,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 11,
@@ -262,14 +273,15 @@
       "y": 2,
       "terrain_type": "Road",
       "risk_normalized": 0.299557,
-      "protection_benefit_raw": 0.164539,
-      "protection_benefit_normalized": 0.323824,
+      "protection_benefit_raw": 0.164514,
+      "protection_benefit_normalized": 0.323868,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
-        "camera": 1
-      }
+        "camera": 0
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 12,
@@ -279,14 +291,15 @@
       "y": 2,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.92389,
-      "protection_benefit_raw": 0.508113,
+      "protection_benefit_raw": 0.507967,
       "protection_benefit_normalized": 1.0,
       "deployment": {
         "patrol_rangers": 1,
         "camp": 0,
         "drone": 0,
         "camera": 1
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 13,
@@ -296,14 +309,15 @@
       "y": 2,
       "terrain_type": "DenseGrass",
       "risk_normalized": 1.0,
-      "protection_benefit_raw": 0.44973,
-      "protection_benefit_normalized": 0.885098,
+      "protection_benefit_raw": 0.449631,
+      "protection_benefit_normalized": 0.885159,
       "deployment": {
-        "patrol_rangers": 0,
+        "patrol_rangers": 1,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 14,
@@ -313,14 +327,15 @@
       "y": 2,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.295308,
-      "protection_benefit_raw": 0.174247,
-      "protection_benefit_normalized": 0.34293,
+      "protection_benefit_raw": 0.18551,
+      "protection_benefit_normalized": 0.365201,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
-        "camera": 1
-      }
+        "camera": 0
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 15,
@@ -331,13 +346,14 @@
       "terrain_type": "WaterHole",
       "risk_normalized": 0.639497,
       "protection_benefit_raw": 0.165746,
-      "protection_benefit_normalized": 0.326199,
+      "protection_benefit_normalized": 0.326293,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 16,
@@ -347,14 +363,15 @@
       "y": 3,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.522235,
-      "protection_benefit_raw": 0.309101,
-      "protection_benefit_normalized": 0.608332,
+      "protection_benefit_raw": 0.308827,
+      "protection_benefit_normalized": 0.607967,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
-        "drone": 0,
+        "drone": 1,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 17,
@@ -364,14 +381,15 @@
       "y": 3,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.717641,
-      "protection_benefit_raw": 0.452842,
-      "protection_benefit_normalized": 0.891224,
+      "protection_benefit_raw": 0.452574,
+      "protection_benefit_normalized": 0.890951,
       "deployment": {
         "patrol_rangers": 1,
-        "camp": 1,
-        "drone": 1,
+        "camp": 0,
+        "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 18,
@@ -381,14 +399,15 @@
       "y": 3,
       "terrain_type": "Road",
       "risk_normalized": 0.129681,
-      "protection_benefit_raw": 0.081731,
-      "protection_benefit_normalized": 0.160852,
+      "protection_benefit_raw": 0.081559,
+      "protection_benefit_normalized": 0.160559,
       "deployment": {
-        "patrol_rangers": 1,
+        "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
         "camera": 0
-      }
+      },
+      "hex_size": 62
     },
     {
       "grid_id": 19,
@@ -398,14 +417,15 @@
       "y": 3,
       "terrain_type": "SparseGrass",
       "risk_normalized": 0.36522,
-      "protection_benefit_raw": 0.227715,
-      "protection_benefit_normalized": 0.448159,
+      "protection_benefit_raw": 0.227644,
+      "protection_benefit_normalized": 0.448147,
       "deployment": {
         "patrol_rangers": 0,
         "camp": 0,
         "drone": 0,
-        "camera": 0
-      }
+        "camera": 1
+      },
+      "hex_size": 62
     }
   ],
   "fence_edges": [
@@ -422,16 +442,16 @@
       "grid_id_2": 2
     },
     {
-      "grid_id_1": 1,
-      "grid_id_2": 5
-    },
-    {
       "grid_id_1": 2,
       "grid_id_2": 3
     },
     {
       "grid_id_1": 5,
       "grid_id_2": 10
+    },
+    {
+      "grid_id_1": 13,
+      "grid_id_2": 14
     },
     {
       "grid_id_1": 14,
