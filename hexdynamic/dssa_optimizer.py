@@ -246,6 +246,8 @@ class DSSAOptimizer:
                 self.best_solution = solution
 
     def optimize(self, callback: Callable[[int, float, DeploymentSolution], None] = None) -> Tuple[DeploymentSolution, float, List[float]]:
+        import time
+
         self.initialize_population()
 
         for solution in self.population:
@@ -256,21 +258,36 @@ class DSSAOptimizer:
 
         self.fitness_history = [self.best_fitness]
 
+        total_start = time.time()
+        iter_times = []
+
         for iteration in range(self.config.max_iterations):
+            iter_start = time.time()
+
             self._update_producers(iteration)
             self._update_followers()
             self._update_scouts()
             self._update_best_solution()
+
+            iter_elapsed = time.time() - iter_start
+            iter_times.append(iter_elapsed)
 
             self.fitness_history.append(self.best_fitness)
 
             if callback:
                 callback(iteration, self.best_fitness, self.best_solution)
 
-            if iteration % 10 == 0:
-                print(f"Iteration {iteration}: Best Fitness = {self.best_fitness:.4f}")
+            avg_iter = sum(iter_times) / len(iter_times)
+            print(f"Iter {iteration+1:>4}/{self.config.max_iterations}"
+                  f"  fitness={self.best_fitness:.6f}"
+                  f"  iter={iter_elapsed*1000:.1f}ms"
+                  f"  avg={avg_iter*1000:.1f}ms")
 
-        print(f"Optimization completed. Best Fitness = {self.best_fitness:.4f}")
+        total_elapsed = time.time() - total_start
+        print(f"\nOptimization completed."
+              f"  Best Fitness = {self.best_fitness:.6f}"
+              f"  Total = {total_elapsed:.2f}s"
+              f"  Avg/iter = {total_elapsed/self.config.max_iterations*1000:.1f}ms")
 
         return self.best_solution, self.best_fitness, self.fitness_history
 
