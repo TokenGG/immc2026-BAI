@@ -131,8 +131,27 @@ pip install -r riskIndex/requirements.txt
 
 ```bash
 cd hexdynamic
+
+# 默认模式
 python protection_pipeline.py <input.json> <output.json>
+
+# 向量化模式（大规模网格推荐，千级以上网格约 4x+ 加速）
+python protection_pipeline.py <input.json> <output.json> --vectorized
 ```
+
+`--vectorized` 启用 `VectorizedCoverageModel`，用 NumPy 矩阵运算替代 Python 循环计算覆盖度，初始化时预构建距离矩阵切片和部署掩码，每次 `evaluate_fitness` 只做矩阵广播运算。网格数越大加速比越显著，120 格约 4x，上千格预计 10x+。
+
+运行时每轮迭代输出格式：
+
+```
+Iter    1/100  fitness=0.351623  iter=84.5ms  avg=84.5ms
+...
+Optimization completed.  Best Fitness = 0.498100  Total = 8.45s  Avg/iter = 84.5ms
+```
+
+- `fitness`：当前最优适应度
+- `iter`：本轮耗时
+- `avg`：累计平均每轮耗时
 
 ### 输入 JSON 格式
 
@@ -258,6 +277,83 @@ python protection_pipeline.py <input.json> <output.json>
 | `Best Fitness` | `Total / Σ R_i` | 风险加权归一化保护效率，优化目标 |
 
 综合保护效果 `E_i = wp × patrol_cov + wd × drone_cov + wc × camera_cov + wf × fence_prot`，各覆盖度基于指数衰减函数计算。
+
+---
+
+## 五、风险模型说明（riskIndex）
+
+pipeline 脚本调用 `riskIndex` 模块计算每个网格的归一化综合风险值 `R_i ∈ [0, 1]`，作为 DSSA 优化的输入。
+
+### 综合风险公式
+
+```
+R'_i = (ω₁·H_i + ω₂·E_i + ω₃·D_i) × T_t × S_t
+
+R_i = (R'_i - R_min) / (R_max - R_min)
+```
+
+| 符号 | 含义 | 默认权重 |
+|------|------|---------|
+| H_i | 人为风险（盗猎/人兽冲突） | ω₁ = 0.4 |
+| E_i | 环境风险（火灾 + 地形） | ω₂ = 0.3 |
+| D_i | 物种密度风险（珍稀物种分布） | ω₃ = 0.3 |
+| T_t | 昼夜因子（可选） | — |
+| S_t | 季节因子（可选） | — |
+
+### 人为风险 H_i（盗猎风险 + 人兽冲突）
+
+反映人类活动对保护区的威胁，综合考虑三个距离因素：
+
+```
+H_i = (α₁·prox_boundary + α₂·prox_road + α₃·prox_water) × P_t
+```
+
+| 因素 | 含义 | 默认权重 |
+|------|------|---------|
+| `prox_boundary` | 到保护区边界的接近度（越近越高） | α₁ = 0.40 |
+| `prox_road` | 到道路的接近度（道路是盗猎者进入通道） | α₂ = 0.35 |
+| `prox_water` | 到水源的接近度（水源是人兽冲突热点） | α₃ = 0.25 |
+| `P_t` | 盗猎时间概率（由昼夜因子决定） | — |
+
+接近度 = `1 - 归一化距离`，即距离越近，接近度越高，风险越大。
+
+在输入 JSON 中，`road_locations` 和 `water_locations` 用于自动计算各格到道路/水源的距离。
+
+### 环境风险 E_i（火灾风险 + 地形复杂度）
+
+```
+E_i = β₁·fire_risk + β₂·terrain_complexity
+```
+
+| 字段 | 含义 | 默认权重 |
+|------|------|---------|
+| `fire_risk` | 火灾风险 [0,1]，由植被类型和干燥程度决定 | β₁ = 0.6 |
+| `terrain_complexity` | 地形复杂度 [0,1]，复杂地形增加巡逻难度 | β₂ = 0.4 |
+
+这两个值在每个网格的输入数据中直接提供（`generate_map.py` 按地形类型随机生成，marker 工具按颜色给出默认值）。
+
+### 物种密度风险 D_i（珍稀物种分布）
+
+反映该格子的保护价值，物种越密集、保护权重越高，风险值越高：
+
+```
+D_i = Σ_s (w_s × density_{s,i} × seasonal_multiplier_s)
+```
+
+| 参数 | 含义 |
+|------|------|
+| `w_s` | 物种保护权重（rhino=0.5, elephant=0.3, bird=0.2） |
+| `density_{s,i}` | 物种 s 在格子 i 的密度 [0,1] |
+| `seasonal_multiplier_s` | 季节密度系数（雨季/旱季不同） |
+
+### 时间因子（可选，`use_temporal_factors: true` 时启用）
+
+| 因子 | 计算方式 | 默认值 |
+|------|---------|--------|
+| 昼夜因子 T_t | 白天（6:00-18:00）= 1.0，夜间 = 1.3 | 离散模式 |
+| 季节因子 S_t | 旱季 = 1.0，雨季 = 1.2 | — |
+
+时间因子作为乘数叠加在基础风险上，夜间雨季的综合风险最高（×1.56）。默认关闭，适合需要分析特定时段风险的场景。
 
 ---
 

@@ -35,6 +35,7 @@ from risk_model.risk import RiskModel, HumanRiskWeights, EnvironmentalRiskWeight
 from data_loader import DataLoader, GridData
 from grid_model import HexGridModel
 from coverage_model import CoverageModel
+from coverage_model_vectorized import VectorizedCoverageModel
 from dssa_optimizer import DSSAOptimizer, DSSAConfig
 
 
@@ -219,7 +220,7 @@ def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
     return loader
 
 
-def run_pipeline(input_path: str, output_path: str):
+def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
     print(f"[1/4] 读取输入: {input_path}")
     data = load_input(input_path)
 
@@ -229,7 +230,11 @@ def run_pipeline(input_path: str, output_path: str):
     print("[3/4] 构建模型并运行 DSSA 优化...")
     loader = build_data_loader(data, risk_map)
     grid_model = HexGridModel(loader.grids)
-    coverage_model = CoverageModel(
+
+    ModelClass = VectorizedCoverageModel if vectorized else CoverageModel
+    if vectorized:
+        print(f"      使用向量化 CoverageModel（VectorizedCoverageModel）")
+    coverage_model = ModelClass(
         grid_model,
         loader.coverage_params,
         loader.deployment_matrix,
@@ -338,7 +343,16 @@ def run_pipeline(input_path: str, output_path: str):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        print("用法: python protection_pipeline.py <input.json> <output.json>")
-        sys.exit(1)
-    run_pipeline(sys.argv[1], sys.argv[2])
+    import argparse
+    parser = argparse.ArgumentParser(
+        description="Protection Pipeline: 风险计算 + DSSA 优化部署方案",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument("input",  help="输入 JSON 路径")
+    parser.add_argument("output", help="输出 JSON 路径")
+    parser.add_argument(
+        "--vectorized", action="store_true", default=False,
+        help="启用向量化 CoverageModel（NumPy 矩阵运算），适合大规模网格（千级以上）"
+    )
+    args = parser.parse_args()
+    run_pipeline(args.input, args.output, vectorized=args.vectorized)
