@@ -178,8 +178,7 @@ class CoverageModel:
                 violations.append(f"Rangers per camp exceeded at camp {camp_id}: {rangers} > {constraints['max_rangers_per_camp']}")
 
         total_fence_length = sum(solution.fences.values())
-        if total_fence_length > constraints['total_fence_length']:
-            violations.append(f"Fence length exceeded: {total_fence_length} > {constraints['total_fence_length']}")
+        # 围栏已固定部署，不再校验长度约束
 
         for grid_id in self.grid_ids:
             if solution.cameras.get(grid_id, 0) > self.deployment_matrix['camera'][grid_id]:
@@ -201,12 +200,7 @@ class CoverageModel:
         cleaned_drones = {k: v for k, v in solution.drones.items() if v > 0}
         cleaned_rangers = {k: v for k, v in solution.rangers.items()
                            if v > 0 and self.deployment_matrix['patrol'].get(k, 0) == 1}
-        cleaned_fences = {
-            k: v for k, v in solution.fences.items()
-            if v > 0
-            and self.deployment_matrix['fence'].get(k[0], 0) == 1
-            and self.deployment_matrix['fence'].get(k[1], 0) == 1
-        }
+        cleaned_fences = {k: v for k, v in solution.fences.items() if v > 0}
         
         repaired = DeploymentSolution(
             cameras=cleaned_cameras,
@@ -291,13 +285,5 @@ class CoverageModel:
                     repaired.rangers[grid_id] = 1
                     remaining_rangers -= 1
 
-        total_fence_length = sum(repaired.fences.values())
-        while total_fence_length > constraints['total_fence_length']:
-            for edge_key in list(repaired.fences.keys()):
-                if repaired.fences[edge_key] == 1:
-                    del repaired.fences[edge_key]
-                    total_fence_length -= 1
-                    if total_fence_length <= constraints['total_fence_length']:
-                        break
-
+        # 围栏已固定，不修剪
         return repaired

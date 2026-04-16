@@ -82,12 +82,17 @@ def load_data(output_path, input_path=None):
             if "species_densities" in g:
                 species_map[g["grid_id"]] = g["species_densities"]
 
-    # 提取 boundary_locations（来自 input JSON 的 map_config）
+    # 提取 boundary_locations，兼容 [{x,y,original_grid_id},...] 和 [[x,y],...] 两种格式
     boundary_xy = None
     if inp and "map_config" in inp:
         bl = inp["map_config"].get("boundary_locations")
         if bl:
-            boundary_xy = [tuple(p) for p in bl]
+            boundary_xy = []
+            for item in bl:
+                if isinstance(item, dict):
+                    boundary_xy.append((item['x'], item['y']))
+                else:
+                    boundary_xy.append(tuple(item))
 
     return out, out_map, species_map, hex_size, boundary_xy
 

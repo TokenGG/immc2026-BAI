@@ -104,14 +104,23 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
     """调用 riskIndex 模块计算每个网格的归一化风险值，返回 {grid_id: normalized_risk}"""
 
     map_cfg_raw = data['map_config']
+    # 提取 boundary_locations，兼容 [{x,y,original_grid_id},...] 和 [[x,y],...] 两种格式
+    boundary_locations = map_cfg_raw.get('boundary_locations')
+    if boundary_locations:
+        normalized = []
+        for item in boundary_locations:
+            if isinstance(item, dict):
+                normalized.append((item['x'], item['y']))
+            else:
+                normalized.append(tuple(item))
+        boundary_locations = normalized
     map_config = MapConfig(
         map_width=map_cfg_raw['map_width'],
         map_height=map_cfg_raw['map_height'],
         boundary_type=map_cfg_raw.get('boundary_type', 'RECTANGLE'),
         road_locations=[tuple(p) for p in map_cfg_raw.get('road_locations', [])],
         water_locations=[tuple(p) for p in map_cfg_raw.get('water_locations', [])],
-        boundary_locations=[tuple(p) for p in map_cfg_raw['boundary_locations']]
-            if 'boundary_locations' in map_cfg_raw else None
+        boundary_locations=boundary_locations
     )
 
     time_raw = data.get('time', {})
@@ -219,6 +228,13 @@ def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
     loader.initialize_deployment_matrix(edge_grids=edge_grids)
     loader.initialize_visibility_params()
 
+    # 有物种存在的格子禁止部署巡逻员
+    for g in data['grids']:
+        gid = g['grid_id']
+        species = g.get('species_densities', {})
+        if any(v > 0 for v in species.values()):
+            loader.deployment_matrix['patrol'][gid] = 0
+
     return loader
 
 
@@ -252,6 +268,16 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
         'total_fence_length': loader.constraints.total_fence_length
     }
 
+    # 预计算固定围栏：所有允许部署围栏的边缘边全部部署
+    fencing_edges = grid_model.get_fencing_edges()
+    fixed_fences = {}
+    for edge in fencing_edges:
+        gid1, gid2, _ = edge
+        if (loader.deployment_matrix['fence'].get(gid1, 0) == 1 and
+                loader.deployment_matrix['fence'].get(gid2, 0) == 1):
+            fixed_fences[tuple(sorted((gid1, gid2)))] = 1
+    print(f"      固定围栏段数: {len(fixed_fences)}")
+
     dc = data.get('dssa_config', {})
     dssa_config = DSSAConfig(
         population_size=dc.get('population_size', 50),
@@ -262,7 +288,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
         R2=dc.get('R2', 0.5)
     )
 
-    optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config)
+    optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config, fixed_fences=fixed_fences)
     best_solution, best_fitness, fitness_history = optimizer.optimize()
 
     print("[4/4] 计算指标并生成输出...")

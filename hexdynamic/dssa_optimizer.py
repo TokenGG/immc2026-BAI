@@ -17,13 +17,15 @@ class DSSAConfig:
 
 class DSSAOptimizer:
     def __init__(self, coverage_model: CoverageModel, constraints: Dict[str, any],
-                 config: DSSAConfig = None):
+                 config: DSSAConfig = None, fixed_fences: Dict[Tuple[int, int], int] = None):
         self.coverage_model = coverage_model
         self.constraints = constraints
         self.config = config or DSSAConfig()
         self.grid_model = coverage_model.grid_model
         self.grid_ids = self.grid_model.get_all_grid_ids()
         self.fencing_edges = self.grid_model.get_fencing_edges()
+        # 固定围栏：不参与优化，每个解都使用相同的围栏部署
+        self.fixed_fences = fixed_fences or {}
 
         self.population = []
         self.fitness_history = []
@@ -76,15 +78,8 @@ class DSSAOptimizer:
         edges_shuffled = self.fencing_edges.copy()
         random.shuffle(edges_shuffled)
 
-        fence_length_used = 0
-        for edge in edges_shuffled:
-            if fence_length_used >= self.constraints['total_fence_length']:
-                break
-            grid_id1, grid_id2, length = edge
-            if (self.coverage_model.deployment_matrix['fence'][grid_id1] == 1 and
-                self.coverage_model.deployment_matrix['fence'][grid_id2] == 1):
-                fences[(grid_id1, grid_id2)] = 1
-                fence_length_used += length
+        # 围栏固定部署，直接使用 fixed_fences
+        fences = dict(self.fixed_fences)
 
         solution = DeploymentSolution(
             cameras=cameras,
@@ -113,23 +108,15 @@ class DSSAOptimizer:
 
     def _solution_to_vector(self, solution: DeploymentSolution) -> np.ndarray:
         vector = []
-
         for grid_id in self.grid_ids:
             vector.append(solution.cameras.get(grid_id, 0))
-
         for grid_id in self.grid_ids:
             vector.append(solution.camps.get(grid_id, 0))
-
         for grid_id in self.grid_ids:
             vector.append(solution.drones.get(grid_id, 0))
-
         for grid_id in self.grid_ids:
             vector.append(solution.rangers.get(grid_id, 0))
-
-        for edge in self.fencing_edges:
-            edge_key = tuple(sorted((edge[0], edge[1])))
-            vector.append(solution.fences.get(edge_key, 0))
-
+        # 围栏不参与向量编码
         return np.array(vector)
 
     def _vector_to_solution(self, vector: np.ndarray) -> DeploymentSolution:
@@ -137,45 +124,33 @@ class DSSAOptimizer:
         camps = {}
         drones = {}
         rangers = {}
-        fences = {}
 
         idx = 0
         for grid_id in self.grid_ids:
             if vector[idx] > 0.5:
                 cameras[grid_id] = 1
             idx += 1
-
         for grid_id in self.grid_ids:
             if vector[idx] > 0.5:
                 camps[grid_id] = 1
             idx += 1
-
         for grid_id in self.grid_ids:
             if vector[idx] > 0.5:
                 drones[grid_id] = 1
             idx += 1
-
         for grid_id in self.grid_ids:
             val = int(round(vector[idx]))
             if val > 0 and self.coverage_model.deployment_matrix['patrol'][grid_id] == 1:
                 rangers[grid_id] = val
             idx += 1
 
-        for edge in self.fencing_edges:
-            edge_key = tuple(sorted((edge[0], edge[1])))
-            if vector[idx] > 0.5:
-                id1, id2 = edge_key
-                if (self.coverage_model.deployment_matrix['fence'][id1] == 1 and
-                        self.coverage_model.deployment_matrix['fence'][id2] == 1):
-                    fences[edge_key] = 1
-            idx += 1
-
+        # 围栏固定，不从向量恢复
         return DeploymentSolution(
             cameras=cameras,
             camps=camps,
             drones=drones,
             rangers=rangers,
-            fences=fences
+            fences=dict(self.fixed_fences)
         )
 
     def _update_producers(self, iteration: int):

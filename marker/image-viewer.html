@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -1137,7 +1137,7 @@
                                 }
                             }
 
-                            if (colorToUse) {
+                            if (colorToUse && presetColors.includes(colorToUse)) {
                                 gridColorMap.set(matchingGrid.gridId, colorToUse);
                                 filledCount++;
                             }
@@ -1762,119 +1762,71 @@
          * @param {Map}   markerNeighbors - marker gridId → neighbor marker gridId[]
          */
         function assignSpeciesDensities(grids, speciesNames, gridIdMap, markerNeighbors) {
-            const N = grids.length;
-            // 初始化所有格子物种密度为 0
-            grids.forEach(g => {
-                g.species_densities = {};
-                speciesNames.forEach(sp => { g.species_densities[sp] = 0.0; });
-            });
-
+            grids.forEach(g => { g.species_densities = {}; speciesNames.forEach(sp => { g.species_densities[sp] = 0.0; }); });
             if (speciesNames.length === 0) return;
-
-            // 找出道路格子及其直接邻居（禁区）
             const roadMarkerIds = new Set();
             gridCoordinates.forEach(mg => {
-                if (!gridColorMap.has(mg.gridId)) return;
                 const color = gridColorMap.get(mg.gridId);
-                if (color === '#a855f7' || color === '#f97316') { // 主路/小路
+                if (color === '#a855f7' || color === '#f97316') {
                     roadMarkerIds.add(mg.gridId);
                     (markerNeighbors.get(mg.gridId) || []).forEach(nb => roadMarkerIds.add(nb));
                 }
             });
-
-            // 判断某个 gridsOutput index 是否在禁区
-            const outputIdxToMarkerId = new Map(); // gridsOutput index → marker gridId
+            const outputIdxToMarkerId = new Map();
+            gridCoordinates.forEach(mg => { if (gridIdMap.has(mg.gridId)) outputIdxToMarkerId.set(gridIdMap.get(mg.gridId), mg.gridId); });
+            const isRoadProhibited = idx => { const mid = outputIdxToMarkerId.get(idx); return mid !== undefined && roadMarkerIds.has(mid); };
+            const wetMarkerIds = new Set();
             gridCoordinates.forEach(mg => {
-                if (gridIdMap.has(mg.gridId)) {
-                    outputIdxToMarkerId.set(gridIdMap.get(mg.gridId), mg.gridId);
+                const color = gridColorMap.get(mg.gridId);
+                if (color === '#06b6d4' || color === '#3b82f6') {
+                    wetMarkerIds.add(mg.gridId);
+                    (markerNeighbors.get(mg.gridId) || []).forEach(nb => wetMarkerIds.add(nb));
                 }
             });
-            const isRoadProhibited = idx => {
-                const mid = outputIdxToMarkerId.get(idx);
-                return mid !== undefined && roadMarkerIds.has(mid);
-            };
-
-            // ---- 鸟类：盐沼/水坑及其邻居 ----
             const birdSp = speciesNames.find(s => s.toLowerCase().includes('bird'));
             if (birdSp) {
-                // 找出盐沼/水坑的 marker gridId
-                const waterMarkerIds = new Set();
+                const saltMarshIds = new Set();
                 gridCoordinates.forEach(mg => {
-                    if (!gridColorMap.has(mg.gridId)) return;
-                    const color = gridColorMap.get(mg.gridId);
-                    if (color === '#3b82f6' || color === '#eab308' || color === '#06b6d4') {
-                        waterMarkerIds.add(mg.gridId);
-                        (markerNeighbors.get(mg.gridId) || []).forEach(nb => waterMarkerIds.add(nb));
+                    if (gridColorMap.get(mg.gridId) === '#06b6d4') {
+                        saltMarshIds.add(mg.gridId);
+                        (markerNeighbors.get(mg.gridId) || []).forEach(nb => saltMarshIds.add(nb));
                     }
                 });
                 grids.forEach((g, idx) => {
                     if (isRoadProhibited(idx)) return;
                     const mid = outputIdxToMarkerId.get(idx);
-                    if (mid && waterMarkerIds.has(mid)) {
+                    if (mid && saltMarshIds.has(mid) && Math.random() < 0.10)
                         g.species_densities[birdSp] = parseFloat((0.5 + Math.random() * 0.5).toFixed(2));
-                    }
                 });
             }
-
-            // ---- 犀牛/大象：SparseGrass，成片，远离道路 ----
-            const rhinoSp   = speciesNames.find(s => s.toLowerCase().includes('rhino'));
+            const rhinoSp = speciesNames.find(s => s.toLowerCase().includes('rhino'));
             const elephantSp = speciesNames.find(s => s.toLowerCase().includes('elephant'));
-
-            // 收集可用的 SparseGrass 格子（未被鸟类占用，不在禁区）
-            const sparseIndices = grids
-                .map((g, idx) => ({ g, idx }))
-                .filter(({ g, idx }) =>
-                    g.terrain_type === 'SparseGrass' &&
-                    !isRoadProhibited(idx) &&
-                    speciesNames.every(sp => g.species_densities[sp] === 0.0)
-                )
-                .map(({ idx }) => idx);
-
-            // 随机打乱，取 50%
-            const shuffled = sparseIndices.slice().sort(() => Math.random() - 0.5);
-            const half = Math.floor(shuffled.length * 0.5);
-            const selected = shuffled.slice(0, half);
-
-            // 生成密集区中心：4 个大象区 + 5 个犀牛区
-            const NUM_ELEPHANT_ZONES = 4;
-            const NUM_RHINO_ZONES    = 5;
-            const totalZones = NUM_ELEPHANT_ZONES + NUM_RHINO_ZONES;
-
-            // 从 selected 里均匀抽取区域中心
+            const candidateIndices = grids.map((g, idx) => ({ g, idx }))
+                .filter(({ g, idx }) => {
+                    if (isRoadProhibited(idx)) return false;
+                    if (!speciesNames.every(sp => g.species_densities[sp] === 0.0)) return false;
+                    const mid = outputIdxToMarkerId.get(idx);
+                    return mid && wetMarkerIds.has(mid);
+                }).map(({ idx }) => idx);
+            const maxCount = Math.max(1, Math.floor(grids.length * 0.05));
+            const shuffled = candidateIndices.slice().sort(() => Math.random() - 0.5);
+            const selected = shuffled.slice(0, Math.min(maxCount, shuffled.length));
+            if (selected.length === 0) return;
+            const NUM_ELEPHANT_ZONES = 2, NUM_RHINO_ZONES = 3, totalZones = 5;
             const zoneCenters = [];
             const step = Math.max(1, Math.floor(selected.length / totalZones));
-            for (let z = 0; z < totalZones && z * step < selected.length; z++) {
-                zoneCenters.push(selected[z * step]);
-            }
-
-            // 为每个 selected 格子找最近的区域中心，分配物种
-            const elephantZoneIndices = new Set(zoneCenters.slice(0, NUM_ELEPHANT_ZONES));
-            const rhinoZoneIndices    = new Set(zoneCenters.slice(NUM_ELEPHANT_ZONES));
-
-            // 计算每个 selected 格子到各区域中心的距离（用 row/col 欧氏距离）
-            const getRC = idx => {
-                const mid = outputIdxToMarkerId.get(idx);
-                const mg = gridCoordinates.find(m => m.gridId === mid);
-                return mg ? { row: mg.row, col: mg.col } : { row: 0, col: 0 };
-            };
+            for (let z = 0; z < totalZones && z * step < selected.length; z++) zoneCenters.push(selected[z * step]);
+            const getRC = idx => { const mid = outputIdxToMarkerId.get(idx); const mg = gridCoordinates.find(m => m.gridId === mid); return mg ? { row: mg.row, col: mg.col } : { row: 0, col: 0 }; };
             const dist2 = (a, b) => (a.row - b.row) ** 2 + (a.col - b.col) ** 2;
-
-            const elephantCenters = [...elephantZoneIndices].map(getRC);
-            const rhinoCenters    = [...rhinoZoneIndices].map(getRC);
-
+            const eCenters = zoneCenters.slice(0, NUM_ELEPHANT_ZONES).map(getRC);
+            const rCenters = zoneCenters.slice(NUM_ELEPHANT_ZONES).map(getRC);
             selected.forEach(idx => {
                 const rc = getRC(idx);
-                const minElephant = elephantCenters.length
-                    ? Math.min(...elephantCenters.map(c => dist2(rc, c))) : Infinity;
-                const minRhino = rhinoCenters.length
-                    ? Math.min(...rhinoCenters.map(c => dist2(rc, c))) : Infinity;
-
+                const minE = eCenters.length ? Math.min(...eCenters.map(c => dist2(rc, c))) : Infinity;
+                const minR = rCenters.length ? Math.min(...rCenters.map(c => dist2(rc, c))) : Infinity;
                 const g = grids[idx];
-                if (elephantSp && minElephant <= minRhino) {
-                    g.species_densities[elephantSp] = parseFloat((0.4 + Math.random() * 0.6).toFixed(2));
-                } else if (rhinoSp) {
-                    g.species_densities[rhinoSp] = parseFloat((0.4 + Math.random() * 0.6).toFixed(2));
-                }
+                if (elephantSp && minE <= minR) g.species_densities[elephantSp] = parseFloat((0.4 + Math.random() * 0.6).toFixed(2));
+                else if (rhinoSp) g.species_densities[rhinoSp] = parseFloat((0.4 + Math.random() * 0.6).toFixed(2));
             });
         }
 
@@ -1932,9 +1884,11 @@
                 }
             });
 
-            // 收集所有有颜色的网格，确定道路/水源位置
-            const coloredGrids = gridCoordinates.filter(g => gridColorMap.has(g.gridId));
-            const uncoloredGrids = gridCoordinates.filter(g => !gridColorMap.has(g.gridId));
+            // 收集所有在 presetColors 里有颜色标注的格子（保护区内）
+            const coloredGrids = gridCoordinates.filter(g =>
+                gridColorMap.has(g.gridId) && presetColors.includes(gridColorMap.get(g.gridId))
+            );
+            const uncoloredGrids = gridCoordinates.filter(g => !coloredGrids.includes(g));
 
             // 计算地图尺寸（行列范围）
             const allGrids = gridCoordinates;
@@ -1962,13 +1916,12 @@
             const boundaryLocations = [];
             for (const g of coloredGrids) {
                 const neighbors = g.neighbors || [];
-                // 邻居中有不在导出集合里的（保护区外或未标注），则为边界格
                 const isBoundary = neighbors.length < 6 ||
                     neighbors.some(nb => !exportedMarkerIds.has(nb));
                 if (isBoundary) {
                     const x = g.col - minCol;
-                    const y = maxRow - g.row; // riskIndex y 轴向上
-                    boundaryLocations.push([x, y]);
+                    const y = maxRow - g.row;
+                    boundaryLocations.push({ x, y, original_grid_id: g.gridId });
                 }
             }
 
@@ -1978,8 +1931,8 @@
 
             // 用 row/col 建立 offset 坐标系，转换为六边形轴坐标 q/r
             for (const g of allGrids) {
-                // 跳过未标注地形的格子（colorTag=0）
-                if (!gridColorMap.has(g.gridId)) continue;
+                // 跳过不在 presetColors 里的格子（围栏外或未标注）
+                if (!gridColorMap.has(g.gridId) || !presetColors.includes(gridColorMap.get(g.gridId))) continue;
                 const row = g.row - minRow;
                 const col = g.col - minCol;
                 const x = col;
@@ -2001,6 +1954,7 @@
 
                 gridsOutput.push({
                     grid_id: gridId,
+                    original_grid_id: g.gridId,
                     q: q_hex,
                     r: r_hex,
                     x: x,
@@ -2013,6 +1967,7 @@
                     species_densities: speciesDef,
                     _markerGridId: g.gridId   // 临时字段，供 assignSpeciesDensities 使用
                 });
+                gridId++;
                 gridId++;
             }
 

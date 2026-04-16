@@ -105,7 +105,7 @@ python generate_map.py -m 15 -n 15 --seed 42 -o map.json
 | `--max_rangers_per_camp` | 5 | 每营地最大人员 |
 | `--total_cameras` | 10 | 摄像头总数 |
 | `--total_drones` | 3 | 无人机总数 |
-| `--total_fence_length` | 50 | 围栏总段数上限 |
+| `--total_fence_length` | 50 | 围栏参数（已不影响结果，围栏固定部署在所有边缘格） |
 | `--patrol_radius` | 5.0 | 巡逻覆盖衰减半径 |
 | `--drone_radius` | 8.0 | 无人机覆盖半径 |
 | `--camera_radius` | 3.0 | 摄像头覆盖半径 |
@@ -225,13 +225,18 @@ Optimization completed.  Best Fitness = 0.498100  Total = 8.45s  Avg/iter = 84.5
 
 | terrain_type | 巡逻 | 营地 | 无人机 | 摄像头 | 围栏 |
 |---|:---:|:---:|:---:|:---:|:---:|
-| SparseGrass | ✗ | ✗ | ✓ | ✓ | ✓（仅边缘） |
+| SparseGrass | ✓（无物种时）| ✗ | ✓ | ✓ | ✓（仅边缘） |
 | DenseGrass  | ✗ | ✗ | ✓ | ✗ | ✓（仅边缘） |
 | WaterHole   | ✗ | ✗ | ✓ | ✗ | ✗ |
 | SaltMarsh   | ✗ | ✗ | ✓ | ✗ | ✗ |
 | Road        | ✓ | ✓ | ✓ | ✓ | ✓（仅边缘） |
 
-围栏只能部署在地图边缘格子，且该格子地形必须允许（非 WaterHole/SaltMarsh）。
+巡逻员部署规则：
+- 只能部署在 Road 或无物种的 SparseGrass 格子
+- 有任意物种密度（`species_densities` 中任一值 > 0）的格子禁止部署巡逻员
+- 不能部署在 WaterHole、DenseGrass（树林）、SaltMarsh
+
+围栏固定部署在所有地图边缘格子（地形允许的边），不参与 DSSA 优化，`total_fence_length` 参数不再影响结果。
 
 ### 输出 JSON 格式
 
