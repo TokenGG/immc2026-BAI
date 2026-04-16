@@ -256,11 +256,23 @@ def _edge_grid_ids(grids):
 
 
 def _draw_resources(ax, grids, out, hex_size, edge_ids):
-    """在 ax 上绘制所有资源图标（fence pentagon + 其他），返回已绘制的 label 集合"""
+    """在 ax 上绘制所有资源图标（fence pentagon + 其他）
+    
+    围栏只在实际部署的边上显示，不是所有边缘网格都显示
+    """
     fence_edges = {(e["grid_id_1"], e["grid_id_2"]) for e in out.get("fence_edges", [])}
     centers = {g["grid_id"]: grid_center(g["q"], g["r"], hex_size) for g in grids}
 
+    # 只在实际部署的围栏边的端点上显示围栏标记
+    # 但只显示在边缘网格上的围栏
     fenced = {gid for (a, b) in fence_edges for gid in (a, b) if gid in edge_ids}
+    
+    # 调试：打印围栏信息
+    if fence_edges:
+        print(f"[DEBUG] 实际部署的围栏边数: {len(fence_edges)}")
+        print(f"[DEBUG] 边缘网格数: {len(edge_ids)}")
+        print(f"[DEBUG] 显示围栏标记的网格数: {len(fenced)}")
+    
     for gid in fenced:
         cx, cy = centers[gid]
         ax.scatter(cx, cy + hex_size * 0.38, marker="p", s=80, color=FENCE_COLOR,
@@ -368,6 +380,74 @@ def plot_protection_heatmap(out, hex_size, boundary_xy, save_path):
     for k, v in summary_items:
         ax_leg.text(0.05, y, f"{k}: {v}", transform=ax_leg.transAxes,
                     fontsize=8, va="top", fontfamily="monospace")
+        y -= 0.09
+
+    fig.savefig(save_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  saved: {save_path}")
+
+
+def plot_risk_comparison(out, hex_size, boundary_xy, save_path):
+    """并排对比：部署前风险（risk_normalized）vs 部署后剩余风险（residual_risk_normalized）"""
+    grids = out["grids"]
+    summary = out["summary"]
+
+    # 检查是否有 residual_risk_normalized 字段
+    if not grids or "residual_risk_normalized" not in grids[0]:
+        print("  [skip] risk_comparison.png — 输出数据缺少 residual_risk_normalized 字段")
+        return
+
+    cmap = matplotlib.colormaps.get_cmap("YlOrRd")
+    norm = Normalize(vmin=0, vmax=1)
+
+    fig = plt.figure(figsize=(20, 9))
+    # 左：部署前  右：部署后  各占 38%，中间颜色条 4%，右侧图例 16%
+    ax_before = fig.add_axes([0.02, 0.06, 0.37, 0.86])
+    ax_after  = fig.add_axes([0.41, 0.06, 0.37, 0.86])
+    ax_cbar   = fig.add_axes([0.80, 0.12, 0.02, 0.62])
+    ax_leg    = fig.add_axes([0.84, 0.06, 0.14, 0.86])
+
+    for ax in (ax_before, ax_after):
+        ax.set_aspect("equal")
+        ax.axis("off")
+    ax_leg.axis("off")
+
+    for g in grids:
+        cx, cy = grid_center(g["q"], g["r"], hex_size)
+        draw_hex(ax_before, cx, cy, hex_size * 0.97,
+                 facecolor=cmap(norm(g["risk_normalized"])))
+        draw_hex(ax_after, cx, cy, hex_size * 0.97,
+                 facecolor=cmap(norm(g["residual_risk_normalized"])))
+
+    setup_map_ax(ax_before, grids, hex_size)
+    setup_map_ax(ax_after, grids, hex_size)
+    draw_boundary(ax_before, grids, boundary_xy, hex_size)
+    draw_boundary(ax_after, grids, boundary_xy, hex_size)
+
+    ax_before.set_title("Before Deployment\n(Normalized Risk)", fontsize=12, fontweight="bold", pad=8)
+    ax_after.set_title("After Deployment\n(Residual Risk)", fontsize=12, fontweight="bold", pad=8)
+
+    sm = cm.ScalarMappable(cmap=cmap, norm=norm)
+    sm.set_array([])
+    cb = fig.colorbar(sm, cax=ax_cbar)
+    cb.set_label("Risk Level", fontsize=9)
+    cb.ax.tick_params(labelsize=8)
+
+    # 右侧指标
+    items = [
+        ("Summary", None, True),
+        ("Best Fitness",   f"{summary['best_fitness']:.4f}",               False),
+        ("Total PB",       f"{summary['total_protection_benefit']:.4f}",   False),
+        ("Avg PB",         f"{summary['average_protection_benefit']:.4f}", False),
+        ("Total Grids",    str(summary['total_grids']),                    False),
+    ]
+    y = 0.97
+    for label, value, bold in items:
+        text = label if value is None else f"{label}: {value}"
+        ax_leg.text(0.05, y, text, transform=ax_leg.transAxes,
+                    fontsize=9, va="top",
+                    fontweight="bold" if bold else "normal",
+                    fontfamily="monospace")
         y -= 0.09
 
     fig.savefig(save_path, dpi=150, bbox_inches="tight")
@@ -513,6 +593,8 @@ def main():
 
     plot_risk_heatmap(out, out_map, hex_size, boundary_xy,
                       save_path=os.path.join(args.out_dir, f"{pre}risk_heatmap.png"))
+    plot_risk_comparison(out, hex_size, boundary_xy,
+                         save_path=os.path.join(args.out_dir, f"{pre}risk_comparison.png"))
     plot_protection_heatmap(out, hex_size, boundary_xy,
                             save_path=os.path.join(args.out_dir, f"{pre}protection_heatmap.png"))
     plot_terrain_map(out, hex_size, boundary_xy,

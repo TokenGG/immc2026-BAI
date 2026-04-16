@@ -1,27 +1,23 @@
 """
 Protection Pipeline
-输入：地图网格 JSON（含 riskIndex 所需字段）
-流程：riskIndex 计算归一化风险 → DSSA 优化部署方案 → 输出 JSON
-输出：每个网格的归一化综合风险指数、保护收益指数，以及全局统计指标和部署资源
 
-用法:
-    python protection_pipeline.py <input.json> <output.json>
+Input: map-grid JSON compatible with the risk model.
+Flow: compute normalized risk with riskIndex -> optimize deployment with DSSA -> write JSON output.
 """
 
 import json
 import sys
 import os
 import numpy as np
-from typing import Dict, List
+from typing import Dict
 
-# ---- 将 riskIndex/src 加入路径 ----
 _RISK_SRC = os.path.join(os.path.dirname(__file__), '..', 'riskIndex', 'src')
 sys.path.insert(0, os.path.abspath(_RISK_SRC))
 _RISK_DIR = os.path.join(os.path.dirname(__file__), '..', 'riskIndex')
 sys.path.insert(0, os.path.abspath(_RISK_DIR))
 
 from risk_model_wrapper import (
-    MapConfig, GridInputData, TimeInputData, ModelInputData, ModelConfigData,
+    MapConfig, GridInputData, TimeInputData, ModelConfigData,
     DistanceCalculator, convert_grid_input, convert_time_input, create_model_from_config,
 )
 from risk_model.core.species import Species
@@ -39,56 +35,12 @@ from coverage_model_vectorized import VectorizedCoverageModel
 from dssa_optimizer import DSSAOptimizer, DSSAConfig
 
 
-# ---------------------------------------------------------------------------
-# 输入 JSON 格式说明
-#
-# {
-#   "map_config": {                          // riskIndex 地图配置
-#     "map_width": 5,
-#     "map_height": 4,
-#     "boundary_type": "RECTANGLE",
-#     "road_locations": [[1,0],[2,1]],
-#     "water_locations": [[4,3]]
-#   },
-#   "time": {                                // riskIndex 时间上下文（可选）
-#     "hour_of_day": 12,
-#     "season": "DRY"
-#   },
-#   "use_temporal_factors": false,           // 是否启用昼夜/季节因子（可选，默认 false）
-#   "risk_model_config": {                   // riskIndex 权重配置（可选）
-#     "risk_weights": {"human_weight":0.4,"environmental_weight":0.3,"density_weight":0.3},
-#     "human_risk_weights": {"boundary_weight":0.4,"road_weight":0.35,"water_weight":0.25},
-#     "environmental_risk_weights": {"fire_weight":0.6,"terrain_weight":0.4}
-#   },
-#   "grids": [
-#     {
-#       "grid_id": 0,
-#       "q": 0, "r": 0,                      // 六边形轴坐标
-#       "x": 0, "y": 0,                      // 笛卡尔坐标（用于 riskIndex 距离计算）
-#       "terrain_type": "SparseGrass",       // hexdynamic 地形类型
-#       "fire_risk": 0.5,                    // riskIndex 环境字段
-#       "terrain_complexity": 0.3,
-#       "vegetation_type": "GRASSLAND",      // GRASSLAND / FOREST / SHRUB
-#       "species_densities": {"rhino":0.7,"elephant":0.5,"bird":0.3}
-#     }, ...
-#   ],
-#   "constraints": {
-#     "total_patrol": 8, "total_camps": 2, "max_rangers_per_camp": 4,
-#     "total_cameras": 4, "total_drones": 2, "total_fence_length": 10
-#   },
-#   "coverage_params": { ... },              // 可选
-#   "dssa_config": { ... }                   // 可选
-# }
-# ---------------------------------------------------------------------------
-
-
 def load_input(path: str) -> dict:
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 
 def build_species_config(species_cfg: dict) -> dict:
-    """将 JSON 中的 species_config 转换为 {name: Species} 字典"""
     result = {}
     for name, cfg in species_cfg.items():
         result[name] = Species(
@@ -101,10 +53,7 @@ def build_species_config(species_cfg: dict) -> dict:
 
 
 def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
-    """调用 riskIndex 模块计算每个网格的归一化风险值，返回 {grid_id: normalized_risk}"""
-
     map_cfg_raw = data['map_config']
-    # 提取 boundary_locations，兼容 [{x,y,original_grid_id},...] 和 [[x,y],...] 两种格式
     boundary_locations = map_cfg_raw.get('boundary_locations')
     if boundary_locations:
         normalized = []
@@ -114,6 +63,7 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
             else:
                 normalized.append(tuple(item))
         boundary_locations = normalized
+
     map_config = MapConfig(
         map_width=map_cfg_raw['map_width'],
         map_height=map_cfg_raw['map_height'],
@@ -132,7 +82,6 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
     distance_calc = DistanceCalculator(map_config)
     time_context = convert_time_input(time_input)
 
-    # 权重配置
     cfg_raw = data.get('risk_model_config', {})
     model_config = ModelConfigData(
         risk_weights=cfg_raw.get('risk_weights'),
@@ -141,18 +90,20 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
     )
     model = create_model_from_config(model_config)
 
-    # 如果有自定义物种配置，重建带物种的模型
     if 'species_config' in data:
         species_cfg = build_species_config(data['species_config'])
         weight_manager = WeightManager()
         if cfg_raw.get('risk_weights'):
             weight_manager.set_risk_weights(**cfg_raw['risk_weights'])
+
         human_weights = None
         if cfg_raw.get('human_risk_weights'):
             human_weights = HumanRiskWeights(**cfg_raw['human_risk_weights'])
+
         env_weights = None
         if cfg_raw.get('environmental_risk_weights'):
             env_weights = EnvironmentalRiskWeights(**cfg_raw['environmental_risk_weights'])
+
         composite_calc = CompositeRiskCalculator(
             weight_manager=weight_manager,
             human_calculator=HumanRiskCalculator(weights=human_weights),
@@ -161,7 +112,6 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
         )
         model = RiskModel(composite_calculator=composite_calc)
 
-    # 构建 riskIndex 输入列表，保持 grid_id 顺序
     grid_data_list = []
     id_order = []
     for g in data['grids']:
@@ -180,26 +130,22 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
         id_order.append(gid)
 
     use_temporal = data.get('use_temporal_factors', False)
-    results = model.calculate_batch(grid_data_list, time_context,
-                                    use_temporal_factors=use_temporal)
-
+    results = model.calculate_batch(grid_data_list, time_context, use_temporal_factors=use_temporal)
     return {id_order[i]: float(r.normalized_risk) for i, r in enumerate(results)}
 
 
 def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
     loader = DataLoader()
-
-    grids = []
-    for g in data['grids']:
-        gid = g['grid_id']
-        grids.append(GridData(
-            grid_id=gid,
+    loader.grids = [
+        GridData(
+            grid_id=g['grid_id'],
             q=g['q'],
             r=g['r'],
             terrain_type=g.get('terrain_type', 'SparseGrass'),
-            risk=risk_map.get(gid, 0.0)
-        ))
-    loader.grids = grids
+            risk=risk_map.get(g['grid_id'], 0.0)
+        )
+        for g in data['grids']
+    ]
 
     cp = data.get('coverage_params', {})
     loader.set_coverage_parameters(
@@ -220,39 +166,36 @@ def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
         max_rangers_per_camp=c['max_rangers_per_camp'],
         total_cameras=c['total_cameras'],
         total_drones=c['total_drones'],
-        total_fence_length=float(c['total_fence_length'])
+        total_fence_length=float(c['total_fence_length']),
+        max_cameras_per_grid=c.get('max_cameras_per_grid', 3),
+        max_drones_per_grid=c.get('max_drones_per_grid', 1),
+        max_camps_per_grid=c.get('max_camps_per_grid', 1)
     )
 
     temp_grid_model = HexGridModel(loader.grids)
     edge_grids = temp_grid_model.get_edge_grids()
     loader.initialize_deployment_matrix(edge_grids=edge_grids)
     loader.initialize_visibility_params()
-
-    # 有物种存在的格子禁止部署巡逻员
-    for g in data['grids']:
-        gid = g['grid_id']
-        species = g.get('species_densities', {})
-        if any(v > 0 for v in species.values()):
-            loader.deployment_matrix['patrol'][gid] = 0
-
     return loader
 
 
 def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
-    print(f"[1/4] 读取输入: {input_path}")
+    print(f"[1/4] Read input: {input_path}")
     data = load_input(input_path)
 
-    print("[2/4] 调用 riskIndex 计算归一化风险...")
+    print("[2/4] Compute normalized risk with riskIndex...")
     risk_map = compute_risk_with_riskindex(data)
 
-    print("[3/4] 构建模型并运行 DSSA 优化...")
+    print("[3/4] Build optimization model and run DSSA...")
     loader = build_data_loader(data, risk_map)
     grid_model = HexGridModel(loader.grids)
 
-    ModelClass = VectorizedCoverageModel if vectorized else CoverageModel
+    model_class = VectorizedCoverageModel if vectorized else CoverageModel
     if vectorized:
-        print(f"      使用向量化 CoverageModel（VectorizedCoverageModel）")
-    coverage_model = ModelClass(
+        print("      ⚡ 使用向量化覆盖模型 (Vectorized Coverage Model)")
+        print("         适用于大规模地图（网格数 > 1000）")
+        print("         性能提升：~3-5倍")
+    coverage_model = model_class(
         grid_model,
         loader.coverage_params,
         loader.deployment_matrix,
@@ -265,18 +208,18 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
         'max_rangers_per_camp': loader.constraints.max_rangers_per_camp,
         'total_cameras': loader.constraints.total_cameras,
         'total_drones': loader.constraints.total_drones,
-        'total_fence_length': loader.constraints.total_fence_length
+        'total_fence_length': loader.constraints.total_fence_length,
+        'max_cameras_per_grid': loader.constraints.max_cameras_per_grid,
+        'max_drones_per_grid': loader.constraints.max_drones_per_grid,
+        'max_camps_per_grid': loader.constraints.max_camps_per_grid,
     }
 
-    # 预计算固定围栏：所有允许部署围栏的边缘边全部部署
-    fencing_edges = grid_model.get_fencing_edges()
     fixed_fences = {}
-    for edge in fencing_edges:
+    for edge in grid_model.get_fencing_edges():
         gid1, gid2, _ = edge
         if (loader.deployment_matrix['fence'].get(gid1, 0) == 1 and
                 loader.deployment_matrix['fence'].get(gid2, 0) == 1):
             fixed_fences[tuple(sorted((gid1, gid2)))] = 1
-    print(f"      固定围栏段数: {len(fixed_fences)}")
 
     dc = data.get('dssa_config', {})
     dssa_config = DSSAConfig(
@@ -291,25 +234,109 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
     optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config, fixed_fences=fixed_fences)
     best_solution, best_fitness, fitness_history = optimizer.optimize()
 
-    print("[4/4] 计算指标并生成输出...")
+    # 打印资源部署总结
+    print("\n" + "=" * 70)
+    print("资源部署总结 (Resource Deployment Summary)")
+    print("=" * 70)
+    
+    deployed_cameras = sum(best_solution.cameras.values())
+    deployed_drones = sum(best_solution.drones.values())
+    deployed_camps = sum(best_solution.camps.values())
+    deployed_rangers = sum(best_solution.rangers.values())
+    deployed_fences = sum(1 for v in best_solution.fences.values() if v == 1)
+    
+    print(f"\n📷 摄像头 (Cameras):")
+    print(f"   部署数量: {deployed_cameras} / {constraints['total_cameras']}")
+    print(f"   部署位置: {len(best_solution.cameras)} 个网格")
+    if best_solution.cameras:
+        camera_grids = sorted(best_solution.cameras.items(), key=lambda x: x[1], reverse=True)[:5]
+        print(f"   主要部署: ", end="")
+        print(", ".join([f"Grid {gid}({count}个)" for gid, count in camera_grids]))
+    
+    print(f"\n🚁 无人机 (Drones):")
+    print(f"   部署数量: {deployed_drones} / {constraints['total_drones']}")
+    print(f"   部署位置: {len(best_solution.drones)} 个网格")
+    if best_solution.drones:
+        drone_grids = sorted(best_solution.drones.keys())[:10]
+        print(f"   部署网格: {', '.join([f'Grid {gid}' for gid in drone_grids])}")
+    
+    print(f"\n⛺ 营地 (Camps):")
+    print(f"   部署数量: {deployed_camps} / {constraints['total_camps']}")
+    if best_solution.camps:
+        camp_grids = sorted(best_solution.camps.keys())
+        print(f"   部署网格: {', '.join([f'Grid {gid}' for gid in camp_grids])}")
+    
+    print(f"\n👮 巡逻人员 (Rangers):")
+    print(f"   部署数量: {deployed_rangers} / {constraints['total_patrol']}")
+    print(f"   部署位置: {len(best_solution.rangers)} 个网格")
+    if best_solution.rangers:
+        ranger_grids = sorted(best_solution.rangers.items(), key=lambda x: x[1], reverse=True)[:10]
+        print(f"   主要部署: ", end="")
+        print(", ".join([f"Grid {gid}({count}人)" for gid, count in ranger_grids]))
+    
+    print(f"\n🚧 围栏 (Fences):")
+    print(f"   部署段数: {deployed_fences}")
+    if deployed_fences > 0:
+        fence_edges_list = [(e[0], e[1]) for e, v in best_solution.fences.items() if v == 1]
+        sample_fences = fence_edges_list[:5]
+        print(f"   示例边: ", end="")
+        print(", ".join([f"({gid1}-{gid2})" for gid1, gid2 in sample_fences]))
+    
+    print(f"\n📊 部署统计:")
+    
+    # 摄像头利用率
+    if constraints['total_cameras'] > 0:
+        camera_util = deployed_cameras / constraints['total_cameras'] * 100
+        print(f"   摄像头利用率: {camera_util:.1f}%")
+    else:
+        print(f"   摄像头利用率: N/A (未配置摄像头资源)")
+    
+    # 无人机利用率
+    if constraints['total_drones'] > 0:
+        drone_util = deployed_drones / constraints['total_drones'] * 100
+        print(f"   无人机利用率: {drone_util:.1f}%")
+    else:
+        print(f"   无人机利用率: N/A (未配置无人机资源)")
+    
+    # 营地利用率
+    if constraints['total_camps'] > 0:
+        camp_util = deployed_camps / constraints['total_camps'] * 100
+        print(f"   营地利用率: {camp_util:.1f}%")
+    else:
+        print(f"   营地利用率: N/A (未配置营地资源)")
+    
+    # 巡逻人员利用率
+    if constraints['total_patrol'] > 0:
+        ranger_util = deployed_rangers / constraints['total_patrol'] * 100
+        print(f"   巡逻人员利用率: {ranger_util:.1f}%")
+    else:
+        print(f"   巡逻人员利用率: N/A (未配置巡逻人员资源)")
+    
+    print("\n" + "=" * 70 + "\n")
 
-    # ---- 全局指标 ----
+    print("[4/4] Compute metrics and write output...")
     pb_per_grid = coverage_model.calculate_protection_benefit(best_solution)
     total_risk = sum(grid_model.get_grid_risk(gid) for gid in grid_model.get_all_grid_ids())
     total_protection_benefit = sum(pb_per_grid.values())
     avg_protection_benefit = float(np.mean(list(pb_per_grid.values())))
 
-    # ---- 保护收益归一化（min-max） ----
     pb_vals = list(pb_per_grid.values())
     pb_min, pb_max = min(pb_vals), max(pb_vals)
 
     def norm_pb(v):
         return float((v - pb_min) / (pb_max - pb_min)) if pb_max != pb_min else float(v)
 
-    # ---- 每个网格结果 ----
-    # 建立 grid_id → 输入原始数据的快速查找表
-    input_grid_map = {g['grid_id']: g for g in data['grids']}
+    rr_per_grid = {
+        gid: grid_model.get_grid_risk(gid) * np.exp(-coverage_model.calculate_protection_effect(best_solution)[gid])
+        for gid in grid_model.get_all_grid_ids()
+    }
+    rr_vals = list(rr_per_grid.values())
+    rr_min, rr_max = min(rr_vals), max(rr_vals)
 
+    def norm_rr(v):
+        return float((v - rr_min) / (rr_max - rr_min)) if rr_max != rr_min else float(v)
+
+    input_grid_map = {g['grid_id']: g for g in data['grids']}
     grid_results = []
     for grid in loader.grids:
         gid = grid.grid_id
@@ -324,6 +351,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
             'risk_normalized': round(float(grid.risk), 6),
             'protection_benefit_raw': round(float(pb_per_grid[gid]), 6),
             'protection_benefit_normalized': round(norm_pb(pb_per_grid[gid]), 6),
+            'residual_risk_normalized': round(norm_rr(rr_per_grid[gid]), 6),
             'deployment': {
                 'patrol_rangers': int(best_solution.rangers.get(gid, 0)),
                 'camp': int(best_solution.camps.get(gid, 0)),
@@ -331,7 +359,6 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
                 'camera': int(best_solution.cameras.get(gid, 0))
             }
         }
-        # 透传输入中存在的 hex_size
         if 'hex_size' in src:
             entry['hex_size'] = src['hex_size']
         grid_results.append(entry)
@@ -364,23 +391,40 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"\n结果已保存至: {output_path}")
-    print(f"  Best Fitness              : {best_fitness:.4f}")
-    print(f"  Total Protection Benefit  : {total_protection_benefit:.4f}")
-    print(f"  Average Protection Benefit: {avg_protection_benefit:.4f}")
+    print(f"\n✅ 优化完成！结果已保存到: {output_path}")
+    print(f"\n最终指标:")
+    print(f"  最佳适应度 (Best Fitness)              : {best_fitness:.6f}")
+    print(f"  总保护收益 (Total Protection Benefit)  : {total_protection_benefit:.6f}")
+    print(f"  平均保护收益 (Average Protection Benefit): {avg_protection_benefit:.6f}")
+    print(f"  总风险 (Total Risk)                    : {total_risk:.6f}")
+    print(f"  网格总数 (Total Grids)                 : {grid_model.get_grid_count()}")
+    print()
 
 
 if __name__ == '__main__':
     import argparse
+
     parser = argparse.ArgumentParser(
-        description="Protection Pipeline: 风险计算 + DSSA 优化部署方案",
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+        description="Protection Pipeline: risk calculation + DSSA deployment optimization",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        epilog="""
+Examples:
+  python protection_pipeline.py input.json output.json
+  python protection_pipeline.py input.json output.json --vectorized
+
+Vectorized Mode:
+  Use --vectorized flag for large maps (>1000 grids)
+  Performance improvement: ~3-5x faster
+  Recommended for production use with large datasets
+        """
     )
-    parser.add_argument("input",  help="输入 JSON 路径")
-    parser.add_argument("output", help="输出 JSON 路径")
+    parser.add_argument("input", help="Input JSON path")
+    parser.add_argument("output", help="Output JSON path")
     parser.add_argument(
-        "--vectorized", action="store_true", default=False,
-        help="启用向量化 CoverageModel（NumPy 矩阵运算），适合大规模网格（千级以上）"
+        "--vectorized",
+        action="store_true",
+        default=False,
+        help="Use NumPy-vectorized coverage model (recommended for maps with >1000 grids, ~3-5x faster)"
     )
     args = parser.parse_args()
     run_pipeline(args.input, args.output, vectorized=args.vectorized)

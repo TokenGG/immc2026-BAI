@@ -204,7 +204,10 @@ Optimization completed.  Best Fitness = 0.498100  Total = 8.45s  Avg/iter = 84.5
   // * 资源约束
   "constraints": {
     "total_patrol": 20, "total_camps": 5, "max_rangers_per_camp": 5,
-    "total_cameras": 10, "total_drones": 3, "total_fence_length": 50
+    "total_cameras": 10, "total_drones": 3, "total_fence_length": 50,
+    "max_cameras_per_grid": 3,   // 单格最大摄像头数（默认 3）
+    "max_drones_per_grid": 1,    // 单格最大无人机数（默认 1）
+    "max_camps_per_grid": 1      // 单格最大营地数（默认 1）
   },
 
   // 覆盖参数（可选）
@@ -258,8 +261,9 @@ Optimization completed.  Best Fitness = 0.498100  Total = 8.45s  Avg/iter = 84.5
       "risk_normalized": 0.35,              // riskIndex 归一化风险 [0,1]
       "protection_benefit_raw": 0.22,       // R_i × (1 - e^(-E_i))
       "protection_benefit_normalized": 0.43, // min-max 归一化 [0,1]
+      "residual_risk_normalized": 0.18,     // 部署后剩余风险 R_i × e^(-E_i)，min-max 归一化
       "deployment": {
-        "patrol_rangers": 0, "camp": 0, "drone": 1, "camera": 1
+        "patrol_rangers": 0, "camp": 0, "drone": 1, "camera": 2
       },
       "hex_size": 62
     }
@@ -277,6 +281,7 @@ Optimization completed.  Best Fitness = 0.498100  Total = 8.45s  Avg/iter = 84.5
 | `risk_normalized` | riskIndex min-max 归一化 | 综合威胁程度，越高越需要保护 |
 | `protection_benefit_raw` | `R_i × (1 - e^(-E_i))` | 该格实际获得的保护收益 |
 | `protection_benefit_normalized` | min-max 归一化 | 相对保护收益，便于可视化 |
+| `residual_risk_normalized` | `R_i × e^(-E_i)`，min-max 归一化 | 部署后剩余风险，越低说明保护越充分 |
 | `Total Protection Benefit` | `Σ protection_benefit_raw` | 全局保护收益总量 |
 | `Average Protection Benefit` | `Total / N` | 每格平均保护收益 |
 | `Best Fitness` | `Total / Σ R_i` | 风险加权归一化保护效率，优化目标 |
@@ -383,13 +388,14 @@ python visualize_output.py output.json --input pipeline_input.json --out_dir ./f
 
 | 文件 | 内容 | 颜色条 |
 |------|------|--------|
-| `risk_heatmap.png` | 风险热力图，右侧显示 Total PB / Average PB / Best Fitness | YlOrRd |
+| `risk_heatmap.png` | 部署前风险热力图，右侧显示 Total PB / Average PB / Best Fitness | YlOrRd |
+| `risk_comparison.png` | 部署前后风险对比（左：原始风险，右：剩余风险），同色阶便于直接对比 | YlOrRd |
 | `protection_heatmap.png` | 保护收益热力图，叠加摄像头/无人机/营地/巡逻员/围栏图标 | RdYlGn |
 | `terrain_map.png` | 地形颜色地图 | — |
 | `terrain_deployment_map.png` | 地形底图 + 部署资源图标叠加 | — |
 | `species_map.png` | 地形底图 + 物种密度图标（大小正比于密度，形状区分物种） | — |
 
-有颜色条的图采用三列布局：地图 | 颜色条 | 图例+指标，三者互不遮挡。
+有颜色条的图采用三列布局：地图 | 颜色条 | 图例+指标，三者互不遮挡。`risk_comparison.png` 采用双图并排布局，左右共用同一颜色条，颜色越深（红色）表示风险越高，对比左右可直观看出哪些高风险区域被有效覆盖。
 
 ### 资源图标说明
 

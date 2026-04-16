@@ -152,17 +152,24 @@ class VectorizedCoverageModel(CoverageModel):
         return {gid: float(coverage[i]) for i, gid in enumerate(self.grid_ids)}
 
     def calculate_camera_coverage(self, solution: DeploymentSolution) -> Dict[int, float]:
-        cam_idx = self._resource_indices(solution.cameras)
+        # 建立摄像头数量向量 (N,)
+        cam_vec = np.zeros(len(self.grid_ids), dtype=np.float64)
+        for gid, cnt in solution.cameras.items():
+            if cnt > 0:
+                idx = self._id_to_idx.get(gid)
+                if idx is not None:
+                    cam_vec[idx] = cnt
+        active = np.where(cam_vec > 0)[0]
 
-        if len(cam_idx) == 0:
+        if len(active) == 0:
             return {gid: 0.0 for gid in self.grid_ids}
 
         eff_radius = self.params.camera_radius * self._vis_camera  # (N,)
-
-        dists = self._dist[:, cam_idx]            # (N, K)
+        dists = self._dist[:, active]            # (N, K)
+        weights = cam_vec[active]                # (K,) 数量权重
         eff_r = eff_radius[:, None]
         within = dists <= eff_r * 2
-        coverage = (np.exp(-dists / np.where(eff_r > 0, eff_r, 1.0)) * within).sum(axis=1)
+        coverage = (np.exp(-dists / np.where(eff_r > 0, eff_r, 1.0)) * within * weights).sum(axis=1)
         coverage = np.minimum(1.0, coverage) * self._deploy_camera
 
         return {gid: float(coverage[i]) for i, gid in enumerate(self.grid_ids)}

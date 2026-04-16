@@ -1750,9 +1750,10 @@
          * 为 gridsOutput 分配物种密度，规则：
          * - 不同物种不会出现在同一网格
          * - 鸟类集中在盐沼(SaltMarsh)和水坑(WaterHole)及其周边格子
-         * - 犀牛/大象分布在稀疏植被(SparseGrass)，成片出现，各自有密集区
-         *   50% 的 SparseGrass 格子有犀牛或大象（不同时出现）
-         *   生成 4 个大象密集区，5 个犀牛密集区
+         * - 犀牛/大象分布在稀疏植被(SparseGrass)和密集植被(DenseGrass)，成片出现，各自有密集区
+         *   犀牛/大象不能分布在水坑(WaterHole)和盐沼(SaltMarsh)网格（关键约束）
+         *   50% 的合格格子有犀牛或大象（不同时出现）
+         *   生成 2 个大象密集区，3 个犀牛密集区
          * - 所有物种远离道路格子（Road 及其直接邻居不分配物种）
          * - 其他格子所有物种密度为 0
          *
@@ -1801,12 +1802,25 @@
             }
             const rhinoSp = speciesNames.find(s => s.toLowerCase().includes('rhino'));
             const elephantSp = speciesNames.find(s => s.toLowerCase().includes('elephant'));
+            
+            // 收集水坑和盐沼的marker IDs（犀牛和大象不能分布在这些网格）
+            const waterholeSaltmarshIds = new Set();
+            gridCoordinates.forEach(mg => {
+                const color = gridColorMap.get(mg.gridId);
+                // #3b82f6 = 水坑(蓝色), #06b6d4 = 盐沼(青色)
+                if (color === '#3b82f6' || color === '#06b6d4') {
+                    waterholeSaltmarshIds.add(mg.gridId);
+                }
+            });
+            
             const candidateIndices = grids.map((g, idx) => ({ g, idx }))
                 .filter(({ g, idx }) => {
                     if (isRoadProhibited(idx)) return false;
                     if (!speciesNames.every(sp => g.species_densities[sp] === 0.0)) return false;
                     const mid = outputIdxToMarkerId.get(idx);
-                    return mid && wetMarkerIds.has(mid);
+                    // 排除水坑和盐沼网格
+                    if (mid && waterholeSaltmarshIds.has(mid)) return false;
+                    return mid !== undefined;
                 }).map(({ idx }) => idx);
             const maxCount = Math.max(1, Math.floor(grids.length * 0.05));
             const shuffled = candidateIndices.slice().sort(() => Math.random() - 0.5);
