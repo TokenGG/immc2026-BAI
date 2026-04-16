@@ -1,11 +1,11 @@
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.patches import Polygon, Circle
 from typing import Dict, List, Tuple
 from grid_model import HexGridModel
 from coverage_model import DeploymentSolution
-import matplotlib.cm as cm
 
 
 class Visualizer:
@@ -27,27 +27,26 @@ class Visualizer:
         for grid_id in self.grid_ids:
             risk_values[grid_id] = self.grid_model.get_grid_risk(grid_id)
 
-        max_risk = max(risk_values.values()) if risk_values else 1.0
-        min_risk = min(risk_values.values()) if risk_values else 0.0
+        cmap = matplotlib.colormaps.get_cmap('YlOrRd')
 
-        cmap = cm.get_cmap('YlOrRd')
-
+        # 使用统一的 [0, 1] 范围便于跨场景对比
         for grid_id in self.grid_ids:
             corners = self._get_hex_corners(grid_id)
             risk = risk_values[grid_id]
-            normalized_risk = (risk - min_risk) / (max_risk - min_risk) if max_risk > min_risk else 0.5
-            color = cmap(normalized_risk)
+            # 直接使用风险值作为颜色映射（已经是 [0, 1] 范围）
+            color = cmap(risk)
 
             polygon = Polygon(corners, facecolor=color, edgecolor='black', linewidth=0.5, alpha=0.8)
             ax.add_patch(polygon)
 
-        sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=min_risk, vmax=max_risk))
+        # 使用统一的 [0, 1] 范围的颜色条
+        sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=0, vmax=1))
         sm.set_array([])
         cbar = plt.colorbar(sm, ax=ax, shrink=0.8)
-        cbar.set_label('Risk Level', fontsize=12)
+        cbar.set_label('Normalized Risk [0, 1]', fontsize=12)
 
         ax.set_aspect('equal')
-        ax.set_title('Risk Heatmap', fontsize=16, fontweight='bold')
+        ax.set_title('Risk Heatmap (Normalized)', fontsize=16, fontweight='bold')
         ax.set_xlabel('X Coordinate', fontsize=12)
         ax.set_ylabel('Y Coordinate', fontsize=12)
         ax.grid(True, alpha=0.3)
@@ -196,7 +195,7 @@ class Visualizer:
         for idx, (title, coverage_dict, cmap_name) in enumerate(coverage_types):
             ax = axes[idx // 2, idx % 2]
 
-            cmap = cm.get_cmap(cmap_name)
+            cmap = matplotlib.colormaps.get_cmap(cmap_name)
 
             for grid_id in self.grid_ids:
                 corners = self._get_hex_corners(grid_id)

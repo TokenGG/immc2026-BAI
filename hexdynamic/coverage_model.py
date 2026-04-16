@@ -143,6 +143,33 @@ class CoverageModel:
 
         return total_benefit
 
+    def calculate_time_aware_total_benefit(self, solution: DeploymentSolution) -> float:
+        """
+        Calculate fitness using time-weighted risk.
+        
+        This applies temporal factors (diurnal and seasonal) to normalized risk,
+        so resource allocation reflects temporal risk differences.
+        
+        Formula:
+            fitness = total_protection_benefit / total_risk_weighted
+            where total_risk_weighted = Σ [R_i × T_t × S_t]
+        
+        Result: Resources are allocated to reflect temporal risk differences.
+        For example, if night risk is 1.3x day risk, night areas get more resources.
+        """
+        protection_benefit = self.calculate_protection_benefit(solution)
+        total_risk_weighted = 0.0
+        for grid_id in self.grid_ids:
+            normalized_risk = self.grid_model.get_grid_risk(grid_id)
+            temporal_factor = self.grid_model.get_grid_temporal_factor(grid_id)
+            total_risk_weighted += normalized_risk * temporal_factor
+
+        total_benefit = sum(protection_benefit.values())
+        if total_risk_weighted > 0:
+            total_benefit = total_benefit / total_risk_weighted
+
+        return total_benefit
+
     def validate_solution(self, solution: DeploymentSolution,
                           constraints: Dict[str, any]) -> Tuple[bool, List[str]]:
         violations = []
