@@ -18,7 +18,7 @@ class DSSAConfig:
 class DSSAOptimizer:
     def __init__(self, coverage_model: CoverageModel, constraints: Dict[str, any],
                  config: DSSAConfig = None, fixed_fences: Dict[Tuple[int, int], int] = None,
-                 force_full_deployment: bool = True):
+                 force_full_deployment: bool = True, frozen_resources: List[str] = None):
         self.coverage_model = coverage_model
         self.constraints = constraints
         self.config = config or DSSAConfig()
@@ -27,11 +27,13 @@ class DSSAOptimizer:
         self.fencing_edges = self.grid_model.get_fencing_edges()
         self.fixed_fences = fixed_fences or {}
         self.force_full_deployment = force_full_deployment  # 新增：是否强制部署所有资源
+        self.frozen_resources = frozen_resources or []  # 新增：冻结的资源列表
 
         self.population = []
         self.fitness_history = []
         self.best_solution = None
         self.best_fitness = float('-inf')
+        self.initial_solution = None  # 新增：保存初始解决方案，用于冻结资源
 
     def _initialize_solution(self) -> DeploymentSolution:
         """初始化解决方案
@@ -166,6 +168,24 @@ class DSSAOptimizer:
         for _ in range(self.config.population_size):
             self.population.append(self._initialize_solution())
 
+    def _apply_frozen_resources(self, solution: DeploymentSolution) -> DeploymentSolution:
+        """应用冻结资源：将冻结的资源替换为初始解决方案中的值"""
+        if not self.frozen_resources or not self.initial_solution:
+            return solution
+        
+        if 'patrol' in self.frozen_resources:
+            solution.rangers = dict(self.initial_solution.rangers)
+        if 'camera' in self.frozen_resources:
+            solution.cameras = dict(self.initial_solution.cameras)
+        if 'drone' in self.frozen_resources:
+            solution.drones = dict(self.initial_solution.drones)
+        if 'camp' in self.frozen_resources:
+            solution.camps = dict(self.initial_solution.camps)
+        if 'fence' in self.frozen_resources:
+            solution.fences = dict(self.initial_solution.fences)
+        
+        return solution
+
     def evaluate_fitness(self, solution: DeploymentSolution) -> float:
         is_valid, violations = self.coverage_model.validate_solution(solution, self.constraints)
         if not is_valid:
@@ -253,6 +273,9 @@ class DSSAOptimizer:
                 self.constraints,
                 self.force_full_deployment
             )
+            
+            # 应用冻结资源
+            new_solution = self._apply_frozen_resources(new_solution)
 
             if self.evaluate_fitness(new_solution) > self.evaluate_fitness(solution):
                 self.population[i] = new_solution
@@ -294,6 +317,9 @@ class DSSAOptimizer:
                 self.constraints,
                 self.force_full_deployment
             )
+            
+            # 应用冻结资源
+            new_solution = self._apply_frozen_resources(new_solution)
 
             if self.evaluate_fitness(new_solution) > self.evaluate_fitness(solution):
                 self.population[num_producers + i] = new_solution
@@ -320,6 +346,9 @@ class DSSAOptimizer:
         import time
 
         self.initialize_population()
+        
+        # 保存初始解决方案（用于冻结资源）
+        self.initial_solution = self._initialize_solution()
 
         for solution in self.population:
             fitness = self.evaluate_fitness(solution)

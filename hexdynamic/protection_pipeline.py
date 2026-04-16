@@ -179,7 +179,7 @@ def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
     return loader
 
 
-def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, allow_partial_deployment: bool = False):
+def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, allow_partial_deployment: bool = False, freeze_resources: str = None):
     print(f"[1/4] Read input: {input_path}")
     data = load_input(input_path)
 
@@ -238,9 +238,17 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     else:
         print("      ⚙️  部分部署模式：允许优化器根据收益选择资源")
     
+    # 解析冻结资源列表
+    frozen_resources_list = []
+    if freeze_resources:
+        frozen_resources_list = [r.strip() for r in freeze_resources.split(',')]
+        if frozen_resources_list:
+            print(f"      🔒 冻结资源模式：{', '.join(frozen_resources_list)} 将保持不变")
+    
     optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config, 
                              fixed_fences=fixed_fences,
-                             force_full_deployment=force_full_deployment)
+                             force_full_deployment=force_full_deployment,
+                             frozen_resources=frozen_resources_list)
     best_solution, best_fitness, fitness_history = optimizer.optimize()
 
     # 打印资源部署总结
@@ -452,5 +460,11 @@ Vectorized Mode:
         default=False,
         help="Allow partial deployment of resources based on marginal benefit (default: force full deployment)"
     )
+    parser.add_argument(
+        "--freeze-resources",
+        type=str,
+        default=None,
+        help="Comma-separated list of resources to freeze (e.g., 'patrol,camera,drone'). Frozen resources will not be optimized."
+    )
     args = parser.parse_args()
-    run_pipeline(args.input, args.output, vectorized=args.vectorized, allow_partial_deployment=args.allow_partial_deployment)
+    run_pipeline(args.input, args.output, vectorized=args.vectorized, allow_partial_deployment=args.allow_partial_deployment, freeze_resources=args.freeze_resources)

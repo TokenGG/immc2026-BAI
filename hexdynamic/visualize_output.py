@@ -352,7 +352,9 @@ def plot_risk_heatmap(out, out_map, hex_size, boundary_xy, save_path):
 def plot_protection_heatmap(out, hex_size, boundary_xy, save_path):
     grids = out["grids"]
     summary = out["summary"]
-    cmap = matplotlib.colormaps.get_cmap("RdYlGn")
+    # 使用绿色色系：浅绿 → 深绿
+    # 保护效果越高，颜色越深；保护效果越低，颜色越浅
+    cmap = matplotlib.colormaps.get_cmap("Greens")
     norm = Normalize(vmin=0, vmax=1)
 
     fig, ax, ax_cbar, ax_leg = make_figure(has_colorbar=True)
