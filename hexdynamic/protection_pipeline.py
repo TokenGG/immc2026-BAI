@@ -218,7 +218,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
 
     model_class = VectorizedCoverageModel if vectorized else CoverageModel
     if vectorized:
-        print("      ⚡ 使用向量化覆盖模型 (Vectorized Coverage Model)")
+        print("      [VECTOR] 使用向量化覆盖模型 (Vectorized Coverage Model)")
         print("         适用于大规模地图（网格数 > 1000）")
         print("         性能提升：~3-5倍")
     coverage_model = model_class(
@@ -274,7 +274,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     if freeze_resources:
         frozen_resources_list = [r.strip() for r in freeze_resources.split(',')]
         if frozen_resources_list:
-            print(f"      🔒 冻结资源模式：{', '.join(frozen_resources_list)} 将保持不变")
+            print(f"      [FROZEN] 冻结资源模式：{', '.join(frozen_resources_list)} 将保持不变")
     
     optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config, 
                              fixed_fences=fixed_fences,
@@ -293,7 +293,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     deployed_rangers = sum(best_solution.rangers.values())
     deployed_fences = sum(1 for v in best_solution.fences.values() if v == 1)
     
-    print(f"\n📷 摄像头 (Cameras):")
+    print(f"\n[CAMERA] 摄像头 (Cameras):")
     print(f"   部署数量: {deployed_cameras} / {constraints['total_cameras']}")
     print(f"   部署位置: {len(best_solution.cameras)} 个网格")
     if best_solution.cameras:
@@ -301,20 +301,20 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
         print(f"   主要部署: ", end="")
         print(", ".join([f"Grid {gid}({count}个)" for gid, count in camera_grids]))
     
-    print(f"\n🚁 无人机 (Drones):")
+    print(f"\n[DRONE] 无人机 (Drones):")
     print(f"   部署数量: {deployed_drones} / {constraints['total_drones']}")
     print(f"   部署位置: {len(best_solution.drones)} 个网格")
     if best_solution.drones:
         drone_grids = sorted(best_solution.drones.keys())[:10]
         print(f"   部署网格: {', '.join([f'Grid {gid}' for gid in drone_grids])}")
     
-    print(f"\n⛺ 营地 (Camps):")
+    print(f"\n[CAMP] 营地 (Camps):")
     print(f"   部署数量: {deployed_camps} / {constraints['total_camps']}")
     if best_solution.camps:
         camp_grids = sorted(best_solution.camps.keys())
         print(f"   部署网格: {', '.join([f'Grid {gid}' for gid in camp_grids])}")
     
-    print(f"\n👮 巡逻人员 (Rangers):")
+    print(f"\n[RANGER] 巡逻人员 (Rangers):")
     print(f"   部署数量: {deployed_rangers} / {constraints['total_patrol']}")
     print(f"   部署位置: {len(best_solution.rangers)} 个网格")
     if best_solution.rangers:
@@ -322,7 +322,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
         print(f"   主要部署: ", end="")
         print(", ".join([f"Grid {gid}({count}人)" for gid, count in ranger_grids]))
     
-    print(f"\n🚧 围栏 (Fences):")
+    print(f"\n[FENCE] 围栏 (Fences):")
     print(f"   部署段数: {deployed_fences}")
     if deployed_fences > 0:
         fence_edges_list = [(e[0], e[1]) for e, v in best_solution.fences.items() if v == 1]
@@ -330,7 +330,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
         print(f"   示例边: ", end="")
         print(", ".join([f"({gid1}-{gid2})" for gid1, gid2 in sample_fences]))
     
-    print(f"\n📊 部署统计:")
+    print(f"\n[STATS] 部署统计:")
     
     # 摄像头利用率
     if constraints['total_cameras'] > 0:

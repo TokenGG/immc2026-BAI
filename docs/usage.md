@@ -497,6 +497,132 @@ hex\_size 优先级：命令行参数 > input JSON 中的 `grids[0].hex_size` > 
 
 ***
 
+## 五、风险分析批量处理脚本
+
+文件：`hexdynamic/risk_analysis_batch.py`
+
+批量处理多个输入 JSON 文件，生成每个场景的独立可视化，并生成所有场景的对比图。
+
+### 用法
+
+```bash
+cd hexdynamic
+
+# 基本用法
+python risk_analysis_batch.py --input-dir ./data --output-dir ./results
+
+# 指定文件模式
+python risk_analysis_batch.py --input-dir ./data --output-dir ./results --pattern "scenario_*.json"
+
+# 指定 hex_size
+python risk_analysis_batch.py --input-dir ./data --output-dir ./results --hex-size 62.0
+```
+
+### 输入
+
+输入目录中的多个 JSON 文件，格式同 `protection_pipeline.py` 的输入 JSON。
+
+### 输出结构
+
+```
+output_dir/
+├── scenario_1/
+│   ├── risk_heatmap.png
+│   ├── raw_risk_heatmap.png
+│   ├── attributes_map.png
+│   └── risk_results.json
+├── scenario_2/
+│   ├── risk_heatmap.png
+│   ├── raw_risk_heatmap.png
+│   ├── attributes_map.png
+│   └── risk_results.json
+├── scenario_3/
+│   └── ...
+├── risk_heatmap_comparison.png      # 所有场景归一化风险对比
+├── raw_risk_heatmap_comparison.png  # 所有场景原始风险对比
+└── summary_report.json              # 统计汇总报告
+```
+
+### 输出文件说明
+
+| 文件 | 说明 |
+|------|------|
+| `scenario_x/risk_heatmap.png` | 单个场景的归一化风险热力图 |
+| `scenario_x/raw_risk_heatmap.png` | 单个场景的原始风险热力图 |
+| `scenario_x/attributes_map.png` | 单个场景的地理属性图 |
+| `scenario_x/risk_results.json` | 单个场景的风险数据 |
+| `risk_heatmap_comparison.png` | 所有场景的归一化风险对比图（统一颜色条） |
+| `raw_risk_heatmap_comparison.png` | 所有场景的原始风险对比图（统一颜色条） |
+| `summary_report.json` | 所有场景的统计汇总 |
+
+### 对比图特点
+
+- **统一颜色条**：使用所有场景的最大风险值作为颜色条上限，确保不同场景之间可以直观对比
+- **固定 2×2 布局**：每个热力图保持原始尺寸，不压缩
+- **清晰标注**：每个子图标注场景名称
+- **最多 4 个场景**：一次对比最多显示 4 个场景，超过 4 个会生成多张对比图
+
+### 命令行参数
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--input-dir, -i` | 必需 | 输入目录路径 |
+| `--output-dir, -o` | `./risk_analysis_results` | 输出目录路径 |
+| `--pattern, -p` | `*.json` | 文件匹配模式 |
+| `--hex-size` | 自动检测 | 六边形大小 |
+
+### 使用场景
+
+1. **多时段对比**：分析不同时段（白天/夜间、旱季/雨季）的风险分布差异
+2. **多场景分析**：对比不同配置或假设下的风险分布
+3. **批量报告生成**：自动生成所有场景的可视化和统计报告
+
+### 示例
+
+```bash
+# 分析 data 目录下所有 JSON 文件
+python risk_analysis_batch.py --input-dir ./data --output-dir ./results
+
+# 只分析 scenario_ 开头的文件
+python risk_analysis_batch.py --input-dir ./data --output-dir ./results --pattern "scenario_*.json"
+```
+
+### 输出示例
+
+```
+Scanning input directory: ./data
+  Pattern: *.json
+  Found 3 file(s)
+    - scenario_1.json
+    - scenario_2.json
+    - scenario_3.json
+
+Processing 3 file(s)...
+
+[1/3] Processing: scenario_1.json
+  Normalized: min=0.1234  max=0.8765  mean=0.4567
+  Raw       : min=0.1234  max=1.2345  mean=0.6789
+  Saved to: ./results/scenario_1/
+
+[2/3] Processing: scenario_2.json
+  ...
+
+Generating comparison plots...
+  Normalized risk max: 0.9876
+  Raw risk max: 1.4567
+  Saved: risk_heatmap_comparison.png
+  Saved: raw_risk_heatmap_comparison.png
+  Saved: summary_report.json
+
+======================================================================
+Batch processing complete!
+  Processed: 3/3 file(s)
+  Output directory: ./results
+======================================================================
+```
+
+***
+
 ## 七、时间因子与资源部署策略
 
 ### 7.1 问题：为什么启用时间因子后，DSSA 优化结果相同？
