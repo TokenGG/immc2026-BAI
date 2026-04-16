@@ -91,6 +91,43 @@
 - ✅ 围栏标记正确显示在所有边界网格上
 - ✅ 保持向后兼容性
 
+### 11. ✅ 风险对比图归一化修复
+**文件**：`hexdynamic/protection_pipeline.py`
+**文档**：`RISK_COMPARISON_FIX.md`
+
+- ✅ 修复部署前后风险使用不同归一化基准的问题
+- ✅ 使用统一的归一化范围（基于部署前风险）
+- ✅ 部署前后热力图现在有明显的颜色差异
+- ✅ 可以直观看出保护效果
+
+### 12. ✅ 保护收益热力图简化
+**文件**：`hexdynamic/visualize_output.py`
+
+- ✅ 移除资源部署图标显示
+- ✅ 移除资源图例
+- ✅ 专注于保护收益分布
+- ✅ 提高热力图清晰度
+
+### 13. ✅ 强制资源部署功能
+**文件**：`hexdynamic/dssa_optimizer.py`, `hexdynamic/coverage_model.py`, `hexdynamic/protection_pipeline.py`
+**文档**：`FORCE_DEPLOYMENT_IMPLEMENTATION.md`, `FORCE_RESOURCE_DEPLOYMENT_PROPOSAL.md`
+
+- ✅ 添加强制部署模式（默认）
+- ✅ 确保所有资源都被部署到上限
+- ✅ 不受边际收益递减影响
+- ✅ 通过命令行参数 `--allow-partial-deployment` 控制
+- ✅ 保持向后兼容性
+- ✅ 创建测试脚本验证功能
+- ✅ 可以直观看出保护效果
+
+### 12. ✅ 保护收益热力图简化
+**文件**：`hexdynamic/visualize_output.py`
+
+- ✅ 移除资源部署图标显示
+- ✅ 移除资源图例
+- ✅ 专注于保护收益分布
+- ✅ 提高热力图清晰度
+
 ## 文档清单
 
 ### 技术文档
@@ -107,17 +144,22 @@
 - ✅ `RESOURCE_UTILIZATION_GUIDE.md` - 资源利用率诊断指南
 - ✅ `WHY_ZERO_UTILIZATION.md` - 资源利用率为0%深度解析
 - ✅ `FENCE_EDGE_GRID_FIX.md` - 围栏边缘网格显示修复
+- ✅ `RISK_COMPARISON_FIX.md` - 风险对比图归一化修复
+- ✅ `FORCE_RESOURCE_DEPLOYMENT_PROPOSAL.md` - 强制资源部署方案设计
+- ✅ `FORCE_DEPLOYMENT_IMPLEMENTATION.md` - 强制资源部署实现文档
 
 ### 测试脚本
 - ✅ `test_patrol_camp_constraint.py` - Patrol和Camp约束测试
 - ✅ `test_deployment_summary.py` - 资源部署总结测试
 - ✅ `test_escape_update_logging.py` - 警戒更新日志测试
+- ✅ `test_utilization_display.py` - 利用率显示测试
+- ✅ `test_fence_edge_grid_fix.py` - 边缘网格识别测试
+- ✅ `test_risk_comparison_fix.py` - 风险对比图归一化测试
 - ✅ `diagnose_fence_deployment.py` - 围栏部署诊断脚本
 
 ### 工具脚本
 - ✅ `marker_to_pipeline.py` - Marker到Pipeline转换脚本
 - ✅ `diagnose_resource_utilization.py` - 资源利用率诊断工具
-- ✅ `test_utilization_display.py` - 利用率显示测试
 - ✅ `analyze_resource_contribution.py` - 资源贡献度分析工具
 
 ## 代码改进统计
@@ -125,13 +167,13 @@
 ### 修改的文件
 1. `hexdynamic/coverage_model.py` - 约束检查和修复逻辑
 2. `hexdynamic/dssa_optimizer.py` - R2动态化、警戒更新日志、total benefit输出
-3. `hexdynamic/protection_pipeline.py` - 向量化模式提示、剩余风险计算、资源部署总结、利用率显示改进
-4. `hexdynamic/visualize_output.py` - 围栏可视化调试信息、边缘网格识别修复
+3. `hexdynamic/protection_pipeline.py` - 向量化模式提示、剩余风险计算、资源部署总结、利用率显示改进、风险归一化修复
+4. `hexdynamic/visualize_output.py` - 围栏可视化调试信息、边缘网格识别修复、保护收益热力图简化
 5. `marker/image-viewer.html` - 物种分布约束
 
 ### 新增文件
-- 13个技术文档
-- 5个测试脚本
+- 14个技术文档
+- 7个测试/诊断脚本
 - 3个工具脚本
 
 ## 功能验证

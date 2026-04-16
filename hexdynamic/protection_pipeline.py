@@ -179,7 +179,7 @@ def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
     return loader
 
 
-def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
+def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, allow_partial_deployment: bool = False):
     print(f"[1/4] Read input: {input_path}")
     data = load_input(input_path)
 
@@ -231,7 +231,16 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
         R2=dc.get('R2', 0.5)
     )
 
-    optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config, fixed_fences=fixed_fences)
+    # 强制部署模式：默认True，除非通过命令行参数设置为False
+    force_full_deployment = not allow_partial_deployment
+    if force_full_deployment:
+        print("      🎯 强制部署模式：所有资源将被部署到上限")
+    else:
+        print("      ⚙️  部分部署模式：允许优化器根据收益选择资源")
+    
+    optimizer = DSSAOptimizer(coverage_model, constraints, dssa_config, 
+                             fixed_fences=fixed_fences,
+                             force_full_deployment=force_full_deployment)
     best_solution, best_fitness, fitness_history = optimizer.optimize()
 
     # 打印资源部署总结
@@ -320,21 +329,27 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
     total_protection_benefit = sum(pb_per_grid.values())
     avg_protection_benefit = float(np.mean(list(pb_per_grid.values())))
 
+    # 获取所有网格的原始风险值（已归一化）
+    risk_vals = [grid_model.get_grid_risk(gid) for gid in grid_model.get_all_grid_ids()]
+    risk_min, risk_max = min(risk_vals), max(risk_vals)
+
+    # 计算剩余风险（原始值）
+    rr_per_grid = {
+        gid: grid_model.get_grid_risk(gid) * np.exp(-coverage_model.calculate_protection_effect(best_solution)[gid])
+        for gid in grid_model.get_all_grid_ids()
+    }
+    
+    # 使用统一的归一化范围（基于部署前风险范围）
+    # 这样部署前后的热力图可以直接对比
+    def norm_unified_risk(v):
+        return float((v - risk_min) / (risk_max - risk_min)) if risk_max != risk_min else float(v)
+
+    # 归一化保护收益
     pb_vals = list(pb_per_grid.values())
     pb_min, pb_max = min(pb_vals), max(pb_vals)
 
     def norm_pb(v):
         return float((v - pb_min) / (pb_max - pb_min)) if pb_max != pb_min else float(v)
-
-    rr_per_grid = {
-        gid: grid_model.get_grid_risk(gid) * np.exp(-coverage_model.calculate_protection_effect(best_solution)[gid])
-        for gid in grid_model.get_all_grid_ids()
-    }
-    rr_vals = list(rr_per_grid.values())
-    rr_min, rr_max = min(rr_vals), max(rr_vals)
-
-    def norm_rr(v):
-        return float((v - rr_min) / (rr_max - rr_min)) if rr_max != rr_min else float(v)
 
     input_grid_map = {g['grid_id']: g for g in data['grids']}
     grid_results = []
@@ -348,10 +363,10 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False):
             'x': src.get('x', 0),
             'y': src.get('y', 0),
             'terrain_type': grid.terrain_type,
-            'risk_normalized': round(float(grid.risk), 6),
+            'risk_normalized': round(norm_unified_risk(grid_model.get_grid_risk(gid)), 6),
             'protection_benefit_raw': round(float(pb_per_grid[gid]), 6),
             'protection_benefit_normalized': round(norm_pb(pb_per_grid[gid]), 6),
-            'residual_risk_normalized': round(norm_rr(rr_per_grid[gid]), 6),
+            'residual_risk_normalized': round(norm_unified_risk(rr_per_grid[gid]), 6),
             'deployment': {
                 'patrol_rangers': int(best_solution.rangers.get(gid, 0)),
                 'camp': int(best_solution.camps.get(gid, 0)),
@@ -411,6 +426,11 @@ if __name__ == '__main__':
 Examples:
   python protection_pipeline.py input.json output.json
   python protection_pipeline.py input.json output.json --vectorized
+  python protection_pipeline.py input.json output.json --allow-partial-deployment
+
+Deployment Modes:
+  Default (Force Full Deployment): All resources will be deployed to their limits
+  --allow-partial-deployment: Allow optimizer to choose which resources to deploy based on marginal benefit
 
 Vectorized Mode:
   Use --vectorized flag for large maps (>1000 grids)
@@ -426,5 +446,11 @@ Vectorized Mode:
         default=False,
         help="Use NumPy-vectorized coverage model (recommended for maps with >1000 grids, ~3-5x faster)"
     )
+    parser.add_argument(
+        "--allow-partial-deployment",
+        action="store_true",
+        default=False,
+        help="Allow partial deployment of resources based on marginal benefit (default: force full deployment)"
+    )
     args = parser.parse_args()
-    run_pipeline(args.input, args.output, vectorized=args.vectorized)
+    run_pipeline(args.input, args.output, vectorized=args.vectorized, allow_partial_deployment=args.allow_partial_deployment)

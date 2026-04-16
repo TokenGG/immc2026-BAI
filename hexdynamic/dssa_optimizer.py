@@ -17,7 +17,8 @@ class DSSAConfig:
 
 class DSSAOptimizer:
     def __init__(self, coverage_model: CoverageModel, constraints: Dict[str, any],
-                 config: DSSAConfig = None, fixed_fences: Dict[Tuple[int, int], int] = None):
+                 config: DSSAConfig = None, fixed_fences: Dict[Tuple[int, int], int] = None,
+                 force_full_deployment: bool = True):
         self.coverage_model = coverage_model
         self.constraints = constraints
         self.config = config or DSSAConfig()
@@ -25,6 +26,7 @@ class DSSAOptimizer:
         self.grid_ids = self.grid_model.get_all_grid_ids()
         self.fencing_edges = self.grid_model.get_fencing_edges()
         self.fixed_fences = fixed_fences or {}
+        self.force_full_deployment = force_full_deployment  # 新增：是否强制部署所有资源
 
         self.population = []
         self.fitness_history = []
@@ -32,6 +34,11 @@ class DSSAOptimizer:
         self.best_fitness = float('-inf')
 
     def _initialize_solution(self) -> DeploymentSolution:
+        """初始化解决方案
+        
+        如果 force_full_deployment=True，强制部署所有资源到上限
+        否则使用原来的逻辑（可能部分部署）
+        """
         cameras = {}
         camps = {}
         drones = {}
@@ -40,40 +47,110 @@ class DSSAOptimizer:
         grid_ids_shuffled = self.grid_ids.copy()
         random.shuffle(grid_ids_shuffled)
 
-        max_cam = self.constraints.get('max_cameras_per_grid', 3)
-        cam_deployed = 0
-        for grid_id in grid_ids_shuffled:
-            if cam_deployed >= self.constraints['total_cameras']:
-                break
-            if self.coverage_model.deployment_matrix['camera'][grid_id] == 1:
-                count = min(max_cam, self.constraints['total_cameras'] - cam_deployed)
-                cameras[grid_id] = count
-                cam_deployed += count
-
-        drones_to_deploy = min(self.constraints['total_drones'], len(grid_ids_shuffled))
-        for i in range(drones_to_deploy):
-            grid_id = grid_ids_shuffled[(i + cam_deployed) % len(grid_ids_shuffled)]
-            if self.coverage_model.deployment_matrix['drone'][grid_id] == 1:
-                drones[grid_id] = 1
-
-        camps_to_deploy = min(self.constraints['total_camps'], len(grid_ids_shuffled))
-        for i in range(camps_to_deploy):
-            grid_id = grid_ids_shuffled[(i + cam_deployed + drones_to_deploy) % len(grid_ids_shuffled)]
-            if self.coverage_model.deployment_matrix['camp'][grid_id] == 1:
-                camps[grid_id] = 1
-
-        if self.constraints['total_patrol'] > 0 and sum(rangers.values()) < self.constraints['total_patrol']:
-            remaining_rangers = self.constraints['total_patrol'] - sum(rangers.values())
+        if self.force_full_deployment:
+            # 强制部署模式：确保所有资源都部署到上限
+            
+            # 1. 部署所有摄像头
+            max_cam = self.constraints.get('max_cameras_per_grid', 3)
+            cam_target = self.constraints['total_cameras']
+            cam_deployed = 0
+            
             for grid_id in grid_ids_shuffled:
-                if remaining_rangers <= 0:
+                if cam_deployed >= cam_target:
                     break
-                if (grid_id not in cameras and
-                        grid_id not in drones and
-                        grid_id not in camps and
-                        grid_id not in rangers and
-                        self.coverage_model.deployment_matrix['patrol'][grid_id] == 1):
+                if self.coverage_model.deployment_matrix['camera'][grid_id] == 1:
+                    count = min(max_cam, cam_target - cam_deployed)
+                    cameras[grid_id] = count
+                    cam_deployed += count
+            
+            # 如果还没部署完，继续尝试（可能需要多次遍历）
+            attempt = 0
+            while cam_deployed < cam_target and attempt < 3:
+                for grid_id in grid_ids_shuffled:
+                    if cam_deployed >= cam_target:
+                        break
+                    if self.coverage_model.deployment_matrix['camera'][grid_id] == 1:
+                        current = cameras.get(grid_id, 0)
+                        can_add = min(max_cam - current, cam_target - cam_deployed)
+                        if can_add > 0:
+                            cameras[grid_id] = current + can_add
+                            cam_deployed += can_add
+                attempt += 1
+
+            # 2. 部署所有无人机
+            max_drone = self.constraints.get('max_drones_per_grid', 1)
+            drone_target = self.constraints['total_drones']
+            drone_deployed = 0
+            
+            for grid_id in grid_ids_shuffled:
+                if drone_deployed >= drone_target:
+                    break
+                if self.coverage_model.deployment_matrix['drone'][grid_id] == 1:
+                    count = min(max_drone, drone_target - drone_deployed)
+                    drones[grid_id] = count
+                    drone_deployed += count
+
+            # 3. 部署所有营地
+            max_camp = self.constraints.get('max_camps_per_grid', 1)
+            camp_target = self.constraints['total_camps']
+            camp_deployed = 0
+            
+            for grid_id in grid_ids_shuffled:
+                if camp_deployed >= camp_target:
+                    break
+                if self.coverage_model.deployment_matrix['camp'][grid_id] == 1:
+                    count = min(max_camp, camp_target - camp_deployed)
+                    camps[grid_id] = count
+                    camp_deployed += count
+
+            # 4. 部署所有巡逻人员（避免与营地冲突）
+            ranger_target = self.constraints['total_patrol']
+            ranger_deployed = 0
+            
+            for grid_id in grid_ids_shuffled:
+                if ranger_deployed >= ranger_target:
+                    break
+                if (grid_id not in camps and 
+                    self.coverage_model.deployment_matrix['patrol'][grid_id] == 1):
                     rangers[grid_id] = rangers.get(grid_id, 0) + 1
-                    remaining_rangers -= 1
+                    ranger_deployed += 1
+        
+        else:
+            # 原来的逻辑：允许部分部署
+            max_cam = self.constraints.get('max_cameras_per_grid', 3)
+            cam_deployed = 0
+            for grid_id in grid_ids_shuffled:
+                if cam_deployed >= self.constraints['total_cameras']:
+                    break
+                if self.coverage_model.deployment_matrix['camera'][grid_id] == 1:
+                    count = min(max_cam, self.constraints['total_cameras'] - cam_deployed)
+                    cameras[grid_id] = count
+                    cam_deployed += count
+
+            drones_to_deploy = min(self.constraints['total_drones'], len(grid_ids_shuffled))
+            for i in range(drones_to_deploy):
+                grid_id = grid_ids_shuffled[(i + cam_deployed) % len(grid_ids_shuffled)]
+                if self.coverage_model.deployment_matrix['drone'][grid_id] == 1:
+                    drones[grid_id] = 1
+
+            camps_to_deploy = min(self.constraints['total_camps'], len(grid_ids_shuffled))
+            for i in range(camps_to_deploy):
+                grid_id = grid_ids_shuffled[(i + cam_deployed + drones_to_deploy) % len(grid_ids_shuffled)]
+                if self.coverage_model.deployment_matrix['camp'][grid_id] == 1:
+                    camps[grid_id] = 1
+
+            if self.constraints['total_patrol'] > 0 and sum(rangers.values()) < self.constraints['total_patrol']:
+                remaining_rangers = self.constraints['total_patrol'] - sum(rangers.values())
+                for grid_id in grid_ids_shuffled:
+                    if remaining_rangers <= 0:
+                        break
+                    if (grid_id not in cameras and
+                            grid_id not in drones and
+                            grid_id not in camps and
+                            grid_id not in rangers and
+                            self.coverage_model.deployment_matrix['patrol'][grid_id] == 1):
+                        rangers[grid_id] = rangers.get(grid_id, 0) + 1
+                        remaining_rangers -= 1
 
         solution = DeploymentSolution(
             cameras=cameras,
@@ -82,7 +159,7 @@ class DSSAOptimizer:
             rangers=rangers,
             fences=dict(self.fixed_fences)
         )
-        return self.coverage_model.repair_solution(solution, self.constraints)
+        return self.coverage_model.repair_solution(solution, self.constraints, self.force_full_deployment)
 
     def initialize_population(self):
         self.population = []
@@ -173,7 +250,8 @@ class DSSAOptimizer:
 
             new_solution = self.coverage_model.repair_solution(
                 self._vector_to_solution(new_vector),
-                self.constraints
+                self.constraints,
+                self.force_full_deployment
             )
 
             if self.evaluate_fitness(new_solution) > self.evaluate_fitness(solution):
@@ -213,7 +291,8 @@ class DSSAOptimizer:
 
             new_solution = self.coverage_model.repair_solution(
                 self._vector_to_solution(new_vector),
-                self.constraints
+                self.constraints,
+                self.force_full_deployment
             )
 
             if self.evaluate_fitness(new_solution) > self.evaluate_fitness(solution):

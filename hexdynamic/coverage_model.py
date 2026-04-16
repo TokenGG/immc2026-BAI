@@ -192,7 +192,8 @@ class CoverageModel:
         return (len(violations) == 0, violations)
 
     def repair_solution(self, solution: DeploymentSolution,
-                       constraints: Dict[str, any]) -> DeploymentSolution:
+                       constraints: Dict[str, any],
+                       force_full_deployment: bool = True) -> DeploymentSolution:
         cleaned_cameras = {k: v for k, v in solution.cameras.items() if v > 0}
         cleaned_camps = {k: v for k, v in solution.camps.items() if v > 0}
         cleaned_drones = {k: v for k, v in solution.drones.items() if v > 0}
@@ -290,5 +291,71 @@ class CoverageModel:
                         self.deployment_matrix['patrol'][grid_id] == 1):
                     repaired.rangers[grid_id] = 1
                     remaining_rangers -= 1
+
+        # 如果启用强制部署模式，补充所有未达到上限的资源
+        if force_full_deployment:
+            import random
+            
+            # 补充摄像头
+            total_cameras = sum(repaired.cameras.values())
+            if total_cameras < constraints['total_cameras']:
+                available_grids = [gid for gid in self.grid_ids 
+                                  if self.deployment_matrix['camera'][gid] == 1]
+                random.shuffle(available_grids)
+                max_cam = constraints.get('max_cameras_per_grid', 3)
+                
+                for grid_id in available_grids:
+                    if total_cameras >= constraints['total_cameras']:
+                        break
+                    current = repaired.cameras.get(grid_id, 0)
+                    can_add = min(max_cam - current, constraints['total_cameras'] - total_cameras)
+                    if can_add > 0:
+                        repaired.cameras[grid_id] = current + can_add
+                        total_cameras += can_add
+            
+            # 补充无人机
+            total_drones = sum(repaired.drones.values())
+            if total_drones < constraints['total_drones']:
+                available_grids = [gid for gid in self.grid_ids 
+                                  if self.deployment_matrix['drone'][gid] == 1
+                                  and gid not in repaired.drones]
+                random.shuffle(available_grids)
+                max_drone = constraints.get('max_drones_per_grid', 1)
+                
+                for grid_id in available_grids:
+                    if total_drones >= constraints['total_drones']:
+                        break
+                    repaired.drones[grid_id] = 1
+                    total_drones += 1
+            
+            # 补充营地
+            total_camps = sum(repaired.camps.values())
+            if total_camps < constraints['total_camps']:
+                available_grids = [gid for gid in self.grid_ids 
+                                  if self.deployment_matrix['camp'][gid] == 1
+                                  and gid not in repaired.camps]
+                random.shuffle(available_grids)
+                max_camp = constraints.get('max_camps_per_grid', 1)
+                
+                for grid_id in available_grids:
+                    if total_camps >= constraints['total_camps']:
+                        break
+                    repaired.camps[grid_id] = 1
+                    total_camps += 1
+            
+            # 补充巡逻人员（如果之前没有补充完）
+            total_rangers = sum(repaired.rangers.values())
+            if total_rangers < constraints['total_patrol']:
+                available_grids = [gid for gid in self.grid_ids 
+                                  if self.deployment_matrix['patrol'][gid] == 1
+                                  and gid not in repaired.camps  # 避免与营地冲突
+                                  and gid not in repaired.rangers]
+                random.shuffle(available_grids)
+                
+                for grid_id in available_grids:
+                    if total_rangers >= constraints['total_patrol']:
+                        break
+                    repaired.rangers[grid_id] = 1
+                    total_rangers += 1
 
         return repaired

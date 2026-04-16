@@ -354,7 +354,6 @@ def plot_protection_heatmap(out, hex_size, boundary_xy, save_path):
     summary = out["summary"]
     cmap = matplotlib.colormaps.get_cmap("RdYlGn")
     norm = Normalize(vmin=0, vmax=1)
-    edge_ids = _edge_grid_ids(grids, boundary_xy)
 
     fig, ax, ax_cbar, ax_leg = make_figure(has_colorbar=True)
 
@@ -362,30 +361,18 @@ def plot_protection_heatmap(out, hex_size, boundary_xy, save_path):
         cx, cy = grid_center(g["q"], g["r"], hex_size)
         draw_hex(ax, cx, cy, hex_size * 0.97, facecolor=cmap(norm(g["protection_benefit_normalized"])))
 
-    _draw_resources(ax, grids, out, hex_size, edge_ids)
     setup_map_ax(ax, grids, hex_size)
     draw_boundary(ax, grids, boundary_xy, hex_size)
-    ax.set_title("Protection Benefit & Deployment", fontsize=13, fontweight="bold", pad=8)
+    ax.set_title("Protection Benefit", fontsize=13, fontweight="bold", pad=8)
 
     add_colorbar(fig, ax_cbar, cmap, norm, "Protection Benefit (norm.)")
-
-    res_handles = [
-        plt.Line2D([0], [0], marker=m, color="w", markerfacecolor=c,
-                   markeredgecolor="black", markersize=8, label=l)
-        for _, (m, c, l) in RESOURCE_MARKERS.items()
-    ]
-    res_handles.append(
-        plt.Line2D([0], [0], marker="p", color="w", markerfacecolor=FENCE_COLOR,
-                   markeredgecolor="black", markersize=8, label="Fence")
-    )
-    y = legend_in_ax(ax_leg, res_handles, "Resources", y_start=0.97)
 
     summary_items = [
         ("Best Fitness", f"{summary['best_fitness']:.4f}"),
         ("Total PB",     f"{summary['total_protection_benefit']:.4f}"),
         ("Avg PB",       f"{summary['average_protection_benefit']:.4f}"),
     ]
-    y -= 0.04
+    y = 0.97
     ax_leg.text(0.05, y, "Summary", transform=ax_leg.transAxes,
                 fontsize=9, fontweight="bold", va="top")
     y -= 0.09
