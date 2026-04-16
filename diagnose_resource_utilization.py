@@ -116,12 +116,15 @@ def diagnose_utilization(input_path: str, output_path: str):
             'reasons': [
                 f"权重过低 (wc={coverage_params.get('wc', 0.2)})",
                 f"覆盖半径过小 (camera_radius={coverage_params.get('camera_radius', 2.0)})",
-                "其他资源已提供足够保护"
+                "其他资源已提供足够保护（边际收益递减）",
+                "巡逻/无人机的权重更高，贡献更大"
             ],
             'solutions': [
-                "增加摄像头权重 wc (例如从0.2增加到0.3)",
-                "增加摄像头覆盖半径 camera_radius",
-                "减少其他资源的权重或数量"
+                "增加摄像头权重 wc (例如从0.2增加到0.3或0.35)",
+                "增加摄像头覆盖半径 camera_radius (例如从2.0增加到4.0)",
+                "减少其他资源的权重或数量",
+                "使用平衡权重配置 (0.25, 0.25, 0.25, 0.25)",
+                "运行 python analyze_resource_contribution.py input.json 查看详细分析"
             ]
         })
     
@@ -133,12 +136,14 @@ def diagnose_utilization(input_path: str, output_path: str):
             'reasons': [
                 "营地本身不直接提供保护收益",
                 "营地只是巡逻人员的部署点",
-                "巡逻人员可以不依赖营地部署"
+                "巡逻人员可以不依赖营地独立部署",
+                "优化器倾向于直接部署巡逻人员"
             ],
             'solutions': [
                 "这可能是正常的优化结果",
                 "如果需要强制使用营地，可以修改约束逻辑",
-                "增加巡逻人员权重 wp 可能间接增加营地使用"
+                "增加巡逻人员权重 wp 可能间接增加营地使用",
+                "或者接受当前结果（营地不是必需的）"
             ]
         })
     
@@ -149,11 +154,12 @@ def diagnose_utilization(input_path: str, output_path: str):
             'issue': '完全未使用',
             'reasons': [
                 f"权重过低 (wd={coverage_params.get('wd', 0.3)})",
-                "其他资源已提供足够保护"
+                "其他资源已提供足够保护（边际收益递减）"
             ],
             'solutions': [
                 "增加无人机权重 wd",
-                "减少其他资源的数量"
+                "减少其他资源的数量",
+                "运行 python analyze_resource_contribution.py input.json 查看详细分析"
             ]
         })
     
@@ -164,11 +170,12 @@ def diagnose_utilization(input_path: str, output_path: str):
             'issue': '完全未使用',
             'reasons': [
                 f"权重过低 (wp={coverage_params.get('wp', 0.3)})",
-                "其他资源已提供足够保护"
+                "其他资源已提供足够保护（边际收益递减）"
             ],
             'solutions': [
                 "增加巡逻人员权重 wp",
-                "减少其他资源的数量"
+                "减少其他资源的数量",
+                "运行 python analyze_resource_contribution.py input.json 查看详细分析"
             ]
         })
     

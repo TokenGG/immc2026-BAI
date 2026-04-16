@@ -73,12 +73,23 @@
 
 ### 9. ✅ 资源利用率显示改进
 **文件**：`hexdynamic/protection_pipeline.py`
-**文档**：`RESOURCE_UTILIZATION_GUIDE.md`
+**文档**：`RESOURCE_UTILIZATION_GUIDE.md`, `WHY_ZERO_UTILIZATION.md`
 
 - ✅ 区分"未配置"和"未使用"
 - ✅ 未配置资源显示"N/A"而不是"0.0%"
 - ✅ 创建资源利用率诊断工具
+- ✅ 创建资源贡献度分析工具
 - ✅ 提供权重和半径调优建议
+- ✅ 深度解析边际收益递减原理
+
+### 10. ✅ 围栏边缘网格显示修复
+**文件**：`hexdynamic/visualize_output.py`
+**文档**：`FENCE_EDGE_GRID_FIX.md`
+
+- ✅ 修复边缘网格识别逻辑
+- ✅ 使用实际边界网格而不是矩形边界
+- ✅ 围栏标记正确显示在所有边界网格上
+- ✅ 保持向后兼容性
 
 ## 文档清单
 
@@ -94,6 +105,8 @@
 - ✅ `DSSA_ESCAPE_UPDATE_LOGGING.md` - 警戒更新日志功能
 - ✅ `DSSA_IMPROVEMENTS_SUMMARY.md` - DSSA改进总结
 - ✅ `RESOURCE_UTILIZATION_GUIDE.md` - 资源利用率诊断指南
+- ✅ `WHY_ZERO_UTILIZATION.md` - 资源利用率为0%深度解析
+- ✅ `FENCE_EDGE_GRID_FIX.md` - 围栏边缘网格显示修复
 
 ### 测试脚本
 - ✅ `test_patrol_camp_constraint.py` - Patrol和Camp约束测试
@@ -105,6 +118,7 @@
 - ✅ `marker_to_pipeline.py` - Marker到Pipeline转换脚本
 - ✅ `diagnose_resource_utilization.py` - 资源利用率诊断工具
 - ✅ `test_utilization_display.py` - 利用率显示测试
+- ✅ `analyze_resource_contribution.py` - 资源贡献度分析工具
 
 ## 代码改进统计
 
@@ -112,13 +126,13 @@
 1. `hexdynamic/coverage_model.py` - 约束检查和修复逻辑
 2. `hexdynamic/dssa_optimizer.py` - R2动态化、警戒更新日志、total benefit输出
 3. `hexdynamic/protection_pipeline.py` - 向量化模式提示、剩余风险计算、资源部署总结、利用率显示改进
-4. `hexdynamic/visualize_output.py` - 围栏可视化调试信息
+4. `hexdynamic/visualize_output.py` - 围栏可视化调试信息、边缘网格识别修复
 5. `marker/image-viewer.html` - 物种分布约束
 
 ### 新增文件
-- 11个技术文档
+- 13个技术文档
 - 5个测试脚本
-- 2个工具脚本
+- 3个工具脚本
 
 ## 功能验证
 

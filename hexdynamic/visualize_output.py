@@ -246,13 +246,25 @@ SPECIES_STYLE = {
 }
 
 
-def _edge_grid_ids(grids):
-    rows = [g["r"] for g in grids]
-    cols = [g["q"] + g["r"] // 2 for g in grids]
-    min_r, max_r = min(rows), max(rows)
-    min_c, max_c = min(cols), max(cols)
-    return {g["grid_id"] for g in grids
-            if g["r"] in (min_r, max_r) or (g["q"] + g["r"] // 2) in (min_c, max_c)}
+def _edge_grid_ids(grids, boundary_xy=None):
+    """
+    返回边缘网格的ID集合
+    
+    如果提供了boundary_xy，使用实际的边界网格
+    否则使用矩形边界的边缘网格（向后兼容）
+    """
+    if boundary_xy:
+        # 使用实际的边界网格
+        xy_to_grid = {(g["x"], g["y"]): g for g in grids}
+        return {xy_to_grid[(x, y)]["grid_id"] for (x, y) in boundary_xy if (x, y) in xy_to_grid}
+    else:
+        # 使用矩形边界的边缘网格（旧逻辑）
+        rows = [g["r"] for g in grids]
+        cols = [g["q"] + g["r"] // 2 for g in grids]
+        min_r, max_r = min(rows), max(rows)
+        min_c, max_c = min(cols), max(cols)
+        return {g["grid_id"] for g in grids
+                if g["r"] in (min_r, max_r) or (g["q"] + g["r"] // 2) in (min_c, max_c)}
 
 
 def _draw_resources(ax, grids, out, hex_size, edge_ids):
@@ -342,7 +354,7 @@ def plot_protection_heatmap(out, hex_size, boundary_xy, save_path):
     summary = out["summary"]
     cmap = matplotlib.colormaps.get_cmap("RdYlGn")
     norm = Normalize(vmin=0, vmax=1)
-    edge_ids = _edge_grid_ids(grids)
+    edge_ids = _edge_grid_ids(grids, boundary_xy)
 
     fig, ax, ax_cbar, ax_leg = make_figure(has_colorbar=True)
 
@@ -478,7 +490,7 @@ def plot_terrain_map(out, hex_size, boundary_xy, save_path):
 
 def plot_terrain_deployment_map(out, hex_size, boundary_xy, save_path):
     grids = out["grids"]
-    edge_ids = _edge_grid_ids(grids)
+    edge_ids = _edge_grid_ids(grids, boundary_xy)
     fig, ax, _, ax_leg = make_figure(has_colorbar=False)
 
     for g in grids:
