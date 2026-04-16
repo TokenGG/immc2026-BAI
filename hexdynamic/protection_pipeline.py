@@ -9,7 +9,7 @@ import json
 import sys
 import os
 import numpy as np
-from typing import Dict
+from typing import Dict, Tuple
 
 _RISK_SRC = os.path.join(os.path.dirname(__file__), '..', 'riskIndex', 'src')
 sys.path.insert(0, os.path.abspath(_RISK_SRC))
@@ -52,7 +52,15 @@ def build_species_config(species_cfg: dict) -> dict:
     return result
 
 
-def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
+def compute_risk_with_riskindex(data: dict) -> Tuple[Dict[int, float], Dict[int, float]]:
+    """
+    Compute normalized risk and temporal factors.
+    
+    Returns:
+        Tuple of (risk_map, temporal_factor_map)
+        - risk_map: normalized risk values [0, 1]
+        - temporal_factor_map: T_t × S_t (diurnal × seasonal factors)
+    """
     map_cfg_raw = data['map_config']
     boundary_locations = map_cfg_raw.get('boundary_locations')
     if boundary_locations:
@@ -131,10 +139,27 @@ def compute_risk_with_riskindex(data: dict) -> Dict[int, float]:
 
     use_temporal = data.get('use_temporal_factors', False)
     results = model.calculate_batch(grid_data_list, time_context, use_temporal_factors=use_temporal)
-    return {id_order[i]: float(r.normalized_risk) for i, r in enumerate(results)}
+    
+    risk_map = {id_order[i]: float(r.normalized_risk) for i, r in enumerate(results)}
+    
+    # Extract temporal factors from components
+    temporal_factor_map = {}
+    for i, r in enumerate(results):
+        gid = id_order[i]
+        if r.components:
+            temporal_factor = r.components.temporal_factor
+        else:
+            temporal_factor = 1.0
+        temporal_factor_map[gid] = temporal_factor
+    
+    return risk_map, temporal_factor_map
 
 
-def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
+def build_data_loader(data: dict, risk_map: Dict[int, float], temporal_factor_map: Dict[int, float] = None) -> DataLoader:
+    """Build data loader with temporal factors for time-aware fitness."""
+    if temporal_factor_map is None:
+        temporal_factor_map = {gid: 1.0 for gid in risk_map.keys()}
+    
     loader = DataLoader()
     loader.grids = [
         GridData(
@@ -142,7 +167,8 @@ def build_data_loader(data: dict, risk_map: Dict[int, float]) -> DataLoader:
             q=g['q'],
             r=g['r'],
             terrain_type=g.get('terrain_type', 'SparseGrass'),
-            risk=risk_map.get(g['grid_id'], 0.0)
+            risk=risk_map.get(g['grid_id'], 0.0),
+            temporal_factor=temporal_factor_map.get(g['grid_id'], 1.0)
         )
         for g in data['grids']
     ]
@@ -184,10 +210,10 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     data = load_input(input_path)
 
     print("[2/4] Compute normalized risk with riskIndex...")
-    risk_map = compute_risk_with_riskindex(data)
+    risk_map, temporal_factor_map = compute_risk_with_riskindex(data)
 
     print("[3/4] Build optimization model and run DSSA...")
-    loader = build_data_loader(data, risk_map)
+    loader = build_data_loader(data, risk_map, temporal_factor_map)
     grid_model = HexGridModel(loader.grids)
 
     model_class = VectorizedCoverageModel if vectorized else CoverageModel
@@ -228,15 +254,20 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
         producer_ratio=dc.get('producer_ratio', 0.2),
         scout_ratio=dc.get('scout_ratio', 0.2),
         ST=dc.get('ST', 0.8),
-        R2=dc.get('R2', 0.5)
+        R2=dc.get('R2', 0.5),
+        use_time_aware_fitness=dc.get('use_time_aware_fitness', False)
     )
 
     # 强制部署模式：默认True，除非通过命令行参数设置为False
     force_full_deployment = not allow_partial_deployment
     if force_full_deployment:
-        print("      🎯 强制部署模式：所有资源将被部署到上限")
+        print("      [FORCE] 强制部署模式：所有资源将被部署到上限")
     else:
-        print("      ⚙️  部分部署模式：允许优化器根据收益选择资源")
+        print("      [PARTIAL] 部分部署模式：允许优化器根据收益选择资源")
+    
+    # 时间感知适应度模式
+    if dssa_config.use_time_aware_fitness:
+        print("      [TIME-AWARE] 时间感知模式：资源分配将反映时间因子的影响")
     
     # 解析冻结资源列表
     frozen_resources_list = []
@@ -334,6 +365,14 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     print("[4/4] Compute metrics and write output...")
     pb_per_grid = coverage_model.calculate_protection_benefit(best_solution)
     total_risk = sum(grid_model.get_grid_risk(gid) for gid in grid_model.get_all_grid_ids())
+    
+    # 计算时间加权的总风险（如果启用时间感知模式）
+    total_risk_weighted = 0.0
+    for gid in grid_model.get_all_grid_ids():
+        normalized_risk = grid_model.get_grid_risk(gid)
+        temporal_factor = grid_model.get_grid_temporal_factor(gid)
+        total_risk_weighted += normalized_risk * temporal_factor
+    
     total_protection_benefit = sum(pb_per_grid.values())
     avg_protection_benefit = float(np.mean(list(pb_per_grid.values())))
 
@@ -341,9 +380,12 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     risk_vals = [grid_model.get_grid_risk(gid) for gid in grid_model.get_all_grid_ids()]
     risk_min, risk_max = min(risk_vals), max(risk_vals)
 
+    # 计算保护效果（缓存结果以避免重复计算）
+    protection_effect = coverage_model.calculate_protection_effect(best_solution)
+    
     # 计算剩余风险（原始值）
     rr_per_grid = {
-        gid: grid_model.get_grid_risk(gid) * np.exp(-coverage_model.calculate_protection_effect(best_solution)[gid])
+        gid: grid_model.get_grid_risk(gid) * np.exp(-protection_effect[gid])
         for gid in grid_model.get_all_grid_ids()
     }
     
@@ -395,6 +437,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
         'summary': {
             'total_grids': grid_model.get_grid_count(),
             'total_risk': round(float(total_risk), 6),
+            'total_risk_weighted': round(float(total_risk_weighted), 6),  # 时间加权的总风险
             'best_fitness': round(float(best_fitness), 6),
             'total_protection_benefit': round(float(total_protection_benefit), 6),
             'average_protection_benefit': round(float(avg_protection_benefit), 6),

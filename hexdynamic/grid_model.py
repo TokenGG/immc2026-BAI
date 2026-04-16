@@ -138,6 +138,11 @@ class HexGridModel:
         grid = self.get_grid_by_id(grid_id)
         return grid.risk if grid else 0.0
 
+    def get_grid_temporal_factor(self, grid_id: int) -> float:
+        """Get temporal factor (T_t × S_t) for time-aware fitness."""
+        grid = self.get_grid_by_id(grid_id)
+        return grid.temporal_factor if grid else 1.0
+
     def get_grid_terrain(self, grid_id: int) -> str:
         grid = self.get_grid_by_id(grid_id)
         return grid.terrain_type if grid else 'Unknown'

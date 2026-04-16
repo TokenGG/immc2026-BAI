@@ -10,6 +10,7 @@ class GridData:
     r: int
     terrain_type: str
     risk: float
+    temporal_factor: float = 1.0  # T_t × S_t (diurnal × seasonal)
 
 
 @dataclass

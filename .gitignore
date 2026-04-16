@@ -60,3 +60,13 @@ marker/*.webp
 .DS_Store
 Thumbs.db
 desktop.ini
+hexdynamic/etoshagrided.json
+hexdynamic/etosharesult.json
+hexdynamic/out.json
+hexdynamic/out2.json
+hexdynamic/pipeline_input1.json
+hexdynamic/figures1/protection_heatmap.png
+hexdynamic/figures1/risk_heatmap.png
+hexdynamic/figures1/species_map.png
+hexdynamic/figures1/terrain_deployment_map.png
+hexdynamic/figures1/terrain_map.png

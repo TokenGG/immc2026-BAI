@@ -13,6 +13,7 @@ class DSSAConfig:
     scout_ratio: float = 0.2
     ST: float = 0.8
     R2: float = 0.5  # 已弃用：R2现在在每次迭代中随机生成，此参数保留用于向后兼容
+    use_time_aware_fitness: bool = False  # 启用时间感知的适应度计算
 
 
 class DSSAOptimizer:
@@ -190,7 +191,12 @@ class DSSAOptimizer:
         is_valid, violations = self.coverage_model.validate_solution(solution, self.constraints)
         if not is_valid:
             return -len(violations) * 1000
-        return self.coverage_model.calculate_total_benefit(solution)
+        
+        # Use time-aware fitness if configured
+        if self.config.use_time_aware_fitness:
+            return self.coverage_model.calculate_time_aware_total_benefit(solution)
+        else:
+            return self.coverage_model.calculate_total_benefit(solution)
 
     def _solution_to_vector(self, solution: DeploymentSolution) -> np.ndarray:
         vector = []
