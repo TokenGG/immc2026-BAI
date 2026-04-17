@@ -195,7 +195,8 @@ def build_data_loader(data: dict, risk_map: Dict[int, float], temporal_factor_ma
         total_fence_length=float(c['total_fence_length']),
         max_cameras_per_grid=c.get('max_cameras_per_grid', 3),
         max_drones_per_grid=c.get('max_drones_per_grid', 1),
-        max_camps_per_grid=c.get('max_camps_per_grid', 1)
+        max_camps_per_grid=c.get('max_camps_per_grid', 1),
+        max_rangers_per_grid=c.get('max_rangers_per_grid', 1)
     )
 
     temp_grid_model = HexGridModel(loader.grids)
@@ -457,7 +458,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(f"\n✅ 优化完成！结果已保存到: {output_path}")
+    print(f"\n[OK] 优化完成！结果已保存到: {output_path}")
     print(f"\n最终指标:")
     print(f"  最佳适应度 (Best Fitness)              : {best_fitness:.6f}")
     print(f"  总保护收益 (Total Protection Benefit)  : {total_protection_benefit:.6f}")

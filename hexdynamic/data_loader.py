@@ -25,6 +25,7 @@ class ResourceConstraints:
     max_cameras_per_grid: int = 3
     max_drones_per_grid: int = 1
     max_camps_per_grid: int = 1
+    max_rangers_per_grid: int = 1
 
 
 @dataclass
@@ -161,7 +162,8 @@ class DataLoader:
                        total_drones: int, total_fence_length: float,
                        max_cameras_per_grid: int = 3,
                        max_drones_per_grid: int = 1,
-                       max_camps_per_grid: int = 1):
+                       max_camps_per_grid: int = 1,
+                       max_rangers_per_grid: int = 1):
         self.constraints = ResourceConstraints(
             total_patrol=total_patrol,
             total_camps=total_camps,
@@ -171,7 +173,8 @@ class DataLoader:
             total_fence_length=total_fence_length,
             max_cameras_per_grid=max_cameras_per_grid,
             max_drones_per_grid=max_drones_per_grid,
-            max_camps_per_grid=max_camps_per_grid
+            max_camps_per_grid=max_camps_per_grid,
+            max_rangers_per_grid=max_rangers_per_grid
         )
 
     def set_coverage_parameters(self, patrol_radius: float = 5.0, drone_radius: float = 8.0,

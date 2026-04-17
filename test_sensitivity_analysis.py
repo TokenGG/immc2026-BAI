@@ -134,9 +134,9 @@ def test_frozen_resources():
     
     # 验证：冻结的资源应该保持不变
     if patrol_count2 == patrol_count1:
-        print("  ✓ 冻结资源成功：巡逻人员数量保持不变")
+        print("  [OK] 冻结资源成功：巡逻人员数量保持不变")
     else:
-        print(f"  ✗ 冻结资源失败：巡逻人员数量改变了 ({patrol_count1} -> {patrol_count2})")
+        print(f"  [FAIL] 冻结资源失败：巡逻人员数量改变了 ({patrol_count1} -> {patrol_count2})")
     
     # 测试3：冻结 camera 和 drone
     print("\n[1.3] 冻结 camera 和 drone")
@@ -158,9 +158,9 @@ def test_frozen_resources():
     print(f"  巡逻人员: {patrol_count3}")
     
     if camera_count3 == camera_count1 and drone_count3 == sum(solution1.drones.values()):
-        print("  ✓ 冻结多个资源成功")
+        print("  [OK] 冻结多个资源成功")
     else:
-        print("  ✗ 冻结多个资源失败")
+        print("  [FAIL] 冻结多个资源失败")
 
 
 def test_sensitivity_analysis_workflow():
@@ -239,7 +239,7 @@ def test_sensitivity_analysis_workflow():
         with open(base_input_path, 'w') as f:
             json.dump(base_input, f, indent=2)
         
-        print(f"✓ 创建基础输入: {base_input_path}")
+        print(f"[OK] 创建基础输入: {base_input_path}")
         
         # 测试敏感性分析脚本
         print("\n[2.1] 测试敏感性分析脚本")
@@ -263,7 +263,7 @@ def test_sensitivity_analysis_workflow():
         # 检查输出文件
         result_file = os.path.join(output_dir, 'sensitivity_patrol.json')
         if os.path.exists(result_file):
-            print(f"  ✓ 敏感性分析结果已生成: {result_file}")
+            print(f"  [OK] 敏感性分析结果已生成: {result_file}")
             
             with open(result_file, 'r') as f:
                 results = json.load(f)
@@ -275,19 +275,19 @@ def test_sensitivity_analysis_workflow():
             for r in results['results']:
                 print(f"    - patrol={r['resource_value']}: benefit={r['total_protection_benefit']:.4f}, fitness={r['best_fitness']:.4f}")
         else:
-            print(f"  ✗ 敏感性分析结果未生成")
+            print(f"  [FAIL] 敏感性分析结果未生成")
         
         # 检查绘图文件
         plot_file = os.path.join(output_dir, 'sensitivity_patrol_plot.png')
         if os.path.exists(plot_file):
-            print(f"  ✓ 敏感性分析曲线已生成: {plot_file}")
+            print(f"  [OK] 敏感性分析曲线已生成: {plot_file}")
         else:
-            print(f"  ✗ 敏感性分析曲线未生成")
+            print(f"  [FAIL] 敏感性分析曲线未生成")
     
     finally:
         # 清理临时目录
         shutil.rmtree(temp_dir)
-        print(f"\n✓ 清理临时目录")
+        print(f"\n[OK] 清理临时目录")
 
 
 def main():
@@ -300,11 +300,11 @@ def main():
         # test_sensitivity_analysis_workflow()  # 注释掉，因为需要完整的 pipeline
         
         print("\n" + "="*70)
-        print("✓ 所有测试完成！")
+        print("[OK] 所有测试完成！")
         print("="*70 + "\n")
     
     except Exception as e:
-        print(f"\n✗ 测试失败: {e}")
+        print(f"\n[FAIL] 测试失败: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

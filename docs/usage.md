@@ -20,15 +20,13 @@
   ├─────────────────────────────────────┐
   │                                     │
   ▼                                     ▼
-[risk_analysis.py]              [protection_pipeline.py]
-计算风险指数                      计算风险指数 → DSSA 优化部署方案
-生成热力图+属性图                  输出 pipeline_output.json
-  │                                     │
-  │                                     ▼
-  │                            [visualize_output.py]
-  │                            生成可视化图片
-  │                                     │
-  └─────────────────────────────────────┘
+[risk_analysis.py]                   [run.py]  ← 推荐入口
+计算风险指数                      计算风险指数 → DSSA 优化 → 可视化
+生成热力图+属性图                  （整合 protection_pipeline + visualize_output）
+                                         │
+                                    也可分步运行：
+                                    [protection_pipeline.py] → output.json
+                                    [visualize_output.py]    → 图片
 ```
 
 ***
@@ -127,6 +125,8 @@ python generate_map.py -m 15 -n 15 --seed 42 -o map.json
 
 文件：`hexdynamic/protection_pipeline.py`
 
+> 推荐使用 `run.py`（见第三节）一键完成优化+可视化。`protection_pipeline.py` 适合只需要输出 JSON、不需要图片的场景。
+
 ### 依赖安装
 
 ```bash
@@ -144,6 +144,9 @@ python protection_pipeline.py <input.json> <output.json>
 
 # 向量化模式（大规模网格推荐，千级以上网格约 4x+ 加速）
 python protection_pipeline.py <input.json> <output.json> --vectorized
+
+# 冻结部分资源（不参与优化）
+python protection_pipeline.py <input.json> <output.json> --freeze-resources patrol,camera
 ```
 
 `--vectorized` 启用 `VectorizedCoverageModel`，用 NumPy 矩阵运算替代 Python 循环计算覆盖度，初始化时预构建距离矩阵切片和部署掩码，每次 `evaluate_fitness` 只做矩阵广播运算。网格数越大加速比越显著，120 格约 4x，上千格预计 10x+。
@@ -214,7 +217,8 @@ Optimization completed.  Best Fitness = 0.498100  Total = 8.45s  Avg/iter = 84.5
     "total_cameras": 10, "total_drones": 3, "total_fence_length": 50,
     "max_cameras_per_grid": 3,   // 单格最大摄像头数（默认 3）
     "max_drones_per_grid": 1,    // 单格最大无人机数（默认 1）
-    "max_camps_per_grid": 1      // 单格最大营地数（默认 1）
+    "max_camps_per_grid": 1,     // 单格最大营地数（默认 1）
+    "max_rangers_per_grid": 1    // 单格最大巡逻人员数（默认 1）
   },
 
   // 覆盖参数（可选）
@@ -389,7 +393,53 @@ D_i = Σ_s (w_s × density_{s,i} × seasonal_multiplier_s)
 
 ***
 
-## 四、风险分析脚本
+## 三点五、一键运行脚本（推荐）
+
+文件：`hexdynamic/run.py`
+
+整合 `protection_pipeline.py` 和 `visualize_output.py`，一条命令完成优化和出图。
+
+### 用法
+
+```bash
+cd hexdynamic
+
+# 完整流程：优化 + 出图
+python run.py input.json output.json
+
+# 指定图片目录和文件名前缀
+python run.py input.json output.json --out_dir ./figures --prefix night_rainy
+
+# 向量化模式 + 出图
+python run.py input.json output.json --vectorized --out_dir ./figures
+
+# 只优化，不出图
+python run.py input.json output.json --no-visualize
+
+# 只出图（已有 output JSON）
+python run.py output.json --visualize-only --input input.json --out_dir ./figures
+```
+
+### 命令行参数
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `input` | 必填 | 输入 JSON（pipeline 模式）或 output JSON（`--visualize-only` 模式） |
+| `output` | 必填（pipeline 模式） | 输出 JSON 路径 |
+| `--vectorized` | false | 使用向量化覆盖模型（网格数 >1000 推荐） |
+| `--allow-partial-deployment` | false | 允许按边际收益决定是否部署资源 |
+| `--freeze-resources` | None | 冻结资源列表，逗号分隔，如 `patrol,camera` |
+| `--no-visualize` | false | 只运行优化，不生成图片 |
+| `--visualize-only` | false | 只生成图片，跳过优化 |
+| `--input, -i` | None | `--visualize-only` 时的原始 input JSON（用于物种数据） |
+| `--out_dir, -d` | `./figures` | 图片输出目录 |
+| `--prefix` | `""` | 输出文件名前缀 |
+
+### 输出
+
+优化结果写入 `output.json`，图片写入 `--out_dir` 目录，文件名同 `visualize_output.py`（见第八节）。
+
+***
 
 文件：`hexdynamic/risk_analysis.py`
 
@@ -756,6 +806,8 @@ python protection_pipeline.py input-night-rainy.json output-night.json
 ## 八、可视化脚本
 
 文件：`hexdynamic/visualize_output.py`
+
+> 推荐通过 `run.py` 调用（自动在优化后出图）。直接使用 `visualize_output.py` 适合已有 output JSON、只需重新生成图片的场景。
 
 ### 用法
 

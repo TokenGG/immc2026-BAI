@@ -225,19 +225,20 @@ class DSSAOptimizer:
             idx += 1
 
         for grid_id in self.grid_ids:
-            if vector[idx] > 0.5:
+            if vector[idx] > 0.5 and self.coverage_model.deployment_matrix['camp'][grid_id] == 1:
                 camps[grid_id] = 1
             idx += 1
 
         for grid_id in self.grid_ids:
-            if vector[idx] > 0.5:
+            if vector[idx] > 0.5 and self.coverage_model.deployment_matrix['drone'][grid_id] == 1:
                 drones[grid_id] = 1
             idx += 1
 
         for grid_id in self.grid_ids:
             val = int(round(vector[idx]))
             if val > 0 and self.coverage_model.deployment_matrix['patrol'][grid_id] == 1:
-                rangers[grid_id] = val
+                max_ranger = self.constraints.get('max_rangers_per_grid', 1)
+                rangers[grid_id] = min(val, max_ranger)
             idx += 1
 
         return DeploymentSolution(
