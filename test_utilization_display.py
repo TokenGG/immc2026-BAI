@@ -69,7 +69,7 @@ def test_utilization_display():
     }
     
     print_utilization(constraints, deployed)
-    print("\n⚠️  注意: 如果某些资源利用率为0%，可能的原因：")
+    print("\n[!] 注意: 如果某些资源利用率为0%，可能的原因：")
     print("   1. 优化器认为部署这些资源不划算（成本高于收益）")
     print("   2. 约束条件限制了资源部署（如地形限制）")
     print("   3. 其他资源已经提供了足够的保护")
@@ -78,7 +78,7 @@ def test_utilization_display():
 
 def print_utilization(constraints, deployed):
     """打印利用率统计"""
-    print(f"\n📊 部署统计:")
+    print(f"\n[+] 部署统计:")
     
     # 摄像头利用率
     if constraints['total_cameras'] > 0:

@@ -174,7 +174,7 @@ class DataValidator:
     def print_summary(self) -> None:
         """Print a summary of validation errors."""
         if not self.errors:
-            print("✓ All data valid!")
+            print("[OK] All data valid!")
             return
 
         print(f"Found {len(self.errors)} validation error(s):")

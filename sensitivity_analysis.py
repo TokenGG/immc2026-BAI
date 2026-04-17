@@ -168,7 +168,7 @@ def run_sensitivity_analysis(
                 }
                 results.append(result)
                 
-                print(f"  ✓ 完成: benefit={result['total_protection_benefit']:.6f}, fitness={result['best_fitness']:.6f}")
+                print(f"  [OK] 完成: benefit={result['total_protection_benefit']:.6f}, fitness={result['best_fitness']:.6f}")
             except Exception as e:
                 print(f"  错误: 无法解析输出 JSON: {e}")
                 continue
@@ -182,7 +182,7 @@ def run_sensitivity_analysis(
         
         result_path = os.path.join(output_dir, f'sensitivity_{res_type}.json')
         save_json(result_path, sensitivity_results)
-        print(f"\n✓ 结果已保存: {result_path}")
+        print(f"\n[OK] 结果已保存: {result_path}")
         
         # 绘制敏感性曲线
         plot_sensitivity_results(result_path, os.path.join(output_dir, f'sensitivity_{res_type}_plot.png'))
@@ -289,7 +289,7 @@ def plot_sensitivity_results(sensitivity_json_path: str, output_path: str):
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
     plt.close()
     
-    print(f"  ✓ 曲线已保存: {output_path}")
+    print(f"  [OK] 曲线已保存: {output_path}")
 
 
 def main():
@@ -344,7 +344,7 @@ Resources:
     )
     
     print(f"\n{'='*70}")
-    print("✓ 敏感性分析完成！")
+    print("[OK] 敏感性分析完成！")
     print(f"  结果保存在: {args.output}")
     print(f"{'='*70}\n")
 
