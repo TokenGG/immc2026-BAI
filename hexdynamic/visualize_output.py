@@ -329,12 +329,14 @@ def plot_risk_heatmap(out, out_map, hex_size, boundary_xy, save_path):
 
     add_colorbar(fig, ax_cbar, cmap, norm, "Normalized Risk")
 
+    risk_vals = [g["risk_normalized"] for g in grids]
     items = [
-        ("Summary", None, True),
-        ("Total PB",    f"{summary['total_protection_benefit']:.4f}",  False),
-        ("Average PB",  f"{summary['average_protection_benefit']:.4f}", False),
-        ("Best Fitness",f"{summary['best_fitness']:.4f}",               False),
+        ("Summary",     None,                                           True),
         ("Total Grids", str(summary['total_grids']),                    False),
+        ("Risk Min",    f"{min(risk_vals):.4f}",                        False),
+        ("Risk Max",    f"{max(risk_vals):.4f}",                        False),
+        ("Risk Mean",   f"{sum(risk_vals)/len(risk_vals):.4f}",         False),
+        ("Total Risk",  f"{summary.get('total_risk', sum(risk_vals)):.4f}", False),
     ]
     y = 0.97
     for label, value, bold in items:
@@ -400,7 +402,12 @@ def plot_risk_comparison(out, hex_size, boundary_xy, save_path):
         return
 
     cmap = matplotlib.colormaps.get_cmap("YlOrRd")
-    norm = Normalize(vmin=0, vmax=1)
+
+    # 先计算两侧数据，确定统一的颜色条上限
+    risk_before = [g["risk_normalized"] for g in grids]
+    risk_after  = [g["residual_risk_normalized"] for g in grids]
+    vmax = max(max(risk_before), max(risk_after))
+    norm = Normalize(vmin=0, vmax=vmax)
 
     fig = plt.figure(figsize=(20, 9))
     # 左：部署前  右：部署后  各占 38%，中间颜色条 4%，右侧图例 16%
@@ -435,22 +442,35 @@ def plot_risk_comparison(out, hex_size, boundary_xy, save_path):
     cb.set_label("Risk Level", fontsize=9)
     cb.ax.tick_params(labelsize=8)
 
-    # 右侧指标
+    # 右侧指标：展示保护前后的风险统计
+    n = len(grids)
+    mean_before = sum(risk_before) / n
+    mean_after  = sum(risk_after) / n
+    reduction   = (mean_before - mean_after) / mean_before * 100 if mean_before > 0 else 0
+
     items = [
-        ("Summary", None, True),
-        ("Best Fitness",   f"{summary['best_fitness']:.4f}",               False),
-        ("Total PB",       f"{summary['total_protection_benefit']:.4f}",   False),
-        ("Avg PB",         f"{summary['average_protection_benefit']:.4f}", False),
-        ("Total Grids",    str(summary['total_grids']),                    False),
+        ("Summary",        None,                          True),
+        ("Total Grids",    str(summary['total_grids']),   False),
+        ("--- Before ---", None,                          True),
+        ("Risk Min",       f"{min(risk_before):.4f}",     False),
+        ("Risk Max",       f"{max(risk_before):.4f}",     False),
+        ("Risk Mean",      f"{mean_before:.4f}",          False),
+        ("--- After ---",  None,                          True),
+        ("Risk Min",       f"{min(risk_after):.4f}",      False),
+        ("Risk Max",       f"{max(risk_after):.4f}",      False),
+        ("Risk Mean",      f"{mean_after:.4f}",           False),
+        ("--- Delta ---",  None,                          True),
+        ("Reduction",      f"{reduction:.1f}%",           False),
+        ("Fitness",        f"{summary['best_fitness']:.4f}", False),
     ]
     y = 0.97
     for label, value, bold in items:
         text = label if value is None else f"{label}: {value}"
         ax_leg.text(0.05, y, text, transform=ax_leg.transAxes,
-                    fontsize=9, va="top",
+                    fontsize=8, va="top",
                     fontweight="bold" if bold else "normal",
                     fontfamily="monospace")
-        y -= 0.09
+        y -= 0.07
 
     fig.savefig(save_path, dpi=150, bbox_inches="tight")
     plt.close(fig)

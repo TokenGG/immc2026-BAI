@@ -54,7 +54,7 @@ class DSSAOptimizer:
             # 强制部署模式：确保所有资源都部署到上限
             
             # 1. 部署所有摄像头
-            max_cam = self.constraints.get('max_cameras_per_grid', 3)
+            max_cam = self.constraints.get('max_cameras_per_grid', 1)
             cam_target = self.constraints['total_cameras']
             cam_deployed = 0
             
@@ -120,7 +120,7 @@ class DSSAOptimizer:
         
         else:
             # 原来的逻辑：允许部分部署
-            max_cam = self.constraints.get('max_cameras_per_grid', 3)
+            max_cam = self.constraints.get('max_cameras_per_grid', 1)
             cam_deployed = 0
             for grid_id in grid_ids_shuffled:
                 if cam_deployed >= self.constraints['total_cameras']:
@@ -217,7 +217,7 @@ class DSSAOptimizer:
         rangers = {}
 
         idx = 0
-        max_cam = self.constraints.get('max_cameras_per_grid', 3)
+        max_cam = self.constraints.get('max_cameras_per_grid', 1)
         for grid_id in self.grid_ids:
             val = int(round(vector[idx]))
             if val > 0 and self.coverage_model.deployment_matrix['camera'][grid_id] == 1:

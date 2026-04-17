@@ -52,14 +52,15 @@ def build_species_config(species_cfg: dict) -> dict:
     return result
 
 
-def compute_risk_with_riskindex(data: dict) -> Tuple[Dict[int, float], Dict[int, float]]:
+def compute_risk_with_riskindex(data: dict) -> Tuple[Dict[int, float], Dict[int, float], Dict[int, float]]:
     """
-    Compute normalized risk and temporal factors.
-    
+    Compute normalized risk, raw risk and temporal factors.
+
     Returns:
-        Tuple of (risk_map, temporal_factor_map)
+        Tuple of (risk_map, temporal_factor_map, raw_risk_map)
         - risk_map: normalized risk values [0, 1]
         - temporal_factor_map: T_t × S_t (diurnal × seasonal factors)
+        - raw_risk_map: raw (unnormalized) risk values
     """
     map_cfg_raw = data['map_config']
     boundary_locations = map_cfg_raw.get('boundary_locations')
@@ -141,7 +142,8 @@ def compute_risk_with_riskindex(data: dict) -> Tuple[Dict[int, float], Dict[int,
     results = model.calculate_batch(grid_data_list, time_context, use_temporal_factors=use_temporal)
     
     risk_map = {id_order[i]: float(r.normalized_risk) for i, r in enumerate(results)}
-    
+    raw_risk_map = {id_order[i]: float(r.raw_risk) for i, r in enumerate(results)}
+
     # Extract temporal factors from components
     temporal_factor_map = {}
     for i, r in enumerate(results):
@@ -151,8 +153,8 @@ def compute_risk_with_riskindex(data: dict) -> Tuple[Dict[int, float], Dict[int,
         else:
             temporal_factor = 1.0
         temporal_factor_map[gid] = temporal_factor
-    
-    return risk_map, temporal_factor_map
+
+    return risk_map, temporal_factor_map, raw_risk_map
 
 
 def build_data_loader(data: dict, risk_map: Dict[int, float], temporal_factor_map: Dict[int, float] = None) -> DataLoader:
@@ -193,7 +195,7 @@ def build_data_loader(data: dict, risk_map: Dict[int, float], temporal_factor_ma
         total_cameras=c['total_cameras'],
         total_drones=c['total_drones'],
         total_fence_length=float(c['total_fence_length']),
-        max_cameras_per_grid=c.get('max_cameras_per_grid', 3),
+        max_cameras_per_grid=c.get('max_cameras_per_grid', 1),
         max_drones_per_grid=c.get('max_drones_per_grid', 1),
         max_camps_per_grid=c.get('max_camps_per_grid', 1),
         max_rangers_per_grid=c.get('max_rangers_per_grid', 1)
@@ -211,7 +213,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
     data = load_input(input_path)
 
     print("[2/4] Compute normalized risk with riskIndex...")
-    risk_map, temporal_factor_map = compute_risk_with_riskindex(data)
+    risk_map, temporal_factor_map, raw_risk_map = compute_risk_with_riskindex(data)
 
     print("[3/4] Build optimization model and run DSSA...")
     loader = build_data_loader(data, risk_map, temporal_factor_map)
@@ -415,6 +417,7 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
             'y': src.get('y', 0),
             'terrain_type': grid.terrain_type,
             'risk_normalized': round(norm_unified_risk(grid_model.get_grid_risk(gid)), 6),
+            'raw_risk': round(float(raw_risk_map.get(gid, 0.0)), 6),
             'protection_benefit_raw': round(float(pb_per_grid[gid]), 6),
             'protection_benefit_normalized': round(norm_pb(pb_per_grid[gid]), 6),
             'residual_risk_normalized': round(norm_unified_risk(rr_per_grid[gid]), 6),
@@ -434,14 +437,34 @@ def run_pipeline(input_path: str, output_path: str, vectorized: bool = False, al
         for e, v in best_solution.fences.items() if v == 1
     ]
 
+    # 计算 summary 统计量
+    all_gids = grid_model.get_all_grid_ids()
+    norm_risk_vals  = [grid_model.get_grid_risk(gid) for gid in all_gids]
+    raw_risk_vals   = [float(raw_risk_map.get(gid, 0.0)) for gid in all_gids]
+    residual_vals   = [norm_unified_risk(rr_per_grid[gid]) for gid in all_gids]
+    total_residual  = sum(rr_per_grid[gid] for gid in all_gids)
+
     output = {
         'summary': {
             'total_grids': grid_model.get_grid_count(),
             'total_risk': round(float(total_risk), 6),
-            'total_risk_weighted': round(float(total_risk_weighted), 6),  # 时间加权的总风险
+            'total_risk_weighted': round(float(total_risk_weighted), 6),
             'best_fitness': round(float(best_fitness), 6),
             'total_protection_benefit': round(float(total_protection_benefit), 6),
             'average_protection_benefit': round(float(avg_protection_benefit), 6),
+            # 部署前归一化风险统计
+            'risk_min':  round(min(norm_risk_vals), 6),
+            'risk_max':  round(max(norm_risk_vals), 6),
+            'risk_mean': round(float(np.mean(norm_risk_vals)), 6),
+            # 部署前原始风险统计
+            'raw_risk_min':  round(min(raw_risk_vals), 6),
+            'raw_risk_max':  round(max(raw_risk_vals), 6),
+            'raw_risk_mean': round(float(np.mean(raw_risk_vals)), 6),
+            # 部署后剩余风险统计
+            'residual_risk_min':  round(min(residual_vals), 6),
+            'residual_risk_max':  round(max(residual_vals), 6),
+            'residual_risk_mean': round(float(np.mean(residual_vals)), 6),
+            'total_residual_risk': round(float(total_residual), 6),
             'fitness_history': [round(float(f), 6) for f in fitness_history],
             'resources_deployed': {
                 'total_cameras': int(sum(best_solution.cameras.values())),

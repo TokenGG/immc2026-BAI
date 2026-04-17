@@ -198,7 +198,7 @@ class CoverageModel:
 
         for grid_id in self.grid_ids:
             cam_count = solution.cameras.get(grid_id, 0)
-            max_cam = constraints.get('max_cameras_per_grid', 3)
+            max_cam = constraints.get('max_cameras_per_grid', 1)
             if cam_count > self.deployment_matrix['camera'][grid_id] * max_cam:
                 violations.append(f"Camera deployment infeasible at grid {grid_id}")
 
@@ -262,7 +262,7 @@ class CoverageModel:
                 del repaired.fences[edge_key]
 
         # --- Camera: 先截单格上限，再截总量 ---
-        max_cam = constraints.get('max_cameras_per_grid', 3)
+        max_cam = constraints.get('max_cameras_per_grid', 1)
         for grid_id in list(repaired.cameras.keys()):
             if repaired.cameras[grid_id] > max_cam:
                 repaired.cameras[grid_id] = max_cam
@@ -348,7 +348,7 @@ class CoverageModel:
                 available_grids = [gid for gid in self.grid_ids 
                                   if self.deployment_matrix['camera'][gid] == 1]
                 random.shuffle(available_grids)
-                max_cam = constraints.get('max_cameras_per_grid', 3)
+                max_cam = constraints.get('max_cameras_per_grid', 1)
                 
                 for grid_id in available_grids:
                     if total_cameras >= constraints['total_cameras']:

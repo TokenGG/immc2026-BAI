@@ -22,7 +22,7 @@ class ResourceConstraints:
     total_drones: int
     total_fence_length: float
     # 单格最大部署数量
-    max_cameras_per_grid: int = 3
+    max_cameras_per_grid: int = 1
     max_drones_per_grid: int = 1
     max_camps_per_grid: int = 1
     max_rangers_per_grid: int = 1
@@ -160,7 +160,7 @@ class DataLoader:
     def set_constraints(self, total_patrol: int, total_camps: int, 
                        max_rangers_per_camp: int, total_cameras: int, 
                        total_drones: int, total_fence_length: float,
-                       max_cameras_per_grid: int = 3,
+                       max_cameras_per_grid: int = 1,
                        max_drones_per_grid: int = 1,
                        max_camps_per_grid: int = 1,
                        max_rangers_per_grid: int = 1):
