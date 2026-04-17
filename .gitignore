@@ -36,8 +36,17 @@ htmlcov/
 *.swo
 *~
 
-# 可视化输出图片
-hexdynamic/figures/
+# 图片文件
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.webp
+*.svg
+*.tiff
+*.tif
+*.ico
 
 # Pipeline 运行产物（中间/输出 JSON）
 hexdynamic/pipeline_input.json
@@ -50,23 +59,7 @@ hexdynamic/*_input.json
 marker/grid-coordinates*.json
 !marker/grid-coordinates.json
 
-# 图片资源（大文件）
-marker/*.jpg
-marker/*.png
-marker/*.jpeg
-marker/*.webp
-
 # OS
 .DS_Store
 Thumbs.db
 desktop.ini
-hexdynamic/etoshagrided.json
-hexdynamic/etosharesult.json
-hexdynamic/out.json
-hexdynamic/out2.json
-hexdynamic/pipeline_input1.json
-hexdynamic/figures1/protection_heatmap.png
-hexdynamic/figures1/risk_heatmap.png
-hexdynamic/figures1/species_map.png
-hexdynamic/figures1/terrain_deployment_map.png
-hexdynamic/figures1/terrain_map.png
