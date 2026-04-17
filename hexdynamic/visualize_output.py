@@ -38,7 +38,7 @@ from matplotlib import cm
 def hex_corners(cx, cy, size):
     pts = []
     for i in range(6):
-        a = math.pi / 3 * i - math.pi / 6
+        a = math.pi / 3 * i + math.pi / 6
         pts.append((cx + size * math.cos(a), cy + size * math.sin(a)))
     return pts
 
@@ -130,6 +130,7 @@ def setup_map_ax(ax, grids, hex_size, margin=1.5):
         xs.append(cx); ys.append(cy)
     ax.set_xlim(min(xs) - hex_size - margin, max(xs) + hex_size + margin)
     ax.set_ylim(min(ys) - hex_size - margin, max(ys) + hex_size + margin)
+    ax.set_aspect('equal')
 
 
 def draw_boundary(ax, grids, boundary_xy, hex_size):
