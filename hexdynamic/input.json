@@ -2787,7 +2787,7 @@
     "total_camps": 3,
     "max_rangers_per_camp": 5,
     "total_cameras": 60,
-    "total_drones": 10,
+    "total_drones": 5,
     "total_fence_length": 1000
   },
   "coverage_params": {
